@@ -1,0 +1,629 @@
+2025-09-07 12:33:06 - --- Starting Final Training for CLAHE ---
+2025-09-07 12:33:06 - Configuration: {'model_config': {'dims': [32, 64, 128, 160], 'embed_dim': 256}, 'epochs': 150, 'batch_size': 16, 'learning_rate': 0.0002, 'weight_decay': 0.01, 'save_dir': 'saved_models'}
+2025-09-07 12:33:06 - Found 910 total images for K-Fold Cross-Validation.
+2025-09-07 12:33:09 - --- Starting Fold 1 ---
+2025-09-07 12:33:17 - Epoch 1/150 - Train Summary - Speed: 10.59 it/s, Loss: 0.0477
+2025-09-07 12:33:19 - Validation - Acc: 0.6319, P: 1.0000, R: 0.2637, F1: 0.4174 (Best F1: 0.0000)
+2025-09-07 12:33:19 - New best model saved for Fold 1 with F1-Score: 0.4174
+2025-09-07 12:33:24 - Epoch 2/150 - Train Summary - Speed: 11.35 it/s, Loss: 0.0286
+2025-09-07 12:33:25 - Validation - Acc: 0.7912, P: 1.0000, R: 0.5824, F1: 0.7361 (Best F1: 0.4174)
+2025-09-07 12:33:25 - New best model saved for Fold 1 with F1-Score: 0.7361
+2025-09-07 12:33:30 - Epoch 3/150 - Train Summary - Speed: 10.11 it/s, Loss: 0.0241
+2025-09-07 12:33:31 - Validation - Acc: 0.8022, P: 1.0000, R: 0.6044, F1: 0.7534 (Best F1: 0.7361)
+2025-09-07 12:33:31 - New best model saved for Fold 1 with F1-Score: 0.7534
+2025-09-07 12:33:36 - Epoch 4/150 - Train Summary - Speed: 10.88 it/s, Loss: 0.0133
+2025-09-07 12:33:37 - Validation - Acc: 0.8077, P: 1.0000, R: 0.6154, F1: 0.7619 (Best F1: 0.7534)
+2025-09-07 12:33:37 - New best model saved for Fold 1 with F1-Score: 0.7619
+2025-09-07 12:33:42 - Epoch 5/150 - Train Summary - Speed: 10.88 it/s, Loss: 0.0469
+2025-09-07 12:33:43 - Validation - Acc: 0.8077, P: 1.0000, R: 0.6154, F1: 0.7619 (Best F1: 0.7619)
+2025-09-07 12:33:48 - Epoch 6/150 - Train Summary - Speed: 10.93 it/s, Loss: 0.0575
+2025-09-07 12:33:49 - Validation - Acc: 0.8956, P: 0.9737, R: 0.8132, F1: 0.8862 (Best F1: 0.7619)
+2025-09-07 12:33:49 - New best model saved for Fold 1 with F1-Score: 0.8862
+2025-09-07 12:33:54 - Epoch 7/150 - Train Summary - Speed: 11.46 it/s, Loss: 0.0188
+2025-09-07 12:33:55 - Validation - Acc: 0.9011, P: 0.9867, R: 0.8132, F1: 0.8916 (Best F1: 0.8862)
+2025-09-07 12:33:55 - New best model saved for Fold 1 with F1-Score: 0.8916
+2025-09-07 12:34:00 - Epoch 8/150 - Train Summary - Speed: 10.59 it/s, Loss: 0.0236
+2025-09-07 12:34:01 - Validation - Acc: 0.8571, P: 0.9710, R: 0.7363, F1: 0.8375 (Best F1: 0.8916)
+2025-09-07 12:34:06 - Epoch 9/150 - Train Summary - Speed: 10.80 it/s, Loss: 0.0280
+2025-09-07 12:34:07 - Validation - Acc: 0.8681, P: 0.9718, R: 0.7582, F1: 0.8519 (Best F1: 0.8916)
+2025-09-07 12:34:12 - Epoch 10/150 - Train Summary - Speed: 10.90 it/s, Loss: 0.0192
+2025-09-07 12:34:13 - Validation - Acc: 0.8571, P: 0.9710, R: 0.7363, F1: 0.8375 (Best F1: 0.8916)
+2025-09-07 12:34:18 - Epoch 11/150 - Train Summary - Speed: 10.84 it/s, Loss: 0.0128
+2025-09-07 12:34:19 - Validation - Acc: 0.8022, P: 1.0000, R: 0.6044, F1: 0.7534 (Best F1: 0.8916)
+2025-09-07 12:34:24 - Epoch 12/150 - Train Summary - Speed: 11.18 it/s, Loss: 0.0336
+2025-09-07 12:34:25 - Validation - Acc: 0.8901, P: 0.9080, R: 0.8681, F1: 0.8876 (Best F1: 0.8916)
+2025-09-07 12:34:30 - Epoch 13/150 - Train Summary - Speed: 10.02 it/s, Loss: 0.0713
+2025-09-07 12:34:31 - Validation - Acc: 0.8681, P: 1.0000, R: 0.7363, F1: 0.8481 (Best F1: 0.8916)
+2025-09-07 12:34:36 - Epoch 14/150 - Train Summary - Speed: 10.77 it/s, Loss: 0.0060
+2025-09-07 12:34:37 - Validation - Acc: 0.8956, P: 0.9390, R: 0.8462, F1: 0.8902 (Best F1: 0.8916)
+2025-09-07 12:34:42 - Epoch 15/150 - Train Summary - Speed: 11.02 it/s, Loss: 0.0101
+2025-09-07 12:34:43 - Validation - Acc: 0.9011, P: 0.9867, R: 0.8132, F1: 0.8916 (Best F1: 0.8916)
+2025-09-07 12:34:48 - Epoch 16/150 - Train Summary - Speed: 11.87 it/s, Loss: 0.0160
+2025-09-07 12:34:49 - Validation - Acc: 0.8956, P: 0.9737, R: 0.8132, F1: 0.8862 (Best F1: 0.8916)
+2025-09-07 12:34:54 - Epoch 17/150 - Train Summary - Speed: 10.50 it/s, Loss: 0.0293
+2025-09-07 12:34:55 - Validation - Acc: 0.9066, P: 0.9744, R: 0.8352, F1: 0.8994 (Best F1: 0.8916)
+2025-09-07 12:34:55 - New best model saved for Fold 1 with F1-Score: 0.8994
+2025-09-07 12:35:00 - Epoch 18/150 - Train Summary - Speed: 11.04 it/s, Loss: 0.0800
+2025-09-07 12:35:01 - Validation - Acc: 0.8956, P: 0.9865, R: 0.8022, F1: 0.8848 (Best F1: 0.8994)
+2025-09-07 12:35:06 - Epoch 19/150 - Train Summary - Speed: 10.97 it/s, Loss: 0.0098
+2025-09-07 12:35:07 - Validation - Acc: 0.8956, P: 0.9737, R: 0.8132, F1: 0.8862 (Best F1: 0.8994)
+2025-09-07 12:35:12 - Epoch 20/150 - Train Summary - Speed: 10.94 it/s, Loss: 0.0190
+2025-09-07 12:35:13 - Validation - Acc: 0.9066, P: 0.9744, R: 0.8352, F1: 0.8994 (Best F1: 0.8994)
+2025-09-07 12:35:18 - Epoch 21/150 - Train Summary - Speed: 11.38 it/s, Loss: 0.0595
+2025-09-07 12:35:19 - Validation - Acc: 0.9341, P: 1.0000, R: 0.8681, F1: 0.9294 (Best F1: 0.8994)
+2025-09-07 12:35:19 - New best model saved for Fold 1 with F1-Score: 0.9294
+2025-09-07 12:35:24 - Epoch 22/150 - Train Summary - Speed: 11.08 it/s, Loss: 0.0130
+2025-09-07 12:35:25 - Validation - Acc: 0.8901, P: 1.0000, R: 0.7802, F1: 0.8765 (Best F1: 0.9294)
+2025-09-07 12:35:30 - Epoch 23/150 - Train Summary - Speed: 10.40 it/s, Loss: 0.0546
+2025-09-07 12:35:31 - Validation - Acc: 0.9341, P: 0.9759, R: 0.8901, F1: 0.9310 (Best F1: 0.9294)
+2025-09-07 12:35:31 - New best model saved for Fold 1 with F1-Score: 0.9310
+2025-09-07 12:35:36 - Epoch 24/150 - Train Summary - Speed: 11.23 it/s, Loss: 0.0238
+2025-09-07 12:35:37 - Validation - Acc: 0.9231, P: 1.0000, R: 0.8462, F1: 0.9167 (Best F1: 0.9310)
+2025-09-07 12:35:42 - Epoch 25/150 - Train Summary - Speed: 11.43 it/s, Loss: 0.0251
+2025-09-07 12:35:43 - Validation - Acc: 0.9176, P: 0.9750, R: 0.8571, F1: 0.9123 (Best F1: 0.9310)
+2025-09-07 12:35:48 - Epoch 26/150 - Train Summary - Speed: 10.83 it/s, Loss: 0.0648
+2025-09-07 12:35:49 - Validation - Acc: 0.8901, P: 0.9494, R: 0.8242, F1: 0.8824 (Best F1: 0.9310)
+2025-09-07 12:35:54 - Epoch 27/150 - Train Summary - Speed: 10.95 it/s, Loss: 0.0168
+2025-09-07 12:35:55 - Validation - Acc: 0.9066, P: 0.9868, R: 0.8242, F1: 0.8982 (Best F1: 0.9310)
+2025-09-07 12:36:00 - Epoch 28/150 - Train Summary - Speed: 11.66 it/s, Loss: 0.0030
+2025-09-07 12:36:01 - Validation - Acc: 0.9066, P: 0.9868, R: 0.8242, F1: 0.8982 (Best F1: 0.9310)
+2025-09-07 12:36:06 - Epoch 29/150 - Train Summary - Speed: 10.95 it/s, Loss: 0.0410
+2025-09-07 12:36:07 - Validation - Acc: 0.9121, P: 0.9870, R: 0.8352, F1: 0.9048 (Best F1: 0.9310)
+2025-09-07 12:36:12 - Epoch 30/150 - Train Summary - Speed: 10.70 it/s, Loss: 0.0121
+2025-09-07 12:36:13 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9310)
+2025-09-07 12:36:18 - Epoch 31/150 - Train Summary - Speed: 12.10 it/s, Loss: 0.0408
+2025-09-07 12:36:19 - Validation - Acc: 0.9341, P: 0.9647, R: 0.9011, F1: 0.9318 (Best F1: 0.9310)
+2025-09-07 12:36:19 - New best model saved for Fold 1 with F1-Score: 0.9318
+2025-09-07 12:36:24 - Epoch 32/150 - Train Summary - Speed: 10.83 it/s, Loss: 0.0106
+2025-09-07 12:36:25 - Validation - Acc: 0.8132, P: 0.9831, R: 0.6374, F1: 0.7733 (Best F1: 0.9318)
+2025-09-07 12:36:30 - Epoch 33/150 - Train Summary - Speed: 10.03 it/s, Loss: 0.0095
+2025-09-07 12:36:31 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9318)
+2025-09-07 12:36:36 - Epoch 34/150 - Train Summary - Speed: 10.68 it/s, Loss: 0.0047
+2025-09-07 12:36:37 - Validation - Acc: 0.9231, P: 1.0000, R: 0.8462, F1: 0.9167 (Best F1: 0.9318)
+2025-09-07 12:36:42 - Epoch 35/150 - Train Summary - Speed: 10.52 it/s, Loss: 0.0177
+2025-09-07 12:36:43 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9318)
+2025-09-07 12:36:48 - Epoch 36/150 - Train Summary - Speed: 10.81 it/s, Loss: 0.0012
+2025-09-07 12:36:49 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9318)
+2025-09-07 12:36:54 - Epoch 37/150 - Train Summary - Speed: 11.08 it/s, Loss: 0.0896
+2025-09-07 12:36:55 - Validation - Acc: 0.9286, P: 0.9756, R: 0.8791, F1: 0.9249 (Best F1: 0.9318)
+2025-09-07 12:37:00 - Epoch 38/150 - Train Summary - Speed: 10.48 it/s, Loss: 0.0469
+2025-09-07 12:37:01 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9318)
+2025-09-07 12:37:01 - New best model saved for Fold 1 with F1-Score: 0.9492
+2025-09-07 12:37:06 - Epoch 39/150 - Train Summary - Speed: 10.97 it/s, Loss: 0.0041
+2025-09-07 12:37:07 - Validation - Acc: 0.9341, P: 0.9759, R: 0.8901, F1: 0.9310 (Best F1: 0.9492)
+2025-09-07 12:37:12 - Epoch 40/150 - Train Summary - Speed: 11.69 it/s, Loss: 0.0121
+2025-09-07 12:37:13 - Validation - Acc: 0.9341, P: 1.0000, R: 0.8681, F1: 0.9294 (Best F1: 0.9492)
+2025-09-07 12:37:18 - Epoch 41/150 - Train Summary - Speed: 10.76 it/s, Loss: 0.0265
+2025-09-07 12:37:19 - Validation - Acc: 0.9176, P: 0.9524, R: 0.8791, F1: 0.9143 (Best F1: 0.9492)
+2025-09-07 12:37:24 - Epoch 42/150 - Train Summary - Speed: 11.28 it/s, Loss: 0.0014
+2025-09-07 12:37:25 - Validation - Acc: 0.8901, P: 1.0000, R: 0.7802, F1: 0.8765 (Best F1: 0.9492)
+2025-09-07 12:37:30 - Epoch 43/150 - Train Summary - Speed: 11.27 it/s, Loss: 0.0571
+2025-09-07 12:37:31 - Validation - Acc: 0.9121, P: 0.9412, R: 0.8791, F1: 0.9091 (Best F1: 0.9492)
+2025-09-07 12:37:36 - Epoch 44/150 - Train Summary - Speed: 10.79 it/s, Loss: 0.0003
+2025-09-07 12:37:37 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9492)
+2025-09-07 12:37:42 - Epoch 45/150 - Train Summary - Speed: 11.19 it/s, Loss: 0.0012
+2025-09-07 12:37:43 - Validation - Acc: 0.9396, P: 0.9762, R: 0.9011, F1: 0.9371 (Best F1: 0.9492)
+2025-09-07 12:37:48 - Epoch 46/150 - Train Summary - Speed: 10.62 it/s, Loss: 0.0099
+2025-09-07 12:37:49 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9492)
+2025-09-07 12:37:54 - Epoch 47/150 - Train Summary - Speed: 10.32 it/s, Loss: 0.0072
+2025-09-07 12:37:55 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9492)
+2025-09-07 12:38:00 - Epoch 48/150 - Train Summary - Speed: 10.35 it/s, Loss: 0.0044
+2025-09-07 12:38:01 - Validation - Acc: 0.9396, P: 0.9762, R: 0.9011, F1: 0.9371 (Best F1: 0.9492)
+2025-09-07 12:38:06 - Epoch 49/150 - Train Summary - Speed: 11.34 it/s, Loss: 0.0299
+2025-09-07 12:38:07 - Validation - Acc: 0.9396, P: 0.9878, R: 0.8901, F1: 0.9364 (Best F1: 0.9492)
+2025-09-07 12:38:11 - Epoch 50/150 - Train Summary - Speed: 10.89 it/s, Loss: 0.0010
+2025-09-07 12:38:13 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9492)
+2025-09-07 12:38:17 - Epoch 51/150 - Train Summary - Speed: 10.78 it/s, Loss: 0.0204
+2025-09-07 12:38:19 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9492)
+2025-09-07 12:38:23 - Epoch 52/150 - Train Summary - Speed: 10.33 it/s, Loss: 0.0034
+2025-09-07 12:38:25 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9492)
+2025-09-07 12:38:29 - Epoch 53/150 - Train Summary - Speed: 9.92 it/s, Loss: 0.0020
+2025-09-07 12:38:31 - Validation - Acc: 0.9615, P: 0.9884, R: 0.9341, F1: 0.9605 (Best F1: 0.9492)
+2025-09-07 12:38:31 - New best model saved for Fold 1 with F1-Score: 0.9605
+2025-09-07 12:38:35 - Epoch 54/150 - Train Summary - Speed: 11.33 it/s, Loss: 0.0101
+2025-09-07 12:38:37 - Validation - Acc: 0.9231, P: 0.9873, R: 0.8571, F1: 0.9176 (Best F1: 0.9605)
+2025-09-07 12:38:41 - Epoch 55/150 - Train Summary - Speed: 11.51 it/s, Loss: 0.0015
+2025-09-07 12:38:43 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9605)
+2025-09-07 12:38:47 - Epoch 56/150 - Train Summary - Speed: 10.88 it/s, Loss: 0.0054
+2025-09-07 12:38:49 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9605)
+2025-09-07 12:38:53 - Epoch 57/150 - Train Summary - Speed: 11.65 it/s, Loss: 0.0413
+2025-09-07 12:38:55 - Validation - Acc: 0.9615, P: 0.9884, R: 0.9341, F1: 0.9605 (Best F1: 0.9605)
+2025-09-07 12:38:59 - Epoch 58/150 - Train Summary - Speed: 10.74 it/s, Loss: 0.0029
+2025-09-07 12:39:01 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9605)
+2025-09-07 12:39:05 - Epoch 59/150 - Train Summary - Speed: 11.30 it/s, Loss: 0.0076
+2025-09-07 12:39:06 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9605)
+2025-09-07 12:39:11 - Epoch 60/150 - Train Summary - Speed: 10.10 it/s, Loss: 0.0048
+2025-09-07 12:39:12 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9605)
+2025-09-07 12:39:17 - Epoch 61/150 - Train Summary - Speed: 10.71 it/s, Loss: 0.0442
+2025-09-07 12:39:18 - Validation - Acc: 0.9231, P: 0.9873, R: 0.8571, F1: 0.9176 (Best F1: 0.9605)
+2025-09-07 12:39:23 - Epoch 62/150 - Train Summary - Speed: 11.78 it/s, Loss: 0.0147
+2025-09-07 12:39:24 - Validation - Acc: 0.9396, P: 1.0000, R: 0.8791, F1: 0.9357 (Best F1: 0.9605)
+2025-09-07 12:39:29 - Epoch 63/150 - Train Summary - Speed: 10.98 it/s, Loss: 0.0003
+2025-09-07 12:39:30 - Validation - Acc: 0.9286, P: 1.0000, R: 0.8571, F1: 0.9231 (Best F1: 0.9605)
+2025-09-07 12:39:35 - Epoch 64/150 - Train Summary - Speed: 10.65 it/s, Loss: 0.0253
+2025-09-07 12:39:36 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9605)
+2025-09-07 12:39:41 - Epoch 65/150 - Train Summary - Speed: 12.09 it/s, Loss: 0.0006
+2025-09-07 12:39:42 - Validation - Acc: 0.9396, P: 1.0000, R: 0.8791, F1: 0.9357 (Best F1: 0.9605)
+2025-09-07 12:39:47 - Epoch 66/150 - Train Summary - Speed: 11.34 it/s, Loss: 0.0071
+2025-09-07 12:39:48 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9605)
+2025-09-07 12:39:53 - Epoch 67/150 - Train Summary - Speed: 10.32 it/s, Loss: 0.0033
+2025-09-07 12:39:54 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9605)
+2025-09-07 12:39:59 - Epoch 68/150 - Train Summary - Speed: 10.46 it/s, Loss: 0.0005
+2025-09-07 12:40:00 - Validation - Acc: 0.9560, P: 0.9770, R: 0.9341, F1: 0.9551 (Best F1: 0.9605)
+2025-09-07 12:40:05 - Epoch 69/150 - Train Summary - Speed: 10.96 it/s, Loss: 0.0265
+2025-09-07 12:40:06 - Validation - Acc: 0.9560, P: 0.9770, R: 0.9341, F1: 0.9551 (Best F1: 0.9605)
+2025-09-07 12:40:11 - Epoch 70/150 - Train Summary - Speed: 10.76 it/s, Loss: 0.0029
+2025-09-07 12:40:12 - Validation - Acc: 0.9396, P: 0.9878, R: 0.8901, F1: 0.9364 (Best F1: 0.9605)
+2025-09-07 12:40:17 - Epoch 71/150 - Train Summary - Speed: 11.18 it/s, Loss: 0.0407
+2025-09-07 12:40:18 - Validation - Acc: 0.9451, P: 1.0000, R: 0.8901, F1: 0.9419 (Best F1: 0.9605)
+2025-09-07 12:40:23 - Epoch 72/150 - Train Summary - Speed: 11.00 it/s, Loss: 0.0008
+2025-09-07 12:40:24 - Validation - Acc: 0.9176, P: 0.9872, R: 0.8462, F1: 0.9112 (Best F1: 0.9605)
+2025-09-07 12:40:29 - Epoch 73/150 - Train Summary - Speed: 11.33 it/s, Loss: 0.0048
+2025-09-07 12:40:30 - Validation - Acc: 0.9560, P: 1.0000, R: 0.9121, F1: 0.9540 (Best F1: 0.9605)
+2025-09-07 12:40:30 - Fold 1, Epoch 73: Early stopping triggered.
+2025-09-07 12:40:30 - --- Finished Fold 1, Final Best F1-Score: 0.9605 ---
+2025-09-07 12:40:30 - --- Starting Fold 2 ---
+2025-09-07 12:40:35 - Epoch 1/150 - Train Summary - Speed: 11.50 it/s, Loss: 0.0406
+2025-09-07 12:40:36 - Validation - Acc: 0.5824, P: 1.0000, R: 0.1648, F1: 0.2830 (Best F1: 0.0000)
+2025-09-07 12:40:36 - New best model saved for Fold 2 with F1-Score: 0.2830
+2025-09-07 12:40:41 - Epoch 2/150 - Train Summary - Speed: 11.06 it/s, Loss: 0.0399
+2025-09-07 12:40:42 - Validation - Acc: 0.8242, P: 0.9683, R: 0.6703, F1: 0.7922 (Best F1: 0.2830)
+2025-09-07 12:40:42 - New best model saved for Fold 2 with F1-Score: 0.7922
+2025-09-07 12:40:46 - Epoch 3/150 - Train Summary - Speed: 11.59 it/s, Loss: 0.0141
+2025-09-07 12:40:48 - Validation - Acc: 0.7473, P: 0.9787, R: 0.5055, F1: 0.6667 (Best F1: 0.7922)
+2025-09-07 12:40:52 - Epoch 4/150 - Train Summary - Speed: 11.10 it/s, Loss: 0.0391
+2025-09-07 12:40:53 - Validation - Acc: 0.8791, P: 0.9859, R: 0.7692, F1: 0.8642 (Best F1: 0.7922)
+2025-09-07 12:40:54 - New best model saved for Fold 2 with F1-Score: 0.8642
+2025-09-07 12:40:58 - Epoch 5/150 - Train Summary - Speed: 11.48 it/s, Loss: 0.0288
+2025-09-07 12:41:00 - Validation - Acc: 0.8462, P: 0.9701, R: 0.7143, F1: 0.8228 (Best F1: 0.8642)
+2025-09-07 12:41:04 - Epoch 6/150 - Train Summary - Speed: 11.99 it/s, Loss: 0.0187
+2025-09-07 12:41:05 - Validation - Acc: 0.8736, P: 0.9595, R: 0.7802, F1: 0.8606 (Best F1: 0.8642)
+2025-09-07 12:41:10 - Epoch 7/150 - Train Summary - Speed: 10.26 it/s, Loss: 0.0127
+2025-09-07 12:41:11 - Validation - Acc: 0.8626, P: 0.9459, R: 0.7692, F1: 0.8485 (Best F1: 0.8642)
+2025-09-07 12:41:16 - Epoch 8/150 - Train Summary - Speed: 10.57 it/s, Loss: 0.0624
+2025-09-07 12:41:17 - Validation - Acc: 0.8681, P: 0.9467, R: 0.7802, F1: 0.8554 (Best F1: 0.8642)
+2025-09-07 12:41:22 - Epoch 9/150 - Train Summary - Speed: 10.56 it/s, Loss: 0.0287
+2025-09-07 12:41:23 - Validation - Acc: 0.8901, P: 0.9733, R: 0.8022, F1: 0.8795 (Best F1: 0.8642)
+2025-09-07 12:41:23 - New best model saved for Fold 2 with F1-Score: 0.8795
+2025-09-07 12:41:28 - Epoch 10/150 - Train Summary - Speed: 11.70 it/s, Loss: 0.0769
+2025-09-07 12:41:29 - Validation - Acc: 0.8626, P: 0.9714, R: 0.7473, F1: 0.8447 (Best F1: 0.8795)
+2025-09-07 12:41:34 - Epoch 11/150 - Train Summary - Speed: 11.54 it/s, Loss: 0.0177
+2025-09-07 12:41:35 - Validation - Acc: 0.8132, P: 0.9130, R: 0.6923, F1: 0.7875 (Best F1: 0.8795)
+2025-09-07 12:41:40 - Epoch 12/150 - Train Summary - Speed: 10.57 it/s, Loss: 0.0492
+2025-09-07 12:41:41 - Validation - Acc: 0.8077, P: 0.9516, R: 0.6484, F1: 0.7712 (Best F1: 0.8795)
+2025-09-07 12:41:46 - Epoch 13/150 - Train Summary - Speed: 10.90 it/s, Loss: 0.0224
+2025-09-07 12:41:47 - Validation - Acc: 0.8791, P: 0.9726, R: 0.7802, F1: 0.8659 (Best F1: 0.8795)
+2025-09-07 12:41:52 - Epoch 14/150 - Train Summary - Speed: 11.62 it/s, Loss: 0.0257
+2025-09-07 12:41:53 - Validation - Acc: 0.8626, P: 0.9583, R: 0.7582, F1: 0.8466 (Best F1: 0.8795)
+2025-09-07 12:41:57 - Epoch 15/150 - Train Summary - Speed: 11.12 it/s, Loss: 0.0199
+2025-09-07 12:41:59 - Validation - Acc: 0.8571, P: 0.9710, R: 0.7363, F1: 0.8375 (Best F1: 0.8795)
+2025-09-07 12:42:03 - Epoch 16/150 - Train Summary - Speed: 11.21 it/s, Loss: 0.0099
+2025-09-07 12:42:04 - Validation - Acc: 0.9231, P: 0.9873, R: 0.8571, F1: 0.9176 (Best F1: 0.8795)
+2025-09-07 12:42:05 - New best model saved for Fold 2 with F1-Score: 0.9176
+2025-09-07 12:42:09 - Epoch 17/150 - Train Summary - Speed: 10.31 it/s, Loss: 0.0070
+2025-09-07 12:42:10 - Validation - Acc: 0.9011, P: 0.9620, R: 0.8352, F1: 0.8941 (Best F1: 0.9176)
+2025-09-07 12:42:15 - Epoch 18/150 - Train Summary - Speed: 12.05 it/s, Loss: 0.0082
+2025-09-07 12:42:16 - Validation - Acc: 0.9286, P: 0.9756, R: 0.8791, F1: 0.9249 (Best F1: 0.9176)
+2025-09-07 12:42:16 - New best model saved for Fold 2 with F1-Score: 0.9249
+2025-09-07 12:42:21 - Epoch 19/150 - Train Summary - Speed: 10.93 it/s, Loss: 0.0469
+2025-09-07 12:42:22 - Validation - Acc: 0.9121, P: 0.9870, R: 0.8352, F1: 0.9048 (Best F1: 0.9249)
+2025-09-07 12:42:27 - Epoch 20/150 - Train Summary - Speed: 11.09 it/s, Loss: 0.0258
+2025-09-07 12:42:28 - Validation - Acc: 0.9011, P: 0.9867, R: 0.8132, F1: 0.8916 (Best F1: 0.9249)
+2025-09-07 12:42:33 - Epoch 21/150 - Train Summary - Speed: 11.32 it/s, Loss: 0.0180
+2025-09-07 12:42:34 - Validation - Acc: 0.8571, P: 0.9710, R: 0.7363, F1: 0.8375 (Best F1: 0.9249)
+2025-09-07 12:42:39 - Epoch 22/150 - Train Summary - Speed: 11.16 it/s, Loss: 0.0066
+2025-09-07 12:42:40 - Validation - Acc: 0.8791, P: 0.9059, R: 0.8462, F1: 0.8750 (Best F1: 0.9249)
+2025-09-07 12:42:45 - Epoch 23/150 - Train Summary - Speed: 10.70 it/s, Loss: 0.0363
+2025-09-07 12:42:46 - Validation - Acc: 0.9286, P: 0.9643, R: 0.8901, F1: 0.9257 (Best F1: 0.9249)
+2025-09-07 12:42:46 - New best model saved for Fold 2 with F1-Score: 0.9257
+2025-09-07 12:42:52 - Epoch 24/150 - Train Summary - Speed: 10.20 it/s, Loss: 0.0409
+2025-09-07 12:42:53 - Validation - Acc: 0.8571, P: 0.9710, R: 0.7363, F1: 0.8375 (Best F1: 0.9257)
+2025-09-07 12:42:58 - Epoch 25/150 - Train Summary - Speed: 10.11 it/s, Loss: 0.0055
+2025-09-07 12:43:00 - Validation - Acc: 0.9121, P: 0.9870, R: 0.8352, F1: 0.9048 (Best F1: 0.9257)
+2025-09-07 12:43:05 - Epoch 26/150 - Train Summary - Speed: 10.83 it/s, Loss: 0.0388
+2025-09-07 12:43:06 - Validation - Acc: 0.8462, P: 1.0000, R: 0.6923, F1: 0.8182 (Best F1: 0.9257)
+2025-09-07 12:43:11 - Epoch 27/150 - Train Summary - Speed: 10.40 it/s, Loss: 0.0047
+2025-09-07 12:43:12 - Validation - Acc: 0.9176, P: 0.9634, R: 0.8681, F1: 0.9133 (Best F1: 0.9257)
+2025-09-07 12:43:17 - Epoch 28/150 - Train Summary - Speed: 10.92 it/s, Loss: 0.0077
+2025-09-07 12:43:18 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9257)
+2025-09-07 12:43:23 - Epoch 29/150 - Train Summary - Speed: 11.49 it/s, Loss: 0.0550
+2025-09-07 12:43:24 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9257)
+2025-09-07 12:43:24 - New best model saved for Fold 2 with F1-Score: 0.9425
+2025-09-07 12:43:29 - Epoch 30/150 - Train Summary - Speed: 11.25 it/s, Loss: 0.0274
+2025-09-07 12:43:30 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9425)
+2025-09-07 12:43:35 - Epoch 31/150 - Train Summary - Speed: 11.09 it/s, Loss: 0.0333
+2025-09-07 12:43:36 - Validation - Acc: 0.8901, P: 0.9610, R: 0.8132, F1: 0.8810 (Best F1: 0.9425)
+2025-09-07 12:43:41 - Epoch 32/150 - Train Summary - Speed: 10.71 it/s, Loss: 0.0531
+2025-09-07 12:43:42 - Validation - Acc: 0.8407, P: 0.9844, R: 0.6923, F1: 0.8129 (Best F1: 0.9425)
+2025-09-07 12:43:47 - Epoch 33/150 - Train Summary - Speed: 10.80 it/s, Loss: 0.0024
+2025-09-07 12:43:48 - Validation - Acc: 0.9176, P: 0.9043, R: 0.9341, F1: 0.9189 (Best F1: 0.9425)
+2025-09-07 12:43:52 - Epoch 34/150 - Train Summary - Speed: 10.88 it/s, Loss: 0.0297
+2025-09-07 12:43:54 - Validation - Acc: 0.8791, P: 0.9859, R: 0.7692, F1: 0.8642 (Best F1: 0.9425)
+2025-09-07 12:43:58 - Epoch 35/150 - Train Summary - Speed: 11.27 it/s, Loss: 0.0330
+2025-09-07 12:44:00 - Validation - Acc: 0.9396, P: 0.9878, R: 0.8901, F1: 0.9364 (Best F1: 0.9425)
+2025-09-07 12:44:04 - Epoch 36/150 - Train Summary - Speed: 10.59 it/s, Loss: 0.0004
+2025-09-07 12:44:05 - Validation - Acc: 0.9121, P: 1.0000, R: 0.8242, F1: 0.9036 (Best F1: 0.9425)
+2025-09-07 12:44:10 - Epoch 37/150 - Train Summary - Speed: 11.15 it/s, Loss: 0.0228
+2025-09-07 12:44:11 - Validation - Acc: 0.9231, P: 0.9873, R: 0.8571, F1: 0.9176 (Best F1: 0.9425)
+2025-09-07 12:44:16 - Epoch 38/150 - Train Summary - Speed: 11.15 it/s, Loss: 0.0213
+2025-09-07 12:44:17 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9425)
+2025-09-07 12:44:17 - New best model saved for Fold 2 with F1-Score: 0.9486
+2025-09-07 12:44:22 - Epoch 39/150 - Train Summary - Speed: 10.76 it/s, Loss: 0.0012
+2025-09-07 12:44:23 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9486)
+2025-09-07 12:44:28 - Epoch 40/150 - Train Summary - Speed: 11.75 it/s, Loss: 0.0054
+2025-09-07 12:44:29 - Validation - Acc: 0.9396, P: 1.0000, R: 0.8791, F1: 0.9357 (Best F1: 0.9486)
+2025-09-07 12:44:34 - Epoch 41/150 - Train Summary - Speed: 11.11 it/s, Loss: 0.0453
+2025-09-07 12:44:35 - Validation - Acc: 0.8571, P: 0.9851, R: 0.7253, F1: 0.8354 (Best F1: 0.9486)
+2025-09-07 12:44:40 - Epoch 42/150 - Train Summary - Speed: 10.60 it/s, Loss: 0.0050
+2025-09-07 12:44:41 - Validation - Acc: 0.8901, P: 0.9733, R: 0.8022, F1: 0.8795 (Best F1: 0.9486)
+2025-09-07 12:44:46 - Epoch 43/150 - Train Summary - Speed: 11.32 it/s, Loss: 0.0043
+2025-09-07 12:44:47 - Validation - Acc: 0.8516, P: 0.9848, R: 0.7143, F1: 0.8280 (Best F1: 0.9486)
+2025-09-07 12:44:52 - Epoch 44/150 - Train Summary - Speed: 10.86 it/s, Loss: 0.0051
+2025-09-07 12:44:53 - Validation - Acc: 0.9176, P: 1.0000, R: 0.8352, F1: 0.9102 (Best F1: 0.9486)
+2025-09-07 12:44:58 - Epoch 45/150 - Train Summary - Speed: 10.68 it/s, Loss: 0.0059
+2025-09-07 12:44:59 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9486)
+2025-09-07 12:45:04 - Epoch 46/150 - Train Summary - Speed: 10.84 it/s, Loss: 0.0028
+2025-09-07 12:45:05 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9486)
+2025-09-07 12:45:10 - Epoch 47/150 - Train Summary - Speed: 11.09 it/s, Loss: 0.0070
+2025-09-07 12:45:11 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9486)
+2025-09-07 12:45:16 - Epoch 48/150 - Train Summary - Speed: 10.55 it/s, Loss: 0.0527
+2025-09-07 12:45:17 - Validation - Acc: 0.9396, P: 0.9878, R: 0.8901, F1: 0.9364 (Best F1: 0.9486)
+2025-09-07 12:45:22 - Epoch 49/150 - Train Summary - Speed: 11.61 it/s, Loss: 0.0119
+2025-09-07 12:45:23 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9486)
+2025-09-07 12:45:28 - Epoch 50/150 - Train Summary - Speed: 11.14 it/s, Loss: 0.0026
+2025-09-07 12:45:29 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9486)
+2025-09-07 12:45:33 - Epoch 51/150 - Train Summary - Speed: 10.26 it/s, Loss: 0.0045
+2025-09-07 12:45:35 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9486)
+2025-09-07 12:45:35 - New best model saved for Fold 2 with F1-Score: 0.9545
+2025-09-07 12:45:40 - Epoch 52/150 - Train Summary - Speed: 11.67 it/s, Loss: 0.0158
+2025-09-07 12:45:41 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9545)
+2025-09-07 12:45:45 - Epoch 53/150 - Train Summary - Speed: 10.88 it/s, Loss: 0.0598
+2025-09-07 12:45:47 - Validation - Acc: 0.9396, P: 0.9878, R: 0.8901, F1: 0.9364 (Best F1: 0.9545)
+2025-09-07 12:45:51 - Epoch 54/150 - Train Summary - Speed: 11.36 it/s, Loss: 0.0104
+2025-09-07 12:45:53 - Validation - Acc: 0.9396, P: 0.9878, R: 0.8901, F1: 0.9364 (Best F1: 0.9545)
+2025-09-07 12:45:57 - Epoch 55/150 - Train Summary - Speed: 11.33 it/s, Loss: 0.0753
+2025-09-07 12:45:58 - Validation - Acc: 0.9560, P: 0.9560, R: 0.9560, F1: 0.9560 (Best F1: 0.9545)
+2025-09-07 12:45:58 - New best model saved for Fold 2 with F1-Score: 0.9560
+2025-09-07 12:46:03 - Epoch 56/150 - Train Summary - Speed: 11.43 it/s, Loss: 0.1080
+2025-09-07 12:46:04 - Validation - Acc: 0.9670, P: 0.9775, R: 0.9560, F1: 0.9667 (Best F1: 0.9560)
+2025-09-07 12:46:04 - New best model saved for Fold 2 with F1-Score: 0.9667
+2025-09-07 12:46:09 - Epoch 57/150 - Train Summary - Speed: 10.44 it/s, Loss: 0.0108
+2025-09-07 12:46:10 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9667)
+2025-09-07 12:46:15 - Epoch 58/150 - Train Summary - Speed: 10.76 it/s, Loss: 0.0051
+2025-09-07 12:46:16 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9667)
+2025-09-07 12:46:21 - Epoch 59/150 - Train Summary - Speed: 11.18 it/s, Loss: 0.0041
+2025-09-07 12:46:22 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9667)
+2025-09-07 12:46:27 - Epoch 60/150 - Train Summary - Speed: 11.11 it/s, Loss: 0.0010
+2025-09-07 12:46:28 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9667)
+2025-09-07 12:46:33 - Epoch 61/150 - Train Summary - Speed: 11.66 it/s, Loss: 0.0182
+2025-09-07 12:46:34 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9667)
+2025-09-07 12:46:39 - Epoch 62/150 - Train Summary - Speed: 10.47 it/s, Loss: 0.0071
+2025-09-07 12:46:40 - Validation - Acc: 0.9286, P: 0.9756, R: 0.8791, F1: 0.9249 (Best F1: 0.9667)
+2025-09-07 12:46:44 - Epoch 63/150 - Train Summary - Speed: 11.18 it/s, Loss: 0.0507
+2025-09-07 12:46:46 - Validation - Acc: 0.9286, P: 0.9756, R: 0.8791, F1: 0.9249 (Best F1: 0.9667)
+2025-09-07 12:46:50 - Epoch 64/150 - Train Summary - Speed: 10.91 it/s, Loss: 0.0801
+2025-09-07 12:46:52 - Validation - Acc: 0.9121, P: 0.9630, R: 0.8571, F1: 0.9070 (Best F1: 0.9667)
+2025-09-07 12:46:56 - Epoch 65/150 - Train Summary - Speed: 10.12 it/s, Loss: 0.0348
+2025-09-07 12:46:57 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9667)
+2025-09-07 12:47:02 - Epoch 66/150 - Train Summary - Speed: 12.11 it/s, Loss: 0.0249
+2025-09-07 12:47:03 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9667)
+2025-09-07 12:47:08 - Epoch 67/150 - Train Summary - Speed: 11.45 it/s, Loss: 0.0085
+2025-09-07 12:47:09 - Validation - Acc: 0.9615, P: 0.9884, R: 0.9341, F1: 0.9605 (Best F1: 0.9667)
+2025-09-07 12:47:14 - Epoch 68/150 - Train Summary - Speed: 10.66 it/s, Loss: 0.0010
+2025-09-07 12:47:15 - Validation - Acc: 0.9396, P: 0.9878, R: 0.8901, F1: 0.9364 (Best F1: 0.9667)
+2025-09-07 12:47:20 - Epoch 69/150 - Train Summary - Speed: 11.32 it/s, Loss: 0.0009
+2025-09-07 12:47:21 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9667)
+2025-09-07 12:47:26 - Epoch 70/150 - Train Summary - Speed: 11.20 it/s, Loss: 0.0116
+2025-09-07 12:47:27 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9667)
+2025-09-07 12:47:32 - Epoch 71/150 - Train Summary - Speed: 11.52 it/s, Loss: 0.0003
+2025-09-07 12:47:33 - Validation - Acc: 0.9451, P: 0.9551, R: 0.9341, F1: 0.9444 (Best F1: 0.9667)
+2025-09-07 12:47:37 - Epoch 72/150 - Train Summary - Speed: 11.09 it/s, Loss: 0.0003
+2025-09-07 12:47:39 - Validation - Acc: 0.9121, P: 1.0000, R: 0.8242, F1: 0.9036 (Best F1: 0.9667)
+2025-09-07 12:47:43 - Epoch 73/150 - Train Summary - Speed: 10.72 it/s, Loss: 0.0509
+2025-09-07 12:47:44 - Validation - Acc: 0.9121, P: 1.0000, R: 0.8242, F1: 0.9036 (Best F1: 0.9667)
+2025-09-07 12:47:49 - Epoch 74/150 - Train Summary - Speed: 10.55 it/s, Loss: 0.0070
+2025-09-07 12:47:50 - Validation - Acc: 0.9341, P: 0.9438, R: 0.9231, F1: 0.9333 (Best F1: 0.9667)
+2025-09-07 12:47:55 - Epoch 75/150 - Train Summary - Speed: 10.67 it/s, Loss: 0.0002
+2025-09-07 12:47:56 - Validation - Acc: 0.9066, P: 0.9744, R: 0.8352, F1: 0.8994 (Best F1: 0.9667)
+2025-09-07 12:48:01 - Epoch 76/150 - Train Summary - Speed: 12.61 it/s, Loss: 0.0276
+2025-09-07 12:48:02 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9667)
+2025-09-07 12:48:02 - Fold 2, Epoch 76: Early stopping triggered.
+2025-09-07 12:48:02 - --- Finished Fold 2, Final Best F1-Score: 0.9667 ---
+2025-09-07 12:48:02 - --- Starting Fold 3 ---
+2025-09-07 12:48:07 - Epoch 1/150 - Train Summary - Speed: 11.43 it/s, Loss: 0.0553
+2025-09-07 12:48:08 - Validation - Acc: 0.6099, P: 1.0000, R: 0.2198, F1: 0.3604 (Best F1: 0.0000)
+2025-09-07 12:48:08 - New best model saved for Fold 3 with F1-Score: 0.3604
+2025-09-07 12:48:13 - Epoch 2/150 - Train Summary - Speed: 11.04 it/s, Loss: 0.0530
+2025-09-07 12:48:14 - Validation - Acc: 0.8901, P: 0.9176, R: 0.8571, F1: 0.8864 (Best F1: 0.3604)
+2025-09-07 12:48:14 - New best model saved for Fold 3 with F1-Score: 0.8864
+2025-09-07 12:48:19 - Epoch 3/150 - Train Summary - Speed: 11.69 it/s, Loss: 0.0395
+2025-09-07 12:48:20 - Validation - Acc: 0.8462, P: 0.9315, R: 0.7473, F1: 0.8293 (Best F1: 0.8864)
+2025-09-07 12:48:26 - Epoch 4/150 - Train Summary - Speed: 11.54 it/s, Loss: 0.0592
+2025-09-07 12:48:27 - Validation - Acc: 0.8956, P: 0.9737, R: 0.8132, F1: 0.8862 (Best F1: 0.8864)
+2025-09-07 12:48:31 - Epoch 5/150 - Train Summary - Speed: 11.01 it/s, Loss: 0.0268
+2025-09-07 12:48:33 - Validation - Acc: 0.8022, P: 0.9661, R: 0.6264, F1: 0.7600 (Best F1: 0.8864)
+2025-09-07 12:48:37 - Epoch 6/150 - Train Summary - Speed: 10.61 it/s, Loss: 0.0666
+2025-09-07 12:48:39 - Validation - Acc: 0.9231, P: 0.9425, R: 0.9011, F1: 0.9213 (Best F1: 0.8864)
+2025-09-07 12:48:39 - New best model saved for Fold 3 with F1-Score: 0.9213
+2025-09-07 12:48:44 - Epoch 7/150 - Train Summary - Speed: 10.60 it/s, Loss: 0.0406
+2025-09-07 12:48:45 - Validation - Acc: 0.9231, P: 0.9140, R: 0.9341, F1: 0.9239 (Best F1: 0.9213)
+2025-09-07 12:48:45 - New best model saved for Fold 3 with F1-Score: 0.9239
+2025-09-07 12:48:50 - Epoch 8/150 - Train Summary - Speed: 11.14 it/s, Loss: 0.0161
+2025-09-07 12:48:51 - Validation - Acc: 0.9396, P: 0.9545, R: 0.9231, F1: 0.9385 (Best F1: 0.9239)
+2025-09-07 12:48:51 - New best model saved for Fold 3 with F1-Score: 0.9385
+2025-09-07 12:48:56 - Epoch 9/150 - Train Summary - Speed: 10.92 it/s, Loss: 0.0368
+2025-09-07 12:48:57 - Validation - Acc: 0.9286, P: 1.0000, R: 0.8571, F1: 0.9231 (Best F1: 0.9385)
+2025-09-07 12:49:02 - Epoch 10/150 - Train Summary - Speed: 11.19 it/s, Loss: 0.0285
+2025-09-07 12:49:03 - Validation - Acc: 0.9396, P: 0.9651, R: 0.9121, F1: 0.9379 (Best F1: 0.9385)
+2025-09-07 12:49:08 - Epoch 11/150 - Train Summary - Speed: 11.11 it/s, Loss: 0.0810
+2025-09-07 12:49:09 - Validation - Acc: 0.9176, P: 0.8958, R: 0.9451, F1: 0.9198 (Best F1: 0.9385)
+2025-09-07 12:49:14 - Epoch 12/150 - Train Summary - Speed: 10.59 it/s, Loss: 0.0475
+2025-09-07 12:49:15 - Validation - Acc: 0.9231, P: 0.9873, R: 0.8571, F1: 0.9176 (Best F1: 0.9385)
+2025-09-07 12:49:20 - Epoch 13/150 - Train Summary - Speed: 10.24 it/s, Loss: 0.0122
+2025-09-07 12:49:21 - Validation - Acc: 0.9121, P: 1.0000, R: 0.8242, F1: 0.9036 (Best F1: 0.9385)
+2025-09-07 12:49:26 - Epoch 14/150 - Train Summary - Speed: 11.13 it/s, Loss: 0.0471
+2025-09-07 12:49:27 - Validation - Acc: 0.9396, P: 0.9545, R: 0.9231, F1: 0.9385 (Best F1: 0.9385)
+2025-09-07 12:49:32 - Epoch 15/150 - Train Summary - Speed: 11.70 it/s, Loss: 0.0179
+2025-09-07 12:49:33 - Validation - Acc: 0.9396, P: 0.9082, R: 0.9780, F1: 0.9418 (Best F1: 0.9385)
+2025-09-07 12:49:33 - New best model saved for Fold 3 with F1-Score: 0.9418
+2025-09-07 12:49:38 - Epoch 16/150 - Train Summary - Speed: 10.79 it/s, Loss: 0.0397
+2025-09-07 12:49:39 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9418)
+2025-09-07 12:49:39 - New best model saved for Fold 3 with F1-Score: 0.9425
+2025-09-07 12:49:44 - Epoch 17/150 - Train Summary - Speed: 10.12 it/s, Loss: 0.0103
+2025-09-07 12:49:45 - Validation - Acc: 0.9615, P: 0.9773, R: 0.9451, F1: 0.9609 (Best F1: 0.9425)
+2025-09-07 12:49:45 - New best model saved for Fold 3 with F1-Score: 0.9609
+2025-09-07 12:49:50 - Epoch 18/150 - Train Summary - Speed: 10.31 it/s, Loss: 0.0138
+2025-09-07 12:49:52 - Validation - Acc: 0.9670, P: 0.9885, R: 0.9451, F1: 0.9663 (Best F1: 0.9609)
+2025-09-07 12:49:52 - New best model saved for Fold 3 with F1-Score: 0.9663
+2025-09-07 12:49:56 - Epoch 19/150 - Train Summary - Speed: 10.55 it/s, Loss: 0.0242
+2025-09-07 12:49:58 - Validation - Acc: 0.9615, P: 0.9667, R: 0.9560, F1: 0.9613 (Best F1: 0.9663)
+2025-09-07 12:50:02 - Epoch 20/150 - Train Summary - Speed: 10.94 it/s, Loss: 0.0053
+2025-09-07 12:50:04 - Validation - Acc: 0.9725, P: 0.9886, R: 0.9560, F1: 0.9721 (Best F1: 0.9663)
+2025-09-07 12:50:04 - New best model saved for Fold 3 with F1-Score: 0.9721
+2025-09-07 12:50:09 - Epoch 21/150 - Train Summary - Speed: 10.67 it/s, Loss: 0.0065
+2025-09-07 12:50:10 - Validation - Acc: 0.9505, P: 0.9556, R: 0.9451, F1: 0.9503 (Best F1: 0.9721)
+2025-09-07 12:50:15 - Epoch 22/150 - Train Summary - Speed: 11.05 it/s, Loss: 0.0763
+2025-09-07 12:50:16 - Validation - Acc: 0.9396, P: 0.9348, R: 0.9451, F1: 0.9399 (Best F1: 0.9721)
+2025-09-07 12:50:21 - Epoch 23/150 - Train Summary - Speed: 10.82 it/s, Loss: 0.0430
+2025-09-07 12:50:22 - Validation - Acc: 0.9341, P: 0.9341, R: 0.9341, F1: 0.9341 (Best F1: 0.9721)
+2025-09-07 12:50:26 - Epoch 24/150 - Train Summary - Speed: 11.50 it/s, Loss: 0.0161
+2025-09-07 12:50:28 - Validation - Acc: 0.8956, P: 0.8396, R: 0.9780, F1: 0.9036 (Best F1: 0.9721)
+2025-09-07 12:50:33 - Epoch 25/150 - Train Summary - Speed: 11.42 it/s, Loss: 0.0119
+2025-09-07 12:50:34 - Validation - Acc: 0.9560, P: 0.9462, R: 0.9670, F1: 0.9565 (Best F1: 0.9721)
+2025-09-07 12:50:39 - Epoch 26/150 - Train Summary - Speed: 11.12 it/s, Loss: 0.0098
+2025-09-07 12:50:40 - Validation - Acc: 0.9670, P: 0.9775, R: 0.9560, F1: 0.9667 (Best F1: 0.9721)
+2025-09-07 12:50:45 - Epoch 27/150 - Train Summary - Speed: 11.27 it/s, Loss: 0.0284
+2025-09-07 12:50:46 - Validation - Acc: 0.9615, P: 0.9565, R: 0.9670, F1: 0.9617 (Best F1: 0.9721)
+2025-09-07 12:50:51 - Epoch 28/150 - Train Summary - Speed: 10.59 it/s, Loss: 0.0371
+2025-09-07 12:50:52 - Validation - Acc: 0.9670, P: 0.9670, R: 0.9670, F1: 0.9670 (Best F1: 0.9721)
+2025-09-07 12:50:57 - Epoch 29/150 - Train Summary - Speed: 10.74 it/s, Loss: 0.0088
+2025-09-07 12:50:58 - Validation - Acc: 0.9670, P: 0.9670, R: 0.9670, F1: 0.9670 (Best F1: 0.9721)
+2025-09-07 12:51:02 - Epoch 30/150 - Train Summary - Speed: 11.04 it/s, Loss: 0.1293
+2025-09-07 12:51:04 - Validation - Acc: 0.9670, P: 0.9775, R: 0.9560, F1: 0.9667 (Best F1: 0.9721)
+2025-09-07 12:51:08 - Epoch 31/150 - Train Summary - Speed: 11.01 it/s, Loss: 0.0031
+2025-09-07 12:51:10 - Validation - Acc: 0.9560, P: 0.9462, R: 0.9670, F1: 0.9565 (Best F1: 0.9721)
+2025-09-07 12:51:14 - Epoch 32/150 - Train Summary - Speed: 11.55 it/s, Loss: 0.0265
+2025-09-07 12:51:16 - Validation - Acc: 0.9451, P: 0.9451, R: 0.9451, F1: 0.9451 (Best F1: 0.9721)
+2025-09-07 12:51:20 - Epoch 33/150 - Train Summary - Speed: 11.16 it/s, Loss: 0.0514
+2025-09-07 12:51:22 - Validation - Acc: 0.9451, P: 0.9355, R: 0.9560, F1: 0.9457 (Best F1: 0.9721)
+2025-09-07 12:51:27 - Epoch 34/150 - Train Summary - Speed: 11.44 it/s, Loss: 0.0090
+2025-09-07 12:51:28 - Validation - Acc: 0.9615, P: 0.9773, R: 0.9451, F1: 0.9609 (Best F1: 0.9721)
+2025-09-07 12:51:33 - Epoch 35/150 - Train Summary - Speed: 11.60 it/s, Loss: 0.0107
+2025-09-07 12:51:34 - Validation - Acc: 0.9560, P: 0.9770, R: 0.9341, F1: 0.9551 (Best F1: 0.9721)
+2025-09-07 12:51:38 - Epoch 36/150 - Train Summary - Speed: 11.15 it/s, Loss: 0.0299
+2025-09-07 12:51:40 - Validation - Acc: 0.9670, P: 0.9885, R: 0.9451, F1: 0.9663 (Best F1: 0.9721)
+2025-09-07 12:51:44 - Epoch 37/150 - Train Summary - Speed: 10.56 it/s, Loss: 0.0337
+2025-09-07 12:51:46 - Validation - Acc: 0.9615, P: 0.9773, R: 0.9451, F1: 0.9609 (Best F1: 0.9721)
+2025-09-07 12:51:51 - Epoch 38/150 - Train Summary - Speed: 11.33 it/s, Loss: 0.0054
+2025-09-07 12:51:52 - Validation - Acc: 0.9615, P: 0.9773, R: 0.9451, F1: 0.9609 (Best F1: 0.9721)
+2025-09-07 12:51:56 - Epoch 39/150 - Train Summary - Speed: 11.98 it/s, Loss: 0.0237
+2025-09-07 12:51:58 - Validation - Acc: 0.9670, P: 0.9670, R: 0.9670, F1: 0.9670 (Best F1: 0.9721)
+2025-09-07 12:52:02 - Epoch 40/150 - Train Summary - Speed: 10.67 it/s, Loss: 0.0622
+2025-09-07 12:52:04 - Validation - Acc: 0.9615, P: 0.9667, R: 0.9560, F1: 0.9613 (Best F1: 0.9721)
+2025-09-07 12:52:04 - Fold 3, Epoch 40: Early stopping triggered.
+2025-09-07 12:52:04 - --- Finished Fold 3, Final Best F1-Score: 0.9721 ---
+2025-09-07 12:52:04 - --- Starting Fold 4 ---
+2025-09-07 12:52:08 - Epoch 1/150 - Train Summary - Speed: 12.13 it/s, Loss: 0.0719
+2025-09-07 12:52:09 - Validation - Acc: 0.7802, P: 0.9636, R: 0.5824, F1: 0.7260 (Best F1: 0.0000)
+2025-09-07 12:52:09 - New best model saved for Fold 4 with F1-Score: 0.7260
+2025-09-07 12:52:14 - Epoch 2/150 - Train Summary - Speed: 11.75 it/s, Loss: 0.0259
+2025-09-07 12:52:15 - Validation - Acc: 0.8022, P: 0.9825, R: 0.6154, F1: 0.7568 (Best F1: 0.7260)
+2025-09-07 12:52:15 - New best model saved for Fold 4 with F1-Score: 0.7568
+2025-09-07 12:52:20 - Epoch 3/150 - Train Summary - Speed: 11.64 it/s, Loss: 0.0210
+2025-09-07 12:52:21 - Validation - Acc: 0.9011, P: 0.9506, R: 0.8462, F1: 0.8953 (Best F1: 0.7568)
+2025-09-07 12:52:21 - New best model saved for Fold 4 with F1-Score: 0.8953
+2025-09-07 12:52:26 - Epoch 4/150 - Train Summary - Speed: 12.05 it/s, Loss: 0.0240
+2025-09-07 12:52:27 - Validation - Acc: 0.9121, P: 1.0000, R: 0.8242, F1: 0.9036 (Best F1: 0.8953)
+2025-09-07 12:52:27 - New best model saved for Fold 4 with F1-Score: 0.9036
+2025-09-07 12:52:32 - Epoch 5/150 - Train Summary - Speed: 11.07 it/s, Loss: 0.0387
+2025-09-07 12:52:33 - Validation - Acc: 0.8791, P: 0.9726, R: 0.7802, F1: 0.8659 (Best F1: 0.9036)
+2025-09-07 12:52:37 - Epoch 6/150 - Train Summary - Speed: 10.32 it/s, Loss: 0.0233
+2025-09-07 12:52:38 - Validation - Acc: 0.9176, P: 1.0000, R: 0.8352, F1: 0.9102 (Best F1: 0.9036)
+2025-09-07 12:52:39 - New best model saved for Fold 4 with F1-Score: 0.9102
+2025-09-07 12:52:43 - Epoch 7/150 - Train Summary - Speed: 11.42 it/s, Loss: 0.0125
+2025-09-07 12:52:44 - Validation - Acc: 0.9176, P: 0.9872, R: 0.8462, F1: 0.9112 (Best F1: 0.9102)
+2025-09-07 12:52:44 - New best model saved for Fold 4 with F1-Score: 0.9112
+2025-09-07 12:52:49 - Epoch 8/150 - Train Summary - Speed: 11.44 it/s, Loss: 0.0126
+2025-09-07 12:52:50 - Validation - Acc: 0.9176, P: 0.9872, R: 0.8462, F1: 0.9112 (Best F1: 0.9112)
+2025-09-07 12:52:55 - Epoch 9/150 - Train Summary - Speed: 11.51 it/s, Loss: 0.0133
+2025-09-07 12:52:56 - Validation - Acc: 0.9231, P: 1.0000, R: 0.8462, F1: 0.9167 (Best F1: 0.9112)
+2025-09-07 12:52:56 - New best model saved for Fold 4 with F1-Score: 0.9167
+2025-09-07 12:53:01 - Epoch 10/150 - Train Summary - Speed: 11.01 it/s, Loss: 0.0653
+2025-09-07 12:53:02 - Validation - Acc: 0.9121, P: 0.9870, R: 0.8352, F1: 0.9048 (Best F1: 0.9167)
+2025-09-07 12:53:07 - Epoch 11/150 - Train Summary - Speed: 11.73 it/s, Loss: 0.0698
+2025-09-07 12:53:08 - Validation - Acc: 0.9066, P: 0.8854, R: 0.9341, F1: 0.9091 (Best F1: 0.9167)
+2025-09-07 12:53:12 - Epoch 12/150 - Train Summary - Speed: 10.96 it/s, Loss: 0.0357
+2025-09-07 12:53:14 - Validation - Acc: 0.8791, P: 1.0000, R: 0.7582, F1: 0.8625 (Best F1: 0.9167)
+2025-09-07 12:53:18 - Epoch 13/150 - Train Summary - Speed: 11.66 it/s, Loss: 0.0063
+2025-09-07 12:53:19 - Validation - Acc: 0.8846, P: 0.9730, R: 0.7912, F1: 0.8727 (Best F1: 0.9167)
+2025-09-07 12:53:24 - Epoch 14/150 - Train Summary - Speed: 11.44 it/s, Loss: 0.0161
+2025-09-07 12:53:25 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9167)
+2025-09-07 12:53:25 - New best model saved for Fold 4 with F1-Score: 0.9425
+2025-09-07 12:53:30 - Epoch 15/150 - Train Summary - Speed: 11.81 it/s, Loss: 0.0198
+2025-09-07 12:53:31 - Validation - Acc: 0.9176, P: 1.0000, R: 0.8352, F1: 0.9102 (Best F1: 0.9425)
+2025-09-07 12:53:36 - Epoch 16/150 - Train Summary - Speed: 11.43 it/s, Loss: 0.0296
+2025-09-07 12:53:37 - Validation - Acc: 0.9121, P: 0.9870, R: 0.8352, F1: 0.9048 (Best F1: 0.9425)
+2025-09-07 12:53:42 - Epoch 17/150 - Train Summary - Speed: 10.81 it/s, Loss: 0.0278
+2025-09-07 12:53:43 - Validation - Acc: 0.9341, P: 1.0000, R: 0.8681, F1: 0.9294 (Best F1: 0.9425)
+2025-09-07 12:53:47 - Epoch 18/150 - Train Summary - Speed: 11.30 it/s, Loss: 0.0366
+2025-09-07 12:53:49 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9425)
+2025-09-07 12:53:53 - Epoch 19/150 - Train Summary - Speed: 11.48 it/s, Loss: 0.0114
+2025-09-07 12:53:54 - Validation - Acc: 0.9341, P: 0.9877, R: 0.8791, F1: 0.9302 (Best F1: 0.9425)
+2025-09-07 12:53:59 - Epoch 20/150 - Train Summary - Speed: 11.05 it/s, Loss: 0.0821
+2025-09-07 12:54:00 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9425)
+2025-09-07 12:54:05 - Epoch 21/150 - Train Summary - Speed: 11.13 it/s, Loss: 0.0375
+2025-09-07 12:54:06 - Validation - Acc: 0.9066, P: 1.0000, R: 0.8132, F1: 0.8970 (Best F1: 0.9425)
+2025-09-07 12:54:11 - Epoch 22/150 - Train Summary - Speed: 12.49 it/s, Loss: 0.1129
+2025-09-07 12:54:12 - Validation - Acc: 0.9231, P: 0.9053, R: 0.9451, F1: 0.9247 (Best F1: 0.9425)
+2025-09-07 12:54:17 - Epoch 23/150 - Train Summary - Speed: 11.29 it/s, Loss: 0.0034
+2025-09-07 12:54:18 - Validation - Acc: 0.8901, P: 0.9733, R: 0.8022, F1: 0.8795 (Best F1: 0.9425)
+2025-09-07 12:54:22 - Epoch 24/150 - Train Summary - Speed: 11.37 it/s, Loss: 0.0212
+2025-09-07 12:54:24 - Validation - Acc: 0.8516, P: 0.9848, R: 0.7143, F1: 0.8280 (Best F1: 0.9425)
+2025-09-07 12:54:28 - Epoch 25/150 - Train Summary - Speed: 12.02 it/s, Loss: 0.0109
+2025-09-07 12:54:29 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9425)
+2025-09-07 12:54:34 - Epoch 26/150 - Train Summary - Speed: 11.94 it/s, Loss: 0.0091
+2025-09-07 12:54:35 - Validation - Acc: 0.9670, P: 0.9885, R: 0.9451, F1: 0.9663 (Best F1: 0.9425)
+2025-09-07 12:54:35 - New best model saved for Fold 4 with F1-Score: 0.9663
+2025-09-07 12:54:40 - Epoch 27/150 - Train Summary - Speed: 10.96 it/s, Loss: 0.0133
+2025-09-07 12:54:41 - Validation - Acc: 0.9176, P: 0.9872, R: 0.8462, F1: 0.9112 (Best F1: 0.9663)
+2025-09-07 12:54:46 - Epoch 28/150 - Train Summary - Speed: 11.18 it/s, Loss: 0.0286
+2025-09-07 12:54:47 - Validation - Acc: 0.9176, P: 0.9872, R: 0.8462, F1: 0.9112 (Best F1: 0.9663)
+2025-09-07 12:54:52 - Epoch 29/150 - Train Summary - Speed: 12.27 it/s, Loss: 0.0067
+2025-09-07 12:54:53 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9663)
+2025-09-07 12:54:58 - Epoch 30/150 - Train Summary - Speed: 11.29 it/s, Loss: 0.0068
+2025-09-07 12:54:59 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9663)
+2025-09-07 12:55:03 - Epoch 31/150 - Train Summary - Speed: 11.75 it/s, Loss: 0.0119
+2025-09-07 12:55:04 - Validation - Acc: 0.9231, P: 0.9231, R: 0.9231, F1: 0.9231 (Best F1: 0.9663)
+2025-09-07 12:55:09 - Epoch 32/150 - Train Summary - Speed: 12.17 it/s, Loss: 0.0251
+2025-09-07 12:55:10 - Validation - Acc: 0.9066, P: 0.9625, R: 0.8462, F1: 0.9006 (Best F1: 0.9663)
+2025-09-07 12:55:15 - Epoch 33/150 - Train Summary - Speed: 11.24 it/s, Loss: 0.0102
+2025-09-07 12:55:16 - Validation - Acc: 0.8736, P: 1.0000, R: 0.7473, F1: 0.8553 (Best F1: 0.9663)
+2025-09-07 12:55:21 - Epoch 34/150 - Train Summary - Speed: 12.13 it/s, Loss: 0.0052
+2025-09-07 12:55:22 - Validation - Acc: 0.9396, P: 1.0000, R: 0.8791, F1: 0.9357 (Best F1: 0.9663)
+2025-09-07 12:55:27 - Epoch 35/150 - Train Summary - Speed: 11.49 it/s, Loss: 0.0243
+2025-09-07 12:55:28 - Validation - Acc: 0.9341, P: 0.9759, R: 0.8901, F1: 0.9310 (Best F1: 0.9663)
+2025-09-07 12:55:32 - Epoch 36/150 - Train Summary - Speed: 12.18 it/s, Loss: 0.0068
+2025-09-07 12:55:34 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9663)
+2025-09-07 12:55:38 - Epoch 37/150 - Train Summary - Speed: 12.74 it/s, Loss: 0.0015
+2025-09-07 12:55:39 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9663)
+2025-09-07 12:55:44 - Epoch 38/150 - Train Summary - Speed: 11.84 it/s, Loss: 0.0122
+2025-09-07 12:55:45 - Validation - Acc: 0.9560, P: 0.9770, R: 0.9341, F1: 0.9551 (Best F1: 0.9663)
+2025-09-07 12:55:50 - Epoch 39/150 - Train Summary - Speed: 11.52 it/s, Loss: 0.0081
+2025-09-07 12:55:51 - Validation - Acc: 0.9615, P: 0.9773, R: 0.9451, F1: 0.9609 (Best F1: 0.9663)
+2025-09-07 12:55:56 - Epoch 40/150 - Train Summary - Speed: 11.71 it/s, Loss: 0.0089
+2025-09-07 12:55:57 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9663)
+2025-09-07 12:56:02 - Epoch 41/150 - Train Summary - Speed: 10.59 it/s, Loss: 0.0029
+2025-09-07 12:56:03 - Validation - Acc: 0.9396, P: 0.9444, R: 0.9341, F1: 0.9392 (Best F1: 0.9663)
+2025-09-07 12:56:07 - Epoch 42/150 - Train Summary - Speed: 11.55 it/s, Loss: 0.0026
+2025-09-07 12:56:08 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9663)
+2025-09-07 12:56:13 - Epoch 43/150 - Train Summary - Speed: 11.06 it/s, Loss: 0.0015
+2025-09-07 12:56:14 - Validation - Acc: 0.9615, P: 0.9884, R: 0.9341, F1: 0.9605 (Best F1: 0.9663)
+2025-09-07 12:56:19 - Epoch 44/150 - Train Summary - Speed: 11.91 it/s, Loss: 0.0044
+2025-09-07 12:56:20 - Validation - Acc: 0.9505, P: 0.9881, R: 0.9121, F1: 0.9486 (Best F1: 0.9663)
+2025-09-07 12:56:25 - Epoch 45/150 - Train Summary - Speed: 11.31 it/s, Loss: 0.0292
+2025-09-07 12:56:26 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9663)
+2025-09-07 12:56:31 - Epoch 46/150 - Train Summary - Speed: 12.13 it/s, Loss: 0.0232
+2025-09-07 12:56:32 - Validation - Acc: 0.9560, P: 0.9882, R: 0.9231, F1: 0.9545 (Best F1: 0.9663)
+2025-09-07 12:56:32 - Fold 4, Epoch 46: Early stopping triggered.
+2025-09-07 12:56:32 - --- Finished Fold 4, Final Best F1-Score: 0.9663 ---
+2025-09-07 12:56:32 - --- Starting Fold 5 ---
+2025-09-07 12:56:37 - Epoch 1/150 - Train Summary - Speed: 10.91 it/s, Loss: 0.0436
+2025-09-07 12:56:38 - Validation - Acc: 0.7198, P: 1.0000, R: 0.4396, F1: 0.6107 (Best F1: 0.0000)
+2025-09-07 12:56:38 - New best model saved for Fold 5 with F1-Score: 0.6107
+2025-09-07 12:56:43 - Epoch 2/150 - Train Summary - Speed: 11.31 it/s, Loss: 0.0726
+2025-09-07 12:56:44 - Validation - Acc: 0.8352, P: 1.0000, R: 0.6703, F1: 0.8026 (Best F1: 0.6107)
+2025-09-07 12:56:44 - New best model saved for Fold 5 with F1-Score: 0.8026
+2025-09-07 12:56:49 - Epoch 3/150 - Train Summary - Speed: 10.84 it/s, Loss: 0.0167
+2025-09-07 12:56:50 - Validation - Acc: 0.8297, P: 0.9839, R: 0.6703, F1: 0.7974 (Best F1: 0.8026)
+2025-09-07 12:56:55 - Epoch 4/150 - Train Summary - Speed: 11.52 it/s, Loss: 0.0397
+2025-09-07 12:56:56 - Validation - Acc: 0.8242, P: 0.9683, R: 0.6703, F1: 0.7922 (Best F1: 0.8026)
+2025-09-07 12:57:01 - Epoch 5/150 - Train Summary - Speed: 10.65 it/s, Loss: 0.0238
+2025-09-07 12:57:02 - Validation - Acc: 0.8242, P: 0.9683, R: 0.6703, F1: 0.7922 (Best F1: 0.8026)
+2025-09-07 12:57:07 - Epoch 6/150 - Train Summary - Speed: 11.12 it/s, Loss: 0.0655
+2025-09-07 12:57:08 - Validation - Acc: 0.8571, P: 0.9577, R: 0.7473, F1: 0.8395 (Best F1: 0.8026)
+2025-09-07 12:57:08 - New best model saved for Fold 5 with F1-Score: 0.8395
+2025-09-07 12:57:13 - Epoch 7/150 - Train Summary - Speed: 10.54 it/s, Loss: 0.0105
+2025-09-07 12:57:14 - Validation - Acc: 0.8626, P: 0.9853, R: 0.7363, F1: 0.8428 (Best F1: 0.8395)
+2025-09-07 12:57:14 - New best model saved for Fold 5 with F1-Score: 0.8428
+2025-09-07 12:57:19 - Epoch 8/150 - Train Summary - Speed: 10.61 it/s, Loss: 0.0457
+2025-09-07 12:57:20 - Validation - Acc: 0.9011, P: 0.9740, R: 0.8242, F1: 0.8929 (Best F1: 0.8428)
+2025-09-07 12:57:20 - New best model saved for Fold 5 with F1-Score: 0.8929
+2025-09-07 12:57:25 - Epoch 9/150 - Train Summary - Speed: 11.32 it/s, Loss: 0.0229
+2025-09-07 12:57:26 - Validation - Acc: 0.8462, P: 1.0000, R: 0.6923, F1: 0.8182 (Best F1: 0.8929)
+2025-09-07 12:57:31 - Epoch 10/150 - Train Summary - Speed: 10.46 it/s, Loss: 0.0107
+2025-09-07 12:57:32 - Validation - Acc: 0.8516, P: 1.0000, R: 0.7033, F1: 0.8258 (Best F1: 0.8929)
+2025-09-07 12:57:37 - Epoch 11/150 - Train Summary - Speed: 11.50 it/s, Loss: 0.0350
+2025-09-07 12:57:38 - Validation - Acc: 0.8352, P: 0.9692, R: 0.6923, F1: 0.8077 (Best F1: 0.8929)
+2025-09-07 12:57:43 - Epoch 12/150 - Train Summary - Speed: 11.06 it/s, Loss: 0.0578
+2025-09-07 12:57:44 - Validation - Acc: 0.8516, P: 0.9324, R: 0.7582, F1: 0.8364 (Best F1: 0.8929)
+2025-09-07 12:57:49 - Epoch 13/150 - Train Summary - Speed: 10.28 it/s, Loss: 0.0203
+2025-09-07 12:57:50 - Validation - Acc: 0.9231, P: 0.9753, R: 0.8681, F1: 0.9186 (Best F1: 0.8929)
+2025-09-07 12:57:50 - New best model saved for Fold 5 with F1-Score: 0.9186
+2025-09-07 12:57:55 - Epoch 14/150 - Train Summary - Speed: 10.69 it/s, Loss: 0.0178
+2025-09-07 12:57:56 - Validation - Acc: 0.9286, P: 0.9643, R: 0.8901, F1: 0.9257 (Best F1: 0.9186)
+2025-09-07 12:57:56 - New best model saved for Fold 5 with F1-Score: 0.9257
+2025-09-07 12:58:01 - Epoch 15/150 - Train Summary - Speed: 10.52 it/s, Loss: 0.0168
+2025-09-07 12:58:02 - Validation - Acc: 0.9176, P: 0.9750, R: 0.8571, F1: 0.9123 (Best F1: 0.9257)
+2025-09-07 12:58:07 - Epoch 16/150 - Train Summary - Speed: 11.18 it/s, Loss: 0.0069
+2025-09-07 12:58:08 - Validation - Acc: 0.9286, P: 0.9756, R: 0.8791, F1: 0.9249 (Best F1: 0.9257)
+2025-09-07 12:58:13 - Epoch 17/150 - Train Summary - Speed: 10.61 it/s, Loss: 0.0152
+2025-09-07 12:58:14 - Validation - Acc: 0.9066, P: 0.9625, R: 0.8462, F1: 0.9006 (Best F1: 0.9257)
+2025-09-07 12:58:19 - Epoch 18/150 - Train Summary - Speed: 10.56 it/s, Loss: 0.0062
+2025-09-07 12:58:21 - Validation - Acc: 0.9451, P: 0.9551, R: 0.9341, F1: 0.9444 (Best F1: 0.9257)
+2025-09-07 12:58:21 - New best model saved for Fold 5 with F1-Score: 0.9444
+2025-09-07 12:58:25 - Epoch 19/150 - Train Summary - Speed: 11.06 it/s, Loss: 0.0441
+2025-09-07 12:58:27 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9444)
+2025-09-07 12:58:32 - Epoch 20/150 - Train Summary - Speed: 11.15 it/s, Loss: 0.0259
+2025-09-07 12:58:33 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9444)
+2025-09-07 12:58:38 - Epoch 21/150 - Train Summary - Speed: 10.80 it/s, Loss: 0.0717
+2025-09-07 12:58:39 - Validation - Acc: 0.9176, P: 0.9750, R: 0.8571, F1: 0.9123 (Best F1: 0.9444)
+2025-09-07 12:58:44 - Epoch 22/150 - Train Summary - Speed: 10.46 it/s, Loss: 0.0416
+2025-09-07 12:58:45 - Validation - Acc: 0.9615, P: 0.9773, R: 0.9451, F1: 0.9609 (Best F1: 0.9444)
+2025-09-07 12:58:45 - New best model saved for Fold 5 with F1-Score: 0.9609
+2025-09-07 12:58:50 - Epoch 23/150 - Train Summary - Speed: 11.22 it/s, Loss: 0.0381
+2025-09-07 12:58:51 - Validation - Acc: 0.9231, P: 0.9231, R: 0.9231, F1: 0.9231 (Best F1: 0.9609)
+2025-09-07 12:58:56 - Epoch 24/150 - Train Summary - Speed: 10.71 it/s, Loss: 0.0135
+2025-09-07 12:58:57 - Validation - Acc: 0.9231, P: 0.9529, R: 0.8901, F1: 0.9205 (Best F1: 0.9609)
+2025-09-07 12:59:02 - Epoch 25/150 - Train Summary - Speed: 12.29 it/s, Loss: 0.0411
+2025-09-07 12:59:03 - Validation - Acc: 0.9286, P: 0.9875, R: 0.8681, F1: 0.9240 (Best F1: 0.9609)
+2025-09-07 12:59:08 - Epoch 26/150 - Train Summary - Speed: 10.73 it/s, Loss: 0.0209
+2025-09-07 12:59:09 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9609)
+2025-09-07 12:59:14 - Epoch 27/150 - Train Summary - Speed: 10.70 it/s, Loss: 0.0113
+2025-09-07 12:59:15 - Validation - Acc: 0.9121, P: 0.9747, R: 0.8462, F1: 0.9059 (Best F1: 0.9609)
+2025-09-07 12:59:20 - Epoch 28/150 - Train Summary - Speed: 9.80 it/s, Loss: 0.0229
+2025-09-07 12:59:21 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9609)
+2025-09-07 12:59:26 - Epoch 29/150 - Train Summary - Speed: 11.39 it/s, Loss: 0.0098
+2025-09-07 12:59:27 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9609)
+2025-09-07 12:59:32 - Epoch 30/150 - Train Summary - Speed: 10.68 it/s, Loss: 0.0222
+2025-09-07 12:59:33 - Validation - Acc: 0.9451, P: 0.9765, R: 0.9121, F1: 0.9432 (Best F1: 0.9609)
+2025-09-07 12:59:38 - Epoch 31/150 - Train Summary - Speed: 11.20 it/s, Loss: 0.0114
+2025-09-07 12:59:39 - Validation - Acc: 0.9451, P: 0.9551, R: 0.9341, F1: 0.9444 (Best F1: 0.9609)
+2025-09-07 12:59:44 - Epoch 32/150 - Train Summary - Speed: 12.55 it/s, Loss: 0.0024
+2025-09-07 12:59:45 - Validation - Acc: 0.9560, P: 0.9560, R: 0.9560, F1: 0.9560 (Best F1: 0.9609)
+2025-09-07 12:59:50 - Epoch 33/150 - Train Summary - Speed: 10.27 it/s, Loss: 0.0963
+2025-09-07 12:59:51 - Validation - Acc: 0.9505, P: 0.9457, R: 0.9560, F1: 0.9508 (Best F1: 0.9609)
+2025-09-07 12:59:56 - Epoch 34/150 - Train Summary - Speed: 10.08 it/s, Loss: 0.0055
+2025-09-07 12:59:57 - Validation - Acc: 0.9286, P: 0.9535, R: 0.9011, F1: 0.9266 (Best F1: 0.9609)
+2025-09-07 13:00:02 - Epoch 35/150 - Train Summary - Speed: 10.44 it/s, Loss: 0.0022
+2025-09-07 13:00:03 - Validation - Acc: 0.9505, P: 0.9659, R: 0.9341, F1: 0.9497 (Best F1: 0.9609)
+2025-09-07 13:00:08 - Epoch 36/150 - Train Summary - Speed: 10.58 it/s, Loss: 0.0927
+2025-09-07 13:00:10 - Validation - Acc: 0.9560, P: 0.9663, R: 0.9451, F1: 0.9556 (Best F1: 0.9609)
+2025-09-07 13:00:14 - Epoch 37/150 - Train Summary - Speed: 11.25 it/s, Loss: 0.0051
+2025-09-07 13:00:16 - Validation - Acc: 0.9396, P: 0.9762, R: 0.9011, F1: 0.9371 (Best F1: 0.9609)
+2025-09-07 13:00:21 - Epoch 38/150 - Train Summary - Speed: 10.67 it/s, Loss: 0.0007
+2025-09-07 13:00:22 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9609)
+2025-09-07 13:00:27 - Epoch 39/150 - Train Summary - Speed: 11.99 it/s, Loss: 0.0257
+2025-09-07 13:00:28 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9609)
+2025-09-07 13:00:33 - Epoch 40/150 - Train Summary - Speed: 11.41 it/s, Loss: 0.0139
+2025-09-07 13:00:34 - Validation - Acc: 0.9505, P: 0.9767, R: 0.9231, F1: 0.9492 (Best F1: 0.9609)
+2025-09-07 13:00:39 - Epoch 41/150 - Train Summary - Speed: 10.59 it/s, Loss: 0.0118
+2025-09-07 13:00:40 - Validation - Acc: 0.9451, P: 0.9880, R: 0.9011, F1: 0.9425 (Best F1: 0.9609)
+2025-09-07 13:00:45 - Epoch 42/150 - Train Summary - Speed: 10.55 it/s, Loss: 0.0037
+2025-09-07 13:00:46 - Validation - Acc: 0.9341, P: 0.9647, R: 0.9011, F1: 0.9318 (Best F1: 0.9609)
+2025-09-07 13:00:46 - Fold 5, Epoch 42: Early stopping triggered.
+2025-09-07 13:00:46 - --- Finished Fold 5, Final Best F1-Score: 0.9609 ---
+2025-09-07 13:00:46 - --- K-Fold Cross-Validation Finished ---
+2025-09-07 13:00:46 - F1 scores for each fold: ['0.9605', '0.9667', '0.9721', '0.9663', '0.9609']
+2025-09-07 13:00:46 - Average F1-Score: 0.9653
+2025-09-07 13:00:46 - Standard Deviation: 0.0043
+2025-09-07 13:00:46 - --- Finished Final Training for CLAHE ---
