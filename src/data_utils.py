@@ -18,7 +18,7 @@ def get_transforms(is_train=True):
             A.ShiftScaleRotate(shift_limit=0.08, scale_limit=0.12, rotate_limit=25, p=0.75),
             A.Blur(blur_limit=3, p=0.2),
             A.GridDistortion(p=0.2),
-            A.OpticalDistortion(distort_limit=0.2, p=0.2),
+            A.OpticalDistortion(distort_limit=0.2, shift_limit=0.2, p=0.2),
             A.CoarseDropout(max_holes=8, max_height=32, max_width=32, fill_value=0, p=0.5),
             A.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5)),
             ToTensorV2(),
