@@ -19,7 +19,7 @@ def get_transforms(is_train=True):
             A.Blur(blur_limit=3, p=0.2),
             A.GridDistortion(p=0.2),
             A.OpticalDistortion(distort_limit=0.2, shift_limit=0.2, p=0.2),
-            A.CoarseDropout(max_holes=8, max_height=32, max_width=32, fill_value=0, p=0.5),
+            A.Cutout(num_holes=8, max_h_size=32, max_w_size=32, fill_value=0, p=0.5),
             A.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5)),
             ToTensorV2(),
         ])
