@@ -5,7 +5,6 @@ pandas
 numpy
 opencv-python-headless
 albumentations
-albumentations==1.2.0
 matplotlib
 seaborn
 tqdm
