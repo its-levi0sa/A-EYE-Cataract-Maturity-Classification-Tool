@@ -9,7 +9,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 
 from src.aeye_model import AEyeModel
 from src.baseline_model import mobilevit_s

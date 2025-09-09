@@ -1,16 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Unified script to evaluate the trained A-EYE and baseline models.
-This script performs ensembled inference using all trained K-Fold models.
-
-Usage:
-  # Evaluate A-EYE with 8 rings on the test set
-  python scripts/evaluate.py --model_type aeye --num_rings 8 --data_dir data/test --model_dir saved_models/aeye_8_ring
-
-  # Evaluate the baseline model on the test set
-  python scripts/evaluate.py --model_type baseline --data_dir data/test --model_dir saved_models/baseline
-"""
-
 import os
 import argparse
 import logging
@@ -21,7 +8,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 import seaborn as sns
 import matplotlib.pyplot as plt
 
