@@ -4,6 +4,7 @@ import logging
 import glob
 import numpy as np
 import torch
+import sys
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
@@ -32,7 +33,7 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
 
     for epoch in range(config['epochs']):
         model.train()
-        train_loop = tqdm(train_loader, desc=f"Fold {fold+1} Epoch {epoch+1}", leave=False)
+        train_loop = tqdm(train_loader, desc=f"Fold {fold+1} Epoch {epoch+1}", leave=False, file=sys.stdout)
         for inputs, labels in train_loop:
             inputs, labels = inputs.to(device), labels.to(device).unsqueeze(1)
             with torch.cuda.amp.autocast():
