@@ -11,9 +11,10 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import seaborn as sns
 import time
-import timm
 
+# --- Import the from-scratch baseline model ---
 from src.aeye_model import AEyeModel
+from src.baseline_model import mobilevit_s
 from src.data_utils import AlbumentationsDataset, get_transforms
 
 def main(args):
@@ -24,7 +25,6 @@ def main(args):
     log_name = f"evaluation_results_{args.model_type}" + (f"_{args.num_rings}_rings" if args.model_type == 'aeye' else "")
     log_path = os.path.join("results", f"{log_name}.txt")
     
-    # Configure logging to file and console
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s',
                         handlers=[logging.FileHandler(log_path, mode='w'), logging.StreamHandler()])
 
@@ -41,11 +41,12 @@ def main(args):
     # Load models
     models = []
     for path in model_paths:
-        # --- Use timm for baseline, src.aeye_model for aeye ---
+        # --- Use src.baseline_model for baseline ---
         if args.model_type == 'aeye':
             model = AEyeModel({'dims': [32, 64, 128, 160], 'embed_dim': 256, 'num_rings': args.num_rings})
         else: # baseline
-            model = timm.create_model('mobilevit_s', pretrained=False, num_classes=1)
+            model = mobilevit_s()
+            model.fc = nn.Linear(model.fc.in_features, 1)
 
         model.load_state_dict(torch.load(path, map_location=device))
         models.append(model.to(device).eval())
@@ -72,7 +73,7 @@ def main(args):
             total_inference_time += (end_time - start_time)
             all_fold_preds.append(fold_preds)
 
-    # Ensemble predictions by averaging
+    # Ensemble predictions
     avg_preds = np.mean(all_fold_preds, axis=0)
     final_preds = (avg_preds >= 0.5).astype(int)
 
@@ -81,7 +82,7 @@ def main(args):
     precision = precision_score(test_labels, final_preds, zero_division=0)
     recall = recall_score(test_labels, final_preds, zero_division=0)
     f1 = f1_score(test_labels, final_preds, zero_division=0)
-    avg_inference_time = (total_inference_time / len(models) / len(test_ds)) * 1000  # ms per image
+    avg_inference_time = (total_inference_time / len(models) / len(test_ds)) * 1000
 
     logging.info("\n--- Final Ensemble Performance ---")
     logging.info(f"Accuracy: {accuracy:.4f}")
