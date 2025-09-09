@@ -2,132 +2,115 @@ import os
 import argparse
 import logging
 import glob
-import time
 import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from tqdm import tqdm
-import seaborn as sns
 import matplotlib.pyplot as plt
+import seaborn as sns
+import time
+import timm
 
 from src.aeye_model import AEyeModel
-from src.baseline_model import mobilevit_s
 from src.data_utils import AlbumentationsDataset, get_transforms
-
-def evaluate_ensemble(models, test_loader, device):
-    """Performs ensembled inference and returns predictions and labels."""
-    all_preds = []
-    true_labels = []
-    inference_times = []
-
-    with torch.no_grad():
-        for inputs, labels in tqdm(test_loader, desc="Evaluating on Test Set"):
-            inputs = inputs.to(device)
-            batch_fold_probs = []
-
-            # Get predictions from each model in the ensemble
-            for model in models:
-                start_time = time.time()
-                outputs = model(inputs)
-                inference_times.append(time.time() - start_time)
-                
-                probs = torch.sigmoid(outputs)
-                batch_fold_probs.append(probs.cpu())
-
-            # Average the probabilities across all fold models
-            ensembled_probs = torch.stack(batch_fold_probs).mean(dim=0)
-            preds = (ensembled_probs > 0.5).numpy().flatten()
-
-            all_preds.extend(preds)
-            true_labels.extend(labels.numpy().flatten())
-
-    # Calculate average inference time per image
-    avg_inference_time = np.sum(inference_times) / len(test_loader.dataset)
-    return np.array(all_preds), np.array(true_labels), avg_inference_time
 
 def main(args):
     """Main function to set up and run the evaluation process."""
-    config = vars(args)
-
-    # Setup Logging
-    log_name = f"evaluation_results_{config['model_type']}" + (f"_{config['num_rings']}_rings" if config['model_type'] == 'aeye' else "")
-    log_path = os.path.join("results", f"{log_name}.txt")
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s',
-                        handlers=[logging.FileHandler(log_path), logging.StreamHandler()])
-
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # --- Setup Logging ---
+    log_name = f"evaluation_results_{args.model_type}" + (f"_{args.num_rings}_rings" if args.model_type == 'aeye' else "")
+    log_path = os.path.join("results", f"{log_name}.txt")
+    
+    # Configure logging to file and console
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s',
+                        handlers=[logging.FileHandler(log_path, mode='w'), logging.StreamHandler()])
+
+    logging.info(f"--- Starting Evaluation for {log_name.replace('_', ' ').title()} ---")
     logging.info(f"Using device: {device}")
 
-    # Load Model Paths
-    model_paths = glob.glob(os.path.join(config['model_dir'], '*.pth'))
+    # Load model paths
+    model_paths = glob.glob(os.path.join(args.model_dir, '*.pth'))
     if not model_paths:
-        logging.error(f"No models found in '{config['model_dir']}'. Please check the path.")
+        logging.error(f"Error: No model files (.pth) found in '{args.model_dir}'.")
         return
     logging.info(f"Found {len(model_paths)} models for ensembling.")
 
-    # Load all fold models
+    # Load models
     models = []
     for path in model_paths:
-        if config['model_type'] == 'aeye':
-            model = AEyeModel({'dims': [32, 64, 128, 160], 'embed_dim': 256, 'num_rings': config['num_rings']})
-        else:
-            model = mobilevit_s()
-            model.fc = nn.Linear(model.fc.in_features, 1)
-        
+        # --- Use timm for baseline, src.aeye_model for aeye ---
+        if args.model_type == 'aeye':
+            model = AEyeModel({'dims': [32, 64, 128, 160], 'embed_dim': 256, 'num_rings': args.num_rings})
+        else: # baseline
+            model = timm.create_model('mobilevit_s', pretrained=False, num_classes=1)
+
         model.load_state_dict(torch.load(path, map_location=device))
-        model.to(device)
-        model.eval()
-        models.append(model)
+        models.append(model.to(device).eval())
 
-    # Setup Test Dataset
-    image_paths = np.array(glob.glob(os.path.join(config['data_dir'], '*/*.[jp][pn]g')))
-    labels = np.array([0 if 'immature' in path else 1 for path in image_paths])
-    test_ds = AlbumentationsDataset(image_paths, labels, transform=get_transforms(is_train=False))
-    test_loader = DataLoader(test_ds, batch_size=config['batch_size'], shuffle=False, num_workers=2)
-    logging.info(f"Evaluating on {len(test_ds)} test images.")
+    # Load test data
+    test_image_paths = glob.glob(os.path.join(args.data_dir, '*/*.[jp][pn]g'))
+    test_labels = [0 if 'immature' in path else 1 for path in test_image_paths]
+    test_ds = AlbumentationsDataset(test_image_paths, test_labels, transform=get_transforms(is_train=False))
+    test_loader = DataLoader(test_ds, batch_size=args.batch_size, shuffle=False, num_workers=2)
+    logging.info(f"Loaded {len(test_ds)} images from the test set.")
 
-    # Get predictions
-    predictions, true_labels, avg_time = evaluate_ensemble(models, test_loader, device)
+    # Run evaluation
+    all_fold_preds = []
+    total_inference_time = 0
+    with torch.no_grad():
+        for model in models:
+            fold_preds = []
+            start_time = time.time()
+            for inputs, _ in tqdm(test_loader, desc=f"Evaluating Fold {len(all_fold_preds)+1}", leave=False):
+                outputs = model(inputs.to(device))
+                preds = torch.sigmoid(outputs)
+                fold_preds.extend(preds.cpu().numpy().flatten())
+            end_time = time.time()
+            total_inference_time += (end_time - start_time)
+            all_fold_preds.append(fold_preds)
 
-    # Calculate and Log Metrics
-    accuracy = accuracy_score(true_labels, predictions)
-    precision = precision_score(true_labels, predictions, zero_division=0)
-    recall = recall_score(true_labels, predictions, zero_division=0)
-    f1 = f1_score(true_labels, predictions, zero_division=0)
+    # Ensemble predictions by averaging
+    avg_preds = np.mean(all_fold_preds, axis=0)
+    final_preds = (avg_preds >= 0.5).astype(int)
 
-    logging.info("\n--- Final Evaluation Results ---")
-    logging.info(f"Accuracy:  {accuracy:.4f}")
+    # Calculate metrics
+    accuracy = accuracy_score(test_labels, final_preds)
+    precision = precision_score(test_labels, final_preds, zero_division=0)
+    recall = recall_score(test_labels, final_preds, zero_division=0)
+    f1 = f1_score(test_labels, final_preds, zero_division=0)
+    avg_inference_time = (total_inference_time / len(models) / len(test_ds)) * 1000  # ms per image
+
+    logging.info("\n--- Final Ensemble Performance ---")
+    logging.info(f"Accuracy: {accuracy:.4f}")
     logging.info(f"Precision: {precision:.4f}")
-    logging.info(f"Recall:    {recall:.4f}")
-    logging.info(f"F1-Score:  {f1:.4f}")
-    logging.info(f"Avg. Inference Time: {avg_time * 1000:.2f} ms per image")
+    logging.info(f"Recall: {recall:.4f}")
+    logging.info(f"F1-Score: {f1:.4f}")
+    logging.info(f"Avg. Inference Time (per image): {avg_inference_time:.2f} ms")
 
-    # Generate and Save Confusion Matrix
-    cm = confusion_matrix(true_labels, predictions)
+    # Generate and save confusion matrix
+    cm = confusion_matrix(test_labels, final_preds)
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Immature', 'Mature'], yticklabels=['Immature', 'Mature'])
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
-    plt.title(f'Confusion Matrix - {log_name}')
-    
+    plt.title(f'Confusion Matrix for {log_name.replace("_", " ").title()}')
     cm_path = os.path.join("results", f"confusion_matrix_{log_name}.png")
     plt.savefig(cm_path)
-    logging.info(f"Confusion matrix saved to: {cm_path}")
-    plt.show()
+    logging.info(f"Confusion matrix saved to {cm_path}")
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Unified Evaluation Script for Cataract Classification")
-    parser.add_argument('--model_type', type=str, required=True, choices=['aeye', 'baseline'])
+    parser = argparse.ArgumentParser(description="Unified Evaluation Script")
+    parser.add_argument('--model_type', required=True, choices=['aeye', 'baseline'])
     parser.add_argument('--num_rings', type=int, choices=[4, 8, 16], help="Required for 'aeye' model.")
-    parser.add_argument('--data_dir', type=str, required=True, help='Path to the test data directory.')
-    parser.add_argument('--model_dir', type=str, required=True, help='Directory containing trained model .pth files.')
-    parser.add_argument('--batch_size', type=int, default=16)
+    parser.add_argument('--model_dir', required=True, help='Directory containing trained .pth model folds.')
+    parser.add_argument('--data_dir', required=True, help='Path to the test data directory.')
+    parser.add_argument('--batch_size', type=int, default=32, help='Batch size for evaluation.')
     args = parser.parse_args()
 
     if args.model_type == 'aeye' and args.num_rings is None:
-        parser.error("--num_rings is required when --model_type is 'aeye'")
-
-    os.makedirs("results", exist_ok=True)
+        parser.error("--num_rings is required for --model_type 'aeye'")
+    
     main(args)
