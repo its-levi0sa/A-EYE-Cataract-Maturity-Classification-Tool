@@ -49,8 +49,7 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
         # ✅ log training summary after loop ends
         final_loss = loss.item()
         avg_speed = train_loop.format_dict.get("rate", 0)
-        logging.info(
-            f"Epoch {epoch+1} - Train Summary | Speed: {avg_speed:.2f} it/s, Loss: {final_loss:.5f}"
+        logging.info(f"Epoch {epoch+1} - Train Summary | Speed: {avg_speed:.2f} it/s, Loss: {final_loss:.5f}"
         )
 
         # Validation
