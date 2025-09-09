@@ -45,6 +45,13 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
             scaler.update()
             scheduler.step()
             train_loop.set_postfix(loss=loss.item())
+        
+        # ✅ log training summary after loop ends
+        final_loss = loss.item()
+        avg_speed = train_loop.format_dict.get("rate", 0)
+        logging.info(
+            f"Epoch {epoch+1} - Train Summary | Speed: {avg_speed:.2f} it/s, Loss: {final_loss:.5f}"
+        )
 
         # Validation
         model.eval()
@@ -63,7 +70,7 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
         val_f1 = f1_score(val_labels, val_preds, zero_division=0)
 
         logging.info(
-            f"Epoch {epoch+1} | Val Acc: {val_accuracy:.4f}, P: {val_precision:.4f}, R: {val_recall:.4f}, F1: {val_f1:.4f}"
+            f"Epoch {epoch+1} | Val Acc: {val_accuracy:.5f}, P: {val_precision:.5f}, R: {val_recall:.5f}, F1: {val_f1:.5f}"
         )
 
         # Checkpointing and Early Stopping (driven by F1-score)
@@ -71,12 +78,12 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
             best_val_f1 = val_f1
             patience_counter = 0
             torch.save(model.state_dict(), os.path.join(config['save_dir'], f"best_model_fold_{fold+1}.pth"))
-            logging.info(f"  -> New best model saved with F1: {val_f1:.4f}")
+            logging.info(f"  -> New best model saved with F1: {val_f1:.5f}")
         else:
             patience_counter += 1
         
         if patience_counter >= config['patience']:
-            logging.info(f"  -> Early stopping triggered. Best F1: {best_val_f1:.4f}")
+            logging.info(f"  -> Early stopping triggered. Best F1: {best_val_f1:.5f}")
             break
             
     return best_val_f1
@@ -116,8 +123,8 @@ def main(args):
         fold_scores.append(fold_f1)
     
     logging.info("\n--- K-Fold Training Finished ---")
-    logging.info(f"Fold F1 Scores: {[f'{s:.4f}' for s in fold_scores]}")
-    logging.info(f"Average F1-Score: {np.mean(fold_scores):.4f} ± {np.std(fold_scores):.4f}")
+    logging.info(f"Fold F1 Scores: {[f'{s:.5f}' for s in fold_scores]}")
+    logging.info(f"Average F1-Score: {np.mean(fold_scores):.5f} ± {np.std(fold_scores):.5f}")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Unified Training Script for Cataract Classification")
