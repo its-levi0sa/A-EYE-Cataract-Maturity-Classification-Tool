@@ -24,7 +24,9 @@ class RadialTokenizer(nn.Module):
 
     def forward(self, image_tensor: torch.Tensor) -> torch.Tensor:
         B, C, H, W = image_tensor.shape
-        masks = self.ring_masks.to(image_tensor.device)
+        original_device = image_tensor.device
+        
+        masks = self.ring_masks.to(original_device)
         masked_pixels = masks.unsqueeze(0).unsqueeze(2) * image_tensor.unsqueeze(1)
         num_pixels_per_ring = masks.sum(dim=[1, 2]) + 1e-6
 
@@ -33,10 +35,17 @@ class RadialTokenizer(nn.Module):
         mean_sq_vals = (masked_pixels**2).sum(dim=[3, 4]) / num_pixels_per_ring.view(1, self.num_rings, 1)
         std_vals = torch.sqrt(torch.clamp(mean_sq_vals - mean_vals**2, min=0))
         
+        # --- DETERMINISM ---
         flat_pixels = masked_pixels.view(B, self.num_rings, C, -1)
-        flat_pixels[flat_pixels == 0] = float('nan')
-        median_vals = torch.nanmedian(flat_pixels, dim=3).values
+        flat_pixels_cpu = flat_pixels.cpu()
+        flat_pixels_cpu[flat_pixels_cpu == 0] = float('nan')
+        
+        # Calculate median on the CPU
+        median_vals_cpu = torch.nanmedian(flat_pixels_cpu, dim=3).values
+        
+        # Move the result back to the original device
+        median_vals = median_vals_cpu.to(original_device)
 
         # Concatenate features: (mean, std, median) for each channel
         tokens = torch.cat([mean_vals, std_vals, median_vals], dim=2)
-        return tokens.to(device=image_tensor.device, dtype=torch.float32)
+        return tokens.to(device=original_device, dtype=torch.float32)
