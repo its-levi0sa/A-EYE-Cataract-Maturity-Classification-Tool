@@ -19,13 +19,27 @@ os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
 from src.aeye_model import AEyeModel
 from src.baseline_model import mobilevit_s
 from src.data_utils import AlbumentationsDataset, get_transforms
-from src.utils import seed_everything, FocalLoss
+from src.utils import FocalLoss
+
+# --- Training reproducibility function ---
+def seed_everything(seed=42):
+    """Seeds all relevant random number generators for reproducibility."""
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 def seed_worker(worker_id):
     """Seeds the dataloader workers for reproducibility."""
     worker_seed = torch.initial_seed() % 2**32
     np.random.seed(worker_seed)
     random.seed(worker_seed)
+
+# --- Training and Validation logic ---
 
 def train_one_fold(fold, model, train_loader, val_loader, config):
     """Trains and validates the model for a single K-Fold split."""
@@ -57,7 +71,7 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
             scheduler.step()
             train_loop.set_postfix(loss=loss.item())
         
-        # ✅ log training summary after loop ends
+        # Log training summary after loop ends
         final_loss = loss.item()
         avg_speed = train_loop.format_dict.get("rate", 0)
         logging.info(
@@ -74,7 +88,7 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
                 val_preds.extend(preds.cpu().numpy().flatten())
                 val_labels.extend(labels.cpu().numpy().flatten())
         
-        # --- Calculate and log all validation metrics ---
+        # Calculate and log all validation metrics
         val_accuracy = accuracy_score(val_labels, val_preds)
         val_precision = precision_score(val_labels, val_preds, zero_division=0)
         val_recall = recall_score(val_labels, val_preds, zero_division=0)
@@ -99,10 +113,12 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
             
     return best_val_f1
 
+# --- MAIN EXECUTION SCRIPT ---
+
 def main(args):
     """Main function to set up and run the training process."""
-    seed_everything(42)
-    # --- ADD THIS LINE FOR DETERMINISM ---
+    
+    # Global determinism flags
     torch.use_deterministic_algorithms(True)
     
     config = vars(args)
@@ -120,16 +136,20 @@ def main(args):
     # K-Fold Cross-Validation
     skf = StratifiedKFold(n_splits=config['n_splits'], shuffle=True, random_state=42)
     fold_scores = []
-    g = torch.Generator()
-    g.manual_seed(42)
-
+    
     for fold, (train_idx, val_idx) in enumerate(skf.split(image_paths, labels)):
+        seed_everything(seed=42 + fold)
+        g = torch.Generator()
+        g.manual_seed(42 + fold)
+        
+        # --- Model Initialization ---
         if config['model_type'] == 'aeye':
             model = AEyeModel(config)
         else:
             model = mobilevit_s()
             model.fc = nn.Linear(model.fc.in_features, 1)
 
+        # --- Dataset and DataLoader Initialization ---
         train_ds = AlbumentationsDataset(image_paths[train_idx], labels[train_idx], transform=get_transforms(is_train=True))
         val_ds = AlbumentationsDataset(image_paths[val_idx], labels[val_idx], transform=get_transforms(is_train=False))
         
@@ -152,6 +172,7 @@ def main(args):
             generator=g
         )
         
+        # --- Run Training for the Fold ---
         fold_f1 = train_one_fold(fold, model, train_loader, val_loader, config)
         fold_scores.append(fold_f1)
     
@@ -172,7 +193,7 @@ if __name__ == '__main__':
     parser.add_argument('--patience', type=int, default=20, help="Epochs for early stopping.")
     parser.add_argument('--n_splits', type=int, default=5, help="Number of K-Fold splits.")
     
-    # --- ADDED ARGUMENTS FOR A-EYE CONFIGURATION ---
+    # A-EYE specific arguments
     parser.add_argument('--dims', type=int, nargs='+', default=[32, 64, 128, 160])
     parser.add_argument('--embed_dim', type=int, default=256)
 
