@@ -11,11 +11,21 @@ from torch.utils.data import DataLoader
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from tqdm import tqdm
+import random
+
+# Set environment variable BEFORE importing torch for full determinism
+os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
 
 from src.aeye_model import AEyeModel
 from src.baseline_model import mobilevit_s
 from src.data_utils import AlbumentationsDataset, get_transforms
 from src.utils import seed_everything, FocalLoss
+
+def seed_worker(worker_id):
+    """Seeds the dataloader workers for reproducibility."""
+    worker_seed = torch.initial_seed() % 2**32
+    np.random.seed(worker_seed)
+    random.seed(worker_seed)
 
 def train_one_fold(fold, model, train_loader, val_loader, config):
     """Trains and validates the model for a single K-Fold split."""
@@ -92,6 +102,9 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
 def main(args):
     """Main function to set up and run the training process."""
     seed_everything(42)
+    # --- ADD THIS LINE FOR DETERMINISM ---
+    torch.use_deterministic_algorithms(True)
+    
     config = vars(args)
     
     # Setup Logging
@@ -107,18 +120,37 @@ def main(args):
     # K-Fold Cross-Validation
     skf = StratifiedKFold(n_splits=config['n_splits'], shuffle=True, random_state=42)
     fold_scores = []
+    g = torch.Generator()
+    g.manual_seed(42)
 
     for fold, (train_idx, val_idx) in enumerate(skf.split(image_paths, labels)):
         if config['model_type'] == 'aeye':
-            model = AEyeModel({'dims': [32, 64, 128, 160], 'embed_dim': 256, 'num_rings': config['num_rings']})
+            model = AEyeModel(config)
         else:
             model = mobilevit_s()
             model.fc = nn.Linear(model.fc.in_features, 1)
 
         train_ds = AlbumentationsDataset(image_paths[train_idx], labels[train_idx], transform=get_transforms(is_train=True))
         val_ds = AlbumentationsDataset(image_paths[val_idx], labels[val_idx], transform=get_transforms(is_train=False))
-        train_loader = DataLoader(train_ds, batch_size=config['batch_size'], shuffle=True, num_workers=4, pin_memory=True)
-        val_loader = DataLoader(val_ds, batch_size=config['batch_size'], shuffle=False, num_workers=4, pin_memory=True)
+        
+        train_loader = DataLoader(
+            train_ds, 
+            batch_size=config['batch_size'], 
+            shuffle=True, 
+            num_workers=4, 
+            pin_memory=True, 
+            worker_init_fn=seed_worker, 
+            generator=g
+        )
+        val_loader = DataLoader(
+            val_ds, 
+            batch_size=config['batch_size'], 
+            shuffle=False, 
+            num_workers=4, 
+            pin_memory=True, 
+            worker_init_fn=seed_worker,
+            generator=g
+        )
         
         fold_f1 = train_one_fold(fold, model, train_loader, val_loader, config)
         fold_scores.append(fold_f1)
@@ -139,6 +171,11 @@ if __name__ == '__main__':
     parser.add_argument('--weight_decay', type=float, default=1e-2)
     parser.add_argument('--patience', type=int, default=20, help="Epochs for early stopping.")
     parser.add_argument('--n_splits', type=int, default=5, help="Number of K-Fold splits.")
+    
+    # --- ADDED ARGUMENTS FOR A-EYE CONFIGURATION ---
+    parser.add_argument('--dims', type=int, nargs='+', default=[32, 64, 128, 160])
+    parser.add_argument('--embed_dim', type=int, default=256)
+
     args = parser.parse_args()
 
     if args.model_type == 'aeye' and args.num_rings is None:
