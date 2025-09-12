@@ -4,7 +4,7 @@ scikit-learn
 pandas
 numpy
 opencv-python-headless
-albumentations
+albumentations==1.1.0
 matplotlib
 seaborn
 tqdm
