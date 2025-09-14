@@ -26,11 +26,9 @@ def main(args):
     """Main function to set up and run the evaluation process."""
     
     seed_everything(42)
-    
-    # --- Enforce PyTorch's strictest deterministic settings ---
     torch.use_deterministic_algorithms(True)
 
-    # --- Pre-flight checks to validate paths before starting ---
+    # --- Pre-flight checks ---
     print(f"--- Running pre-flight checks for model: {args.model_type} ---")
     
     # Sort glob results for consistent file ordering
@@ -46,7 +44,6 @@ def main(args):
     test_image_paths = sorted(glob.glob(os.path.join(args.data_dir, '*/*.[jp][pn]g')))
     if not test_image_paths:
         print(f"FATAL ERROR: No image files were found in the subfolders of '{args.data_dir}'.")
-        print("   Please check the --data_dir path and ensure it has 'immature'/'mature' subfolders with images.")
         sys.exit(1)
     else:
         print(f"Found {len(test_image_paths)} images in '{args.data_dir}'.")
@@ -82,11 +79,20 @@ def main(args):
     test_loader = DataLoader(test_ds, batch_size=args.batch_size, shuffle=False, num_workers=0)
     logging.info(f"Loaded {len(test_ds)} images from the test set.")
 
-    # Run evaluation
+    # --- Run evaluation ---
     all_fold_preds = []
     total_inference_time = 0
+    
+    # Initialize a list to store memory usage for each fold
+    all_peak_memory = []
+
     with torch.no_grad():
         for i, model in enumerate(models):
+            
+            # Reset CUDA memory stats before evaluating each fold
+            if device.type == 'cuda':
+                torch.cuda.reset_peak_memory_stats(device)
+
             fold_preds = []
             start_time = time.time()
             for inputs, _ in tqdm(test_loader, desc=f"Evaluating Fold {i+1}/{len(models)}", leave=False):
@@ -97,7 +103,12 @@ def main(args):
             total_inference_time += (end_time - start_time)
             all_fold_preds.append(fold_preds)
 
-    # Ensemble predictions and calculate metrics
+            # Record the peak memory usage for this fold in Megabytes (MB)
+            if device.type == 'cuda':
+                peak_memory_mb = torch.cuda.max_memory_allocated(device) / (1024 * 1024)
+                all_peak_memory.append(peak_memory_mb)
+
+    # --- Ensemble predictions and calculate metrics ---
     avg_preds = np.mean(all_fold_preds, axis=0)
     final_preds = (avg_preds >= 0.5).astype(int)
     accuracy = accuracy_score(test_labels, final_preds)
@@ -105,6 +116,9 @@ def main(args):
     recall = recall_score(test_labels, final_preds, zero_division=0)
     f1 = f1_score(test_labels, final_preds, zero_division=0)
     avg_inference_time_per_image = (total_inference_time / len(models) / len(test_ds)) * 1000
+    
+    # Calculate the average peak memory across all folds
+    avg_peak_memory = np.mean(all_peak_memory) if all_peak_memory else 0
 
     logging.info("\n--- Final Ensemble Performance ---")
     logging.info(f"Accuracy: {accuracy:.4f}")
@@ -112,8 +126,12 @@ def main(args):
     logging.info(f"Recall: {recall:.4f}")
     logging.info(f"F1-Score: {f1:.4f}")
     logging.info(f"Avg. Inference Time (per image): {avg_inference_time_per_image:.2f} ms")
+    
+    # Log the memory usage
+    if device.type == 'cuda':
+        logging.info(f"Avg. Peak Memory Usage: {avg_peak_memory:.2f} MB")
 
-    # Generate and save confusion matrix
+    # --- Generate and save confusion matrix ---
     cm = confusion_matrix(test_labels, final_preds)
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Immature', 'Mature'], yticklabels=['Immature', 'Mature'])
