@@ -21,7 +21,6 @@ def generate_aeye_explanation(tokens_tensor, num_rings):
     # Denormalize tokens back to an approximate [0, 255] pixel scale for interpretation
     mean_rgb = (avg_tokens[:, 0:3] * 0.5 + 0.5) * 255
     std_rgb = (avg_tokens[:, 3:6] * 0.5) * 255
-    median_rgb = (avg_tokens[:, 6:9] * 0.5 + 0.5) * 255
 
     # --- Heuristic Calculations for Human-Readable Summary ---
     overall_mean_brightness = np.mean(mean_rgb)
@@ -29,17 +28,9 @@ def generate_aeye_explanation(tokens_tensor, num_rings):
     core_ring_count = max(1, num_rings // 4)
     core_brightness = np.mean(mean_rgb[0:core_ring_count])
 
-    # Heuristic Proxy 1: Pupillary Coverage
-    # Based on overall brightness. A value of ~180+ suggests significant coverage.
-    coverage_proxy = min(100.0, max(0.0, (overall_mean_brightness - 100) / 80 * 100))
-
-    # Heuristic Proxy 2: Cataract Opacity
-    # Based on a combination of texture and a bonus for a very bright central core.
-    opacity_from_texture = min(100.0, (overall_mean_texture / 45.0) * 100)
-    opacity_bonus_from_core = max(0.0, ((core_brightness - 200) / 55) * 30)
-    opacity_proxy = min(100.0, opacity_from_texture + opacity_bonus_from_core)
+    brightness_proxy = min(100.0, max(0.0, (overall_mean_brightness - 100) / 80 * 100))
+    opacity_proxy = min(100.0, (overall_mean_texture / 45.0) * 100)
     
-    # --- Build the Report ---
     report = "\n" + "="*50 + "\n"
     report += "   A-EYE MODEL EXPLAINABILITY REPORT\n"
     report += "="*50 + "\n"
@@ -47,8 +38,8 @@ def generate_aeye_explanation(tokens_tensor, num_rings):
     report += "from the model's internal statistics, not clinical measurements.\n\n"
     
     report += "--- Human-Readable Summary ---\n"
-    report += f"  - Estimated Pupillary Coverage: {coverage_proxy:.1f}%\n"
-    report += f"  - Estimated Cataract Opacity:   {opacity_proxy:.1f}%\n\n"
+    report += f"  - Estimated Opacity Extent (Brightness Proxy): {brightness_proxy:.1f}%\n"
+    report += f"  - Estimated Opacity Density (Texture Proxy):    {opacity_proxy:.1f}%\n\n"
 
     report += "--- Data-Driven Details for Thesis Discussion ---\n"
     for i in range(num_rings):
@@ -71,7 +62,7 @@ def predict(args):
     models = []
     for path in model_paths:
         if args.model_type == 'aeye':
-            model = AEyeModel({'dims': [32, 64, 128, 160], 'embed_dim': 256, 'num_rings': args.num_rings})
+            model = AEyeModel({'dims': args.dims, 'embed_dim': args.embed_dim, 'num_rings': args.num_rings})
         else:
             model = mobilevit_s()
             model.fc = nn.Linear(model.fc.in_features, 1)
@@ -111,6 +102,11 @@ if __name__ == '__main__':
     parser.add_argument('--num_rings', type=int, choices=[4, 8, 16], help="Required for 'aeye' model.")
     parser.add_argument('--model_dir', required=True, help='Directory containing trained .pth files.')
     parser.add_argument('--image_path', required=True, help='Path to the input image.')
+
+    # --- Arguments for model configuration ---
+    parser.add_argument('--dims', type=int, nargs='+', default=[32, 64, 128, 160])
+    parser.add_argument('--embed_dim', type=int, default=256)
+
     args = parser.parse_args()
 
     if args.model_type == 'aeye' and args.num_rings is None:
