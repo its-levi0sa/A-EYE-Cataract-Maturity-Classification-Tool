@@ -63,7 +63,7 @@ def main(args):
     logging.info(f"Starting final training for a fixed {args.epochs} epochs...")
     for epoch in range(args.epochs):
         model.train()
-        train_loop = tqdm(train_loader, desc=f"Epoch {epoch+1}/{args.epochs}", leave=False, file=sys.stdout)
+        train_loop = tqdm(train_loader, desc=f"Epoch {epoch+1}/{args.epochs}", file=sys.stdout, disable=not sys.stdout.isatty())
 
         for images, labels in train_loop:
             images, labels = images.to(device), labels.to(device).unsqueeze(1)
@@ -103,7 +103,7 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=42, help='Random seed for reproducibility.')
 
     # --- Hyperparameters ---
-    parser.add_argument('--epochs', type=int, default=88, help='Fixed number of epochs, determined from CV logs.')
+    parser.add_argument('--epochs', type=int, default=100, help='Fixed number of epochs, determined from CV logs.')
     parser.add_argument('--batch_size', type=int, default=16, help='Batch size for training.')
     parser.add_argument('--learning_rate', type=float, default=2e-4, help='Learning rate for the AdamW optimizer.')
     parser.add_argument('--weight_decay', type=float, default=1e-2, help='Weight decay (L2 penalty) for the optimizer.')

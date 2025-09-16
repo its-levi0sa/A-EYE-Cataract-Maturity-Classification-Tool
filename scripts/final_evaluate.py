@@ -28,7 +28,7 @@ def evaluate_single_model(model, dataloader, device):
     peak_memory_usages = []
 
     with torch.no_grad():
-        for images, labels in tqdm(dataloader, desc="Evaluating", leave=False):
+        for images, labels in tqdm(dataloader, desc="Evaluating", file=sys.stdout, disable=not sys.stdout.isatty()):
             images = images.to(device)
 
             # Measure performance
