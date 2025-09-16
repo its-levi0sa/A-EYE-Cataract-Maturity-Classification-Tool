@@ -1,6 +1,7 @@
 import argparse
 import logging
 import os
+os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
 import random
 import sys
 import glob
@@ -67,12 +68,10 @@ def main(args):
         for images, labels in train_loop:
             images, labels = images.to(device), labels.to(device).unsqueeze(1)
             
-            # Use AMP context manager for mixed precision
             with torch.cuda.amp.autocast():
                 outputs = model(images)
                 loss = criterion(outputs, labels)
 
-            # AMP-aware backpropagation
             optimizer.zero_grad()
             scaler.scale(loss).backward()
             scaler.step(optimizer)
@@ -87,7 +86,7 @@ def main(args):
 
     # --- 5. Save the Final Trained Model ---
     os.makedirs(args.save_dir, exist_ok=True)
-    model_name = f"{args.model_type}_{args.num_rings}_best_model.pth"
+    model_name = f"{args.model_type}_{args.num_rings}_rings_final_model.pth"
     save_path = os.path.join(args.save_dir, model_name)
     torch.save(model.state_dict(), save_path)
     logging.info(f"✅ Final model for deployment saved successfully to {save_path}")
@@ -104,7 +103,7 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=42, help='Random seed for reproducibility.')
 
     # --- Hyperparameters ---
-    parser.add_argument('--epochs', type=int, default=100, help='Fixed number of epochs, determined from CV logs.')
+    parser.add_argument('--epochs', type=int, default=88, help='Fixed number of epochs, determined from CV logs.')
     parser.add_argument('--batch_size', type=int, default=16, help='Batch size for training.')
     parser.add_argument('--learning_rate', type=float, default=2e-4, help='Learning rate for the AdamW optimizer.')
     parser.add_argument('--weight_decay', type=float, default=1e-2, help='Weight decay (L2 penalty) for the optimizer.')
