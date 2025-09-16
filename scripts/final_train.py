@@ -81,9 +81,8 @@ def main(args):
             train_loop.set_postfix(loss=loss.item())
 
         final_loss = loss.item()
-        current_lr = optimizer.param_groups[0]['lr']
         avg_speed = train_loop.format_dict.get("rate", 0)
-        logging.info(f"Epoch {epoch+1} Train Summary | Speed: {avg_speed:.2f} it/s        LR: {current_lr:.6f}       Loss: {final_loss:.5f}")
+        logging.info(f"Epoch {epoch+1} Train Summary | Speed: {avg_speed:.2f} it/s     Loss: {final_loss:.5f}")
 
     # --- 5. Save the Final Trained Model ---
     os.makedirs(args.save_dir, exist_ok=True)
