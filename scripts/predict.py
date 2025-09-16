@@ -3,49 +3,64 @@ import argparse
 import glob
 import numpy as np
 import torch
-import torch.nn as nn
 import cv2
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.aeye_model import AEyeModel
-from src.baseline_model import mobilevit_s
 from src.data_utils import get_transforms
 
 def generate_aeye_explanation(tokens_tensor, num_rings):
     """
     Generates a user-friendly summary and a detailed statistical report from
-    the A-EYE model's internal radial tokens.
+    the A-EYE model's internal radial tokens using a data-driven,
+    percentile-based normalization approach.
     """
-    # Average the tokens from the model ensemble
-    avg_tokens = tokens_tensor.mean(dim=0).squeeze(0).cpu().numpy()
+    # --- CALIBRATED CONSTANTS ---
+    P1_BRIGHTNESS = 85.30
+    P99_BRIGHTNESS = 210.10
+    P1_TEXTURE = 5.70
+    P99_TEXTURE = 65.20
     
-    # Denormalize tokens back to an approximate [0, 255] pixel scale for interpretation
+    # --- Calculation ---
+    # The tokens_tensor is already the average from the ensemble
+    avg_tokens = tokens_tensor.squeeze(0).cpu().numpy()
+    
     mean_rgb = (avg_tokens[:, 0:3] * 0.5 + 0.5) * 255
     std_rgb = (avg_tokens[:, 3:6] * 0.5) * 255
 
-    # --- Heuristic Calculations for Human-Readable Summary ---
     overall_mean_brightness = np.mean(mean_rgb)
     overall_mean_texture = np.mean(std_rgb)
-    core_ring_count = max(1, num_rings // 4)
-    core_brightness = np.mean(mean_rgb[0:core_ring_count])
 
-    brightness_proxy = min(100.0, max(0.0, (overall_mean_brightness - 100) / 80 * 100))
-    opacity_proxy = min(100.0, (overall_mean_texture / 45.0) * 100)
+    # --- Robust Percentile-Based Normalization ---
+    brightness_proxy = 100 * (overall_mean_brightness - P1_BRIGHTNESS) / (P99_BRIGHTNESS - P1_BRIGHTNESS)
+    opacity_proxy = 100 * (overall_mean_texture - P1_TEXTURE) / (P99_TEXTURE - P1_TEXTURE)
     
+    brightness_proxy = np.clip(brightness_proxy, 0, 100)
+    opacity_proxy = np.clip(opacity_proxy, 0, 100)
+    
+    final_opacity_proxy = opacity_proxy
+    brightness_threshold = 5.0
+    if brightness_proxy < brightness_threshold:
+        final_opacity_proxy = opacity_proxy * (brightness_proxy / brightness_threshold)
+
+    # --- Build the Report String ---
     report = "\n" + "="*50 + "\n"
     report += "   A-EYE MODEL EXPLAINABILITY REPORT\n"
     report += "="*50 + "\n"
-    report += "Disclaimer: The following percentages are heuristic proxies derived\n"
-    report += "from the model's internal statistics, not clinical measurements.\n\n"
+    report += "Disclaimer: The following percentages are data-driven proxies derived\n"
+    report += "from the model's statistics, not direct clinical measurements.\n\n"
     
     report += "--- Human-Readable Summary ---\n"
-    report += f"  - Estimated Opacity Extent (Brightness Proxy): {brightness_proxy:.1f}%\n"
-    report += f"  - Estimated Opacity Density (Texture Proxy):    {opacity_proxy:.1f}%\n\n"
+    report += f"   - Estimated Opacity Extent (Brightness Proxy): {brightness_proxy:.1f}%\n"
+    report += f"   - Estimated Opacity Density (Texture Proxy):   {final_opacity_proxy:.1f}%\n\n"
 
     report += "--- Data-Driven Details for Thesis Discussion ---\n"
     for i in range(num_rings):
         mean_gray = np.mean(mean_rgb[i])
         std_gray = np.mean(std_rgb[i])
-        report += f"  - Ring {i+1:02d}: Brightness={mean_gray:6.2f}, Texture={std_gray:6.2f}\n"
+        report += f"   - Ring {i+1:02d}: Brightness={mean_gray:6.2f}, Texture={std_gray:6.2f}\n"
         
     report += "="*50 + "\n"
     return report
@@ -54,22 +69,18 @@ def predict(args):
     """Main function to load models and run prediction."""
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    model_paths = glob.glob(os.path.join(args.model_dir, '*.pth'))
+    model_paths = glob.glob(os.path.join(args.model_dir, 'best_model_fold_*.pth'))
     if not model_paths:
-        print(f"Error: No model files (.pth) found in '{args.model_dir}'.")
+        print(f"Error: No model files found in '{args.model_dir}'.")
         return
 
     models = []
+    model_config = {'dims': args.dims, 'embed_dim': args.embed_dim, 'num_rings': args.num_rings}
     for path in model_paths:
-        if args.model_type == 'aeye':
-            model = AEyeModel({'dims': args.dims, 'embed_dim': args.embed_dim, 'num_rings': args.num_rings})
-        else:
-            model = mobilevit_s()
-            model.fc = nn.Linear(model.fc.in_features, 1)
-        
+        model = AEyeModel(model_config)
         model.load_state_dict(torch.load(path, map_location=device))
         models.append(model.to(device).eval())
-    print(f"Loaded {len(models)} models from '{args.model_dir}' for ensembling.")
+    print(f"Loaded {len(models)} models from '{args.Mymodel_dir}' for ensembling.")
 
     image = cv2.imread(args.image_path)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -78,38 +89,31 @@ def predict(args):
     all_probs, all_tokens = [], []
     with torch.no_grad():
         for model in models:
-            if args.model_type == 'aeye':
-                output, tokens = model(input_tensor, return_tokens=True)
-                all_tokens.append(tokens)
-            else:
-                output = model(input_tensor)
+            output, tokens = model(input_tensor, return_tokens=True)
+            all_tokens.append(tokens)
             all_probs.append(torch.sigmoid(output).item())
 
+    # Average the predictions and tokens from the ensemble
     final_prob = np.mean(all_probs)
+    avg_tokens_tensor = torch.stack(all_tokens, dim=0).mean(dim=0)
     prediction = "Mature" if final_prob >= 0.5 else "Immature"
     
     print("\n--- PREDICTION RESULT ---")
-    print(f"Image:           {os.path.basename(args.image_path)}")
+    print(f"Image:             {os.path.basename(args.image_path)}")
     print(f"Predicted Class:   {prediction}")
     print(f"Confidence Score:  {final_prob:.2%}")
     
-    if args.model_type == 'aeye' and all_tokens:
-        print(generate_aeye_explanation(torch.stack(all_tokens, dim=0), args.num_rings))
+    print(generate_aeye_explanation(avg_tokens_tensor, args.num_rings))
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Single Image Prediction & Explainability Script")
-    parser.add_argument('--model_type', required=True, choices=['aeye', 'baseline'])
-    parser.add_argument('--num_rings', type=int, choices=[4, 8, 16], help="Required for 'aeye' model.")
-    parser.add_argument('--model_dir', required=True, help='Directory containing trained .pth files.')
+    parser = argparse.ArgumentParser(description="Ensemble Prediction & Explainability Script")
+    parser.add_argument('--model_dir', required=True, help="Directory containing the 5 best fold models (e.g., 'saved_models/aeye_4_ring').")
     parser.add_argument('--image_path', required=True, help='Path to the input image.')
+    parser.add_argument('--num_rings', type=int, default=4, help="Number of rings for the A-EYE model.")
 
-    # --- Arguments for model configuration ---
+    # A-EYE model config
     parser.add_argument('--dims', type=int, nargs='+', default=[32, 64, 128, 160])
     parser.add_argument('--embed_dim', type=int, default=256)
 
-    args = parser.parse_args()
-
-    if args.model_type == 'aeye' and args.num_rings is None:
-        parser.error("--num_rings is required for --model_type 'aeye'")
-    
+    args = parser.parse_args()    
     predict(args)
