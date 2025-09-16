@@ -45,10 +45,12 @@ def main(args):
     if args.model_type == 'baseline':
         model = BaselineModel(dims=args.dims)
     elif args.model_type == 'aeye':
-        model = AEyeModel(
-            embed_dim=args.embed_dim,
-            num_rings=args.num_rings
-        )
+        config = {
+            "dims": args.dims,
+            "embed_dim": args.embed_dim,
+            "num_rings": args.num_rings
+        }
+        model = AEyeModel(config)
     else:
         raise ValueError("Invalid model_type specified. Choose 'baseline' or 'aeye'.")
     model.to(device)
