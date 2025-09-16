@@ -3,6 +3,7 @@ import logging
 import os
 import sys
 import time
+import glob
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
@@ -64,7 +65,10 @@ def main(args):
     logging.info(f"Using device: {device}")
 
     # --- 1. Load Test Dataset ---
-    test_dataset = CataractDataset(args.data_dir, transform=get_transforms(is_train=False))
+    image_paths = glob.glob(os.path.join(args.data_dir, '*/*.[jp][pn]g'))
+    labels = [0 if 'immature' in path else 1 for path in image_paths]
+
+    test_dataset = CataractDataset(image_paths, labels, transform=get_transforms(is_train=False))
     test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=2)
     logging.info(f"Loaded {len(test_dataset)} images from the test set.")
 
@@ -72,7 +76,7 @@ def main(args):
     if args.model_type == 'baseline':
         model = BaselineModel(dims=args.dims)
     elif args.model_type == 'aeye':
-        model = AEyeModel(dims=args.dims, embed_dim=args.embed_dim, num_rings=args.num_rings)
+        model = AEyeModel(embed_dim=args.embed_dim, num_rings=args.num_rings)
     else:
         raise ValueError("Invalid model_type specified.")
 

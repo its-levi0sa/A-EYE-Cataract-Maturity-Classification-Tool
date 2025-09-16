@@ -3,6 +3,7 @@ import logging
 import os
 import random
 import sys
+import glob
 import numpy as np
 import torch
 import torch.nn as nn
@@ -33,7 +34,10 @@ def main(args):
     logging.info(f"Using device: {device}")
 
     # --- 1. Load the FULL Dataset for Training ---
-    full_dataset = CataractDataset(args.data_dir, transform=get_transforms(is_train=True))
+    image_paths = glob.glob(os.path.join(args.data_dir, '*/*.[jp][pn]g'))
+    labels = [0 if 'immature' in path else 1 for path in image_paths]
+
+    full_dataset = CataractDataset(image_paths, labels, transform=get_transforms(is_train=True))
     train_loader = DataLoader(full_dataset, batch_size=args.batch_size, shuffle=True, num_workers=2, pin_memory=True)
     logging.info(f"Loaded {len(full_dataset)} images for final training.")
 
@@ -42,7 +46,6 @@ def main(args):
         model = BaselineModel(dims=args.dims)
     elif args.model_type == 'aeye':
         model = AEyeModel(
-            dims=args.dims,
             embed_dim=args.embed_dim,
             num_rings=args.num_rings
         )
