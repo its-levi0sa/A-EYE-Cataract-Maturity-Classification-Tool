@@ -125,6 +125,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     # Setup basic logging to see output in the console
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        handlers=[logging.StreamHandler(sys.stdout)]
+    )
 
     main(args)
