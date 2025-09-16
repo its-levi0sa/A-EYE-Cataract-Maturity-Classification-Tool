@@ -10,6 +10,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+import time
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -63,27 +64,34 @@ def main(args):
     logging.info(f"Starting final training for a fixed {args.epochs} epochs...")
     for epoch in range(args.epochs):
         model.train()
-        train_loop = tqdm(train_loader, desc=f"Epoch {epoch+1}/{args.epochs}", file=sys.stdout, disable=not sys.stdout.isatty())
+        
+        epoch_start_time = time.time()
+        num_iterations = 0
+
+        train_loop = tqdm(train_loader, desc=f"Epoch {epoch+1}/{args.epochs}", file=sys.stdout, mininterval=1.0, disable=not sys.stdout.isatty())
 
         for images, labels in train_loop:
-            images, labels = images.to(device), labels.to(device).unsqueeze(1)
-            
+            images = images.to(device)
+            labels = labels.to(device)
+
+            optimizer.zero_grad()
             with torch.cuda.amp.autocast():
                 outputs = model(images)
                 loss = criterion(outputs, labels)
-
-            optimizer.zero_grad()
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
             scheduler.step()
-
+            
             train_loop.set_postfix(loss=loss.item())
+            num_iterations += 1
 
-        final_loss = loss.item()
-        current_lr = optimizer.param_groups[0]['lr']
-        avg_speed = train_loop.format_dict.get("rate", 0)
-        logging.info(f"Epoch {epoch+1} Train Summary | Speed: {avg_speed:.2f} it/s        LR: {current_lr:.6f}       Loss: {final_loss:.5f}")
+        epoch_end_time = time.time()
+        epoch_duration = epoch_end_time - epoch_start_time
+        avg_speed = num_iterations / epoch_duration if epoch_duration > 0 else 0
+
+        final_loss = loss.item()        
+        logging.info(f"Epoch {epoch+1} Summary | Speed: {avg_speed:.2f} it/s     Loss: {final_loss:.5f}")
 
     # --- 5. Save the Final Trained Model ---
     os.makedirs(args.save_dir, exist_ok=True)
