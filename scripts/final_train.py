@@ -12,8 +12,8 @@ from tqdm import tqdm
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.aeye_model import AEyeModel
-from src.baseline_model import BaselineModel
-from src.data_utils import get_transforms, CataractDataset
+from src.baseline_model import MobileViT
+from src.data_utils import get_transforms, AlbumentationsDataset as CataractDataset
 
 def set_seed(seed=42):
     """Sets the seed for reproducibility across all libraries."""
