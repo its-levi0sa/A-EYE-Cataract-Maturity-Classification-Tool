@@ -61,7 +61,7 @@ def main(args):
     scaler = torch.cuda.amp.GradScaler()
 
     # --- 4. Final Training Loop ---
-    logging.info(f"Starting final training for a fixed {args.epochs} epochs...")
+    logging.info(f"Starting final training for {args.epochs} epochs...")
     for epoch in range(args.epochs):
         model.train()
         start_time = time.time()
@@ -89,7 +89,7 @@ def main(args):
         avg_it_speed = num_batches / (end_time - start_time)
 
         logging.info(
-            f"Epoch {epoch+1} Train Summary | Speed: {avg_it_speed:.2f} it/s     Loss: {avg_loss:.5f}"
+            f"Epoch {epoch+1} Train Summary |     Speed: {avg_it_speed:.2f} it/s     Loss: {avg_loss:.5f}"
         )
 
 
