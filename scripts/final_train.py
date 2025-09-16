@@ -10,6 +10,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+import time
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -63,11 +64,12 @@ def main(args):
     logging.info(f"Starting final training for a fixed {args.epochs} epochs...")
     for epoch in range(args.epochs):
         model.train()
-        train_loop = tqdm(train_loader, desc=f"Epoch {epoch+1}/{args.epochs}", file=sys.stdout, disable=not sys.stdout.isatty())
+        start_time = time.time()
+        total_loss, num_batches, total_samples = 0.0, 0, 0
 
-        for images, labels in train_loop:
+        for images, labels in train_loader:
             images, labels = images.to(device), labels.to(device).unsqueeze(1)
-            
+
             with torch.cuda.amp.autocast():
                 outputs = model(images)
                 loss = criterion(outputs, labels)
@@ -78,11 +80,19 @@ def main(args):
             scaler.update()
             scheduler.step()
 
-            train_loop.set_postfix(loss=loss.item())
+            total_loss += loss.item()
+            num_batches += 1
+            total_samples += images.size(0) 
 
-        final_loss = loss.item()
-        avg_speed = train_loop.format_dict.get("rate", 0)
-        logging.info(f"Epoch {epoch+1} Train Summary | Speed: {avg_speed:.2f} it/s     Loss: {final_loss:.5f}")
+        end_time = time.time()
+        avg_loss = total_loss / num_batches
+        avg_it_speed = num_batches / (end_time - start_time)
+
+        logging.info(
+            f"Epoch {epoch+1} Train Summary | Speed: {avg_it_speed:.2f} it/s     Loss: {avg_loss:.5f}"
+        )
+
+
 
     # --- 5. Save the Final Trained Model ---
     os.makedirs(args.save_dir, exist_ok=True)
