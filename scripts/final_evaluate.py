@@ -64,7 +64,7 @@ def main(args):
     logging.info(f"Using device: {device}")
 
     # --- 1. Load Test Dataset ---
-    test_dataset = CataractDataset(args.data_dir, transform=get_transforms(train=False))
+    test_dataset = CataractDataset(args.data_dir, transform=get_transforms(is_train=False))
     test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=2)
     logging.info(f"Loaded {len(test_dataset)} images from the test set.")
 

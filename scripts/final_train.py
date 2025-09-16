@@ -33,7 +33,7 @@ def main(args):
     logging.info(f"Using device: {device}")
 
     # --- 1. Load the FULL Dataset for Training ---
-    full_dataset = CataractDataset(args.data_dir, transform=get_transforms(train=True))
+    full_dataset = CataractDataset(args.data_dir, transform=get_transforms(is_train=True))
     train_loader = DataLoader(full_dataset, batch_size=args.batch_size, shuffle=True, num_workers=2, pin_memory=True)
     logging.info(f"Loaded {len(full_dataset)} images for final training.")
 
