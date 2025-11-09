@@ -10,7 +10,6 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import seaborn as sns
-import time
 import sys
 
 # --- Import models and utils from 'src' folder ---
@@ -81,32 +80,15 @@ def main(args):
 
     # --- Run evaluation ---
     all_fold_preds = []
-    total_inference_time = 0
     
-    # Initialize a list to store memory usage for each fold
-    all_peak_memory = []
-
     with torch.no_grad():
         for i, model in enumerate(models):
-            
-            # Reset CUDA memory stats before evaluating each fold
-            if device.type == 'cuda':
-                torch.cuda.reset_peak_memory_stats(device)
-
             fold_preds = []
-            start_time = time.time()
             for inputs, _ in tqdm(test_loader, desc=f"Evaluating Fold {i+1}/{len(models)}", leave=False):
                 outputs = model(inputs.to(device))
                 preds = torch.sigmoid(outputs)
                 fold_preds.extend(preds.cpu().numpy().flatten())
-            end_time = time.time()
-            total_inference_time += (end_time - start_time)
             all_fold_preds.append(fold_preds)
-
-            # Record the peak memory usage for this fold in Megabytes (MB)
-            if device.type == 'cuda':
-                peak_memory_mb = torch.cuda.max_memory_allocated(device) / (1024 * 1024)
-                all_peak_memory.append(peak_memory_mb)
 
     # --- Ensemble predictions and calculate metrics ---
     avg_preds = np.mean(all_fold_preds, axis=0)
@@ -115,21 +97,12 @@ def main(args):
     precision = precision_score(test_labels, final_preds, zero_division=0)
     recall = recall_score(test_labels, final_preds, zero_division=0)
     f1 = f1_score(test_labels, final_preds, zero_division=0)
-    avg_inference_time_per_image = (total_inference_time / len(models) / len(test_ds)) * 1000
-    
-    # Calculate the average peak memory across all folds
-    avg_peak_memory = np.mean(all_peak_memory) if all_peak_memory else 0
 
     logging.info("\n--- Final Ensemble Performance ---")
     logging.info(f"Accuracy: {accuracy:.4f}")
     logging.info(f"Precision: {precision:.4f}")
     logging.info(f"Recall: {recall:.4f}")
     logging.info(f"F1-Score: {f1:.4f}")
-    logging.info(f"Avg. Inference Time (per image): {avg_inference_time_per_image:.2f} ms")
-    
-    # Log the memory usage
-    if device.type == 'cuda':
-        logging.info(f"Avg. Peak Memory Usage: {avg_peak_memory:.2f} MB")
 
     # --- Generate and save confusion matrix ---
     cm = confusion_matrix(test_labels, final_preds)

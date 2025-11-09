@@ -2,7 +2,6 @@ import argparse
 import logging
 import os
 import sys
-import time
 import glob
 import numpy as np
 import torch
@@ -16,7 +15,7 @@ from sklearn.metrics import confusion_matrix
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.aeye_model import AEyeModel
-from src.baseline_model import MobileViT as BaselineModel
+from src.baseline_model import MobileViT as BaselineModel 
 from src.data_utils import get_transforms, AlbumentationsDataset as CataractDataset
 
 def evaluate_single_model(model, dataloader, device):
@@ -24,34 +23,18 @@ def evaluate_single_model(model, dataloader, device):
     model.eval()
     all_preds = []
     all_labels = []
-    inference_times = []
-    peak_memory_usages = []
 
     with torch.no_grad():
         for images, labels in tqdm(dataloader, desc="Evaluating", file=sys.stdout, disable=not sys.stdout.isatty()):
             images = images.to(device)
 
-            # Measure performance
-            torch.cuda.synchronize()
-            start_time = time.time()
-
-            if device.type == 'cuda':
-                torch.cuda.reset_peak_memory_stats()
-
             outputs = model(images)
-
-            torch.cuda.synchronize()
-            end_time = time.time()
-
-            inference_times.append(end_time - start_time)
-            if device.type == 'cuda':
-                peak_memory_usages.append(torch.cuda.max_memory_allocated() / (1024 * 1024)) # In MB
 
             preds = torch.sigmoid(outputs).round().cpu().numpy()
             all_preds.extend(preds.flatten())
             all_labels.extend(labels.numpy().flatten())
 
-    return all_preds, all_labels, inference_times, peak_memory_usages
+    return all_preds, all_labels
 
 def main(args):
     """Main function to run the final model evaluation."""
@@ -74,7 +57,9 @@ def main(args):
 
     # --- 2. Initialize and Load the SINGLE Model ---
     if args.model_type == 'baseline':
-        model = BaselineModel(dims=args.dims)
+        from src.baseline_model import mobilevit_s
+        model = mobilevit_s()
+        model.fc = torch.nn.Linear(model.fc.in_features, 1)
     elif args.model_type == 'aeye':
         config = {
             "dims": args.dims,
@@ -90,23 +75,19 @@ def main(args):
     logging.info(f"Successfully loaded single model from: {args.model_path}")
 
     # --- 3. Run Evaluation ---
-    predictions, true_labels, inference_times, peak_memory = evaluate_single_model(model, test_loader, device)
+    predictions, true_labels = evaluate_single_model(model, test_loader, device)
 
     # --- 4. Calculate and Log Metrics ---
     accuracy = accuracy_score(true_labels, predictions)
-    precision = precision_score(true_labels, predictions)
-    recall = recall_score(true_labels, predictions)
-    f1 = f1_score(true_labels, predictions)
-    avg_inference_time = np.mean(inference_times) * 1000 / args.batch_size
-    avg_peak_memory = np.mean(peak_memory) if peak_memory else 0
+    precision = precision_score(true_labels, predictions, zero_division=0)
+    recall = recall_score(true_labels, predictions, zero_division=0)
+    f1 = f1_score(true_labels, predictions, zero_division=0)
 
     logging.info("\n--- Final Model Performance ---")
     logging.info(f"Accuracy: {accuracy:.4f}")
     logging.info(f"Precision: {precision:.4f}")
     logging.info(f"Recall: {recall:.4f}")
     logging.info(f"F1-Score: {f1:.4f}")
-    logging.info(f"Avg. Inference Time (per image): {avg_inference_time:.2f} ms")
-    logging.info(f"Avg. Peak Memory Usage: {avg_peak_memory:.2f} MB")
 
     # --- 5. Save Confusion Matrix ---
     cm = confusion_matrix(true_labels, predictions)
@@ -125,15 +106,19 @@ if __name__ == '__main__':
     # --- Key Arguments ---
     parser.add_argument('--model_path', type=str, required=True, help='Path to the single .pth model file to evaluate.')
     parser.add_argument('--model_type', type=str, required=True, choices=['baseline', 'aeye'], help='Type of model architecture.')
-    parser.add_argument('--num_rings', type=int, default=4, help='Number of rings if model_type is aeye.')
+    parser.add_argument('--num_rings', type=int, choices=[4, 8, 16], help='Number of rings if model_type is aeye.')
     parser.add_argument('--data_dir', type=str, default='data/test', help='Directory containing the test data.')
 
     # --- Hyperparameters ---
-    parser.add_argument('--batch_size', type=int, default=1, help='Batch size for evaluation. Set to 1 for precise per-image timing.')
+    parser.add_argument('--batch_size', type=int, default=16, help='Batch size for evaluation.')
 
     # --- Model Architecture Arguments ---
     parser.add_argument('--dims', type=int, nargs='+', default=[32, 64, 128, 160])
     parser.add_argument('--embed_dim', type=int, default=256)
 
     args = parser.parse_args()
+    
+    if args.model_type == 'aeye' and args.num_rings is None:
+        parser.error("--num_rings is required for --model_type 'aeye'")
+
     main(args)
