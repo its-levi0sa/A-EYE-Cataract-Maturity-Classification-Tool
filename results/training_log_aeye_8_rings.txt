@@ -1,0 +1,55 @@
+2025-11-11 09:46:20 - --- Starting Training: AEYE 8 RINGS ---
+2025-11-11 09:46:20 - Found 868 images for training.
+2025-11-11 09:46:21 - --- Starting Fold 1/5 ---
+2025-11-11 09:46:47 - Epoch 1 - Train Summary | Speed: 2.35 it/s, Loss: 0.02282
+2025-11-11 09:46:53 - Epoch 1 | Val Acc: 0.75287, P: 0.97826, R: 0.51724, F1: 0.67669
+2025-11-11 09:46:53 -   -> New best model saved with F1: 0.67669
+2025-11-11 09:47:15 - Epoch 2 - Train Summary | Speed: 2.58 it/s, Loss: 0.00944
+2025-11-11 09:47:20 - Epoch 2 | Val Acc: 0.85057, P: 1.00000, R: 0.70115, F1: 0.82432
+2025-11-11 09:47:20 -   -> New best model saved with F1: 0.82432
+2025-11-11 09:47:41 - Epoch 3 - Train Summary | Speed: 2.65 it/s, Loss: 0.01548
+2025-11-11 09:47:46 - Epoch 3 | Val Acc: 0.89080, P: 0.98571, R: 0.79310, F1: 0.87898
+2025-11-11 09:47:46 -   -> New best model saved with F1: 0.87898
+2025-11-11 09:47:46 - --- Starting Fold 2/5 ---
+2025-11-11 09:48:07 - Epoch 1 - Train Summary | Speed: 3.21 it/s, Loss: 0.04420
+2025-11-11 09:48:12 - Epoch 1 | Val Acc: 0.83908, P: 0.98361, R: 0.68966, F1: 0.81081
+2025-11-11 09:48:12 -   -> New best model saved with F1: 0.81081
+2025-11-11 09:48:33 - Epoch 2 - Train Summary | Speed: 3.29 it/s, Loss: 0.02436
+2025-11-11 09:48:38 - Epoch 2 | Val Acc: 0.88506, P: 1.00000, R: 0.77011, F1: 0.87013
+2025-11-11 09:48:38 -   -> New best model saved with F1: 0.87013
+2025-11-11 09:49:00 - Epoch 3 - Train Summary | Speed: 3.22 it/s, Loss: 0.00729
+2025-11-11 09:49:05 - Epoch 3 | Val Acc: 0.93103, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-11-11 09:49:05 -   -> New best model saved with F1: 0.92683
+2025-11-11 09:49:05 - --- Starting Fold 3/5 ---
+2025-11-11 09:49:26 - Epoch 1 - Train Summary | Speed: 3.32 it/s, Loss: 0.01856
+2025-11-11 09:49:32 - Epoch 1 | Val Acc: 0.70690, P: 0.97368, R: 0.42529, F1: 0.59200
+2025-11-11 09:49:32 -   -> New best model saved with F1: 0.59200
+2025-11-11 09:49:52 - Epoch 2 - Train Summary | Speed: 3.28 it/s, Loss: 0.03067
+2025-11-11 09:49:58 - Epoch 2 | Val Acc: 0.90230, P: 0.90698, R: 0.89655, F1: 0.90173
+2025-11-11 09:49:58 -   -> New best model saved with F1: 0.90173
+2025-11-11 09:50:18 - Epoch 3 - Train Summary | Speed: 3.33 it/s, Loss: 0.01941
+2025-11-11 09:50:24 - Epoch 3 | Val Acc: 0.87356, P: 1.00000, R: 0.74713, F1: 0.85526
+2025-11-11 09:50:24 - --- Starting Fold 4/5 ---
+2025-11-11 09:50:46 - Epoch 1 - Train Summary | Speed: 1.82 it/s, Loss: 0.08136
+2025-11-11 09:50:51 - Epoch 1 | Val Acc: 0.65318, P: 1.00000, R: 0.31034, F1: 0.47368
+2025-11-11 09:50:51 -   -> New best model saved with F1: 0.47368
+2025-11-11 09:51:12 - Epoch 2 - Train Summary | Speed: 2.60 it/s, Loss: 0.02331
+2025-11-11 09:51:17 - Epoch 2 | Val Acc: 0.93064, P: 0.97468, R: 0.88506, F1: 0.92771
+2025-11-11 09:51:17 -   -> New best model saved with F1: 0.92771
+2025-11-11 09:51:38 - Epoch 3 - Train Summary | Speed: 3.04 it/s, Loss: 0.06931
+2025-11-11 09:51:43 - Epoch 3 | Val Acc: 0.92486, P: 0.97436, R: 0.87356, F1: 0.92121
+2025-11-11 09:51:43 - --- Starting Fold 5/5 ---
+2025-11-11 09:52:04 - Epoch 1 - Train Summary | Speed: 3.15 it/s, Loss: 0.01339
+2025-11-11 09:52:09 - Epoch 1 | Val Acc: 0.88439, P: 0.89286, R: 0.87209, F1: 0.88235
+2025-11-11 09:52:09 -   -> New best model saved with F1: 0.88235
+2025-11-11 09:52:30 - Epoch 2 - Train Summary | Speed: 3.17 it/s, Loss: 0.05105
+2025-11-11 09:52:35 - Epoch 2 | Val Acc: 0.90751, P: 0.98611, R: 0.82558, F1: 0.89873
+2025-11-11 09:52:35 -   -> New best model saved with F1: 0.89873
+2025-11-11 09:52:56 - Epoch 3 - Train Summary | Speed: 3.27 it/s, Loss: 0.02550
+2025-11-11 09:53:01 - Epoch 3 | Val Acc: 0.91329, P: 0.97333, R: 0.84884, F1: 0.90683
+2025-11-11 09:53:01 -   -> New best model saved with F1: 0.90683
+2025-11-11 09:53:01 - 
+--- K-Fold Training Finished ---
+2025-11-11 09:53:01 - Fold F1 Scores: ['0.87898', '0.92683', '0.90173', '0.92771', '0.90683']
+2025-11-11 09:53:01 - Average F1-Score: 0.90842 ± 0.01803
+2025-11-11 09:53:01 - --- Finished Training: AEYE 8 RINGS ---

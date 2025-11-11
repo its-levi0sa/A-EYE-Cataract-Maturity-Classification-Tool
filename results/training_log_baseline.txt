@@ -1,0 +1,55 @@
+2025-11-11 09:46:20 - --- Starting Training: BASELINE ---
+2025-11-11 09:46:20 - Found 868 images for training.
+2025-11-11 09:46:21 - --- Starting Fold 1/5 ---
+2025-11-11 09:46:41 - Epoch 1 - Train Summary | Speed: 0.85 it/s, Loss: 0.03056
+2025-11-11 09:46:43 - Epoch 1 | Val Acc: 0.50575, P: 1.00000, R: 0.01149, F1: 0.02273
+2025-11-11 09:46:43 -   -> New best model saved with F1: 0.02273
+2025-11-11 09:46:52 - Epoch 2 - Train Summary | Speed: 9.46 it/s, Loss: 0.01477
+2025-11-11 09:46:54 - Epoch 2 | Val Acc: 0.83908, P: 0.92754, R: 0.73563, F1: 0.82051
+2025-11-11 09:46:54 -   -> New best model saved with F1: 0.82051
+2025-11-11 09:47:03 - Epoch 3 - Train Summary | Speed: 6.82 it/s, Loss: 0.03281
+2025-11-11 09:47:05 - Epoch 3 | Val Acc: 0.84483, P: 0.88462, R: 0.79310, F1: 0.83636
+2025-11-11 09:47:05 -   -> New best model saved with F1: 0.83636
+2025-11-11 09:47:05 - --- Starting Fold 2/5 ---
+2025-11-11 09:47:13 - Epoch 1 - Train Summary | Speed: 10.25 it/s, Loss: 0.03044
+2025-11-11 09:47:16 - Epoch 1 | Val Acc: 0.51724, P: 1.00000, R: 0.03448, F1: 0.06667
+2025-11-11 09:47:16 -   -> New best model saved with F1: 0.06667
+2025-11-11 09:47:24 - Epoch 2 - Train Summary | Speed: 9.44 it/s, Loss: 0.02948
+2025-11-11 09:47:26 - Epoch 2 | Val Acc: 0.86782, P: 0.84783, R: 0.89655, F1: 0.87151
+2025-11-11 09:47:26 -   -> New best model saved with F1: 0.87151
+2025-11-11 09:47:35 - Epoch 3 - Train Summary | Speed: 9.24 it/s, Loss: 0.01849
+2025-11-11 09:47:37 - Epoch 3 | Val Acc: 0.87931, P: 0.86667, R: 0.89655, F1: 0.88136
+2025-11-11 09:47:37 -   -> New best model saved with F1: 0.88136
+2025-11-11 09:47:37 - --- Starting Fold 3/5 ---
+2025-11-11 09:47:46 - Epoch 1 - Train Summary | Speed: 9.96 it/s, Loss: 0.02801
+2025-11-11 09:47:48 - Epoch 1 | Val Acc: 0.50000, P: 0.00000, R: 0.00000, F1: 0.00000
+2025-11-11 09:47:57 - Epoch 2 - Train Summary | Speed: 9.19 it/s, Loss: 0.01087
+2025-11-11 09:47:59 - Epoch 2 | Val Acc: 0.84483, P: 0.89474, R: 0.78161, F1: 0.83436
+2025-11-11 09:47:59 -   -> New best model saved with F1: 0.83436
+2025-11-11 09:48:08 - Epoch 3 - Train Summary | Speed: 7.92 it/s, Loss: 0.02553
+2025-11-11 09:48:10 - Epoch 3 | Val Acc: 0.85057, P: 0.89610, R: 0.79310, F1: 0.84146
+2025-11-11 09:48:10 -   -> New best model saved with F1: 0.84146
+2025-11-11 09:48:10 - --- Starting Fold 4/5 ---
+2025-11-11 09:48:22 - Epoch 1 - Train Summary | Speed: 1.30 it/s, Loss: 0.03873
+2025-11-11 09:48:24 - Epoch 1 | Val Acc: 0.75145, P: 0.68333, R: 0.94253, F1: 0.79227
+2025-11-11 09:48:24 -   -> New best model saved with F1: 0.79227
+2025-11-11 09:48:32 - Epoch 2 - Train Summary | Speed: 8.12 it/s, Loss: 0.06725
+2025-11-11 09:48:34 - Epoch 2 | Val Acc: 0.90751, P: 0.93827, R: 0.87356, F1: 0.90476
+2025-11-11 09:48:34 -   -> New best model saved with F1: 0.90476
+2025-11-11 09:48:42 - Epoch 3 - Train Summary | Speed: 9.49 it/s, Loss: 0.08449
+2025-11-11 09:48:45 - Epoch 3 | Val Acc: 0.89017, P: 1.00000, R: 0.78161, F1: 0.87742
+2025-11-11 09:48:45 - --- Starting Fold 5/5 ---
+2025-11-11 09:48:53 - Epoch 1 - Train Summary | Speed: 10.28 it/s, Loss: 0.01629
+2025-11-11 09:48:55 - Epoch 1 | Val Acc: 0.52601, P: 1.00000, R: 0.04651, F1: 0.08889
+2025-11-11 09:48:55 -   -> New best model saved with F1: 0.08889
+2025-11-11 09:49:04 - Epoch 2 - Train Summary | Speed: 9.95 it/s, Loss: 0.05663
+2025-11-11 09:49:06 - Epoch 2 | Val Acc: 0.86705, P: 0.92000, R: 0.80233, F1: 0.85714
+2025-11-11 09:49:06 -   -> New best model saved with F1: 0.85714
+2025-11-11 09:49:15 - Epoch 3 - Train Summary | Speed: 9.78 it/s, Loss: 0.02887
+2025-11-11 09:49:17 - Epoch 3 | Val Acc: 0.88439, P: 0.86667, R: 0.90698, F1: 0.88636
+2025-11-11 09:49:17 -   -> New best model saved with F1: 0.88636
+2025-11-11 09:49:17 - 
+--- K-Fold Training Finished ---
+2025-11-11 09:49:17 - Fold F1 Scores: ['0.83636', '0.88136', '0.84146', '0.90476', '0.88636']
+2025-11-11 09:49:17 - Average F1-Score: 0.87006 ± 0.02665
+2025-11-11 09:49:17 - --- Finished Training: BASELINE ---
