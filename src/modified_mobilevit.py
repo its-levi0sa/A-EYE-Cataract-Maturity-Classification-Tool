@@ -7,14 +7,6 @@ from .utils import fold_tokens_to_grid
 class ModifiedMobileViT(nn.Module):
     def __init__(self, in_channels, embed_dim, depth, num_rings, num_heads=4, mlp_dim=384):
         super().__init__()
-
-        # Local path
-        self.local_conv = nn.Sequential(
-            nn.Conv2d(in_channels, in_channels, 3, padding=1, bias=False),
-            nn.BatchNorm2d(in_channels),
-            nn.SiLU()
-        )
-        self.proj_in = nn.Conv2d(in_channels, embed_dim, kernel_size=1)
         
         # Global (token) path
         self.token_proj = nn.Linear(9, embed_dim) 
