@@ -1,0 +1,688 @@
+2025-12-28 18:06:47 - --- Starting Training: BASELINE ---
+2025-12-28 18:06:47 - Found 660 images for training.
+2025-12-28 18:06:47 - --- Starting Fold 1/5 ---
+2025-12-28 18:07:08 - Epoch 1 - Train Summary | Speed: 2.98 it/s, Loss: 0.09028
+2025-12-28 18:07:10 - Epoch 1 | Val Acc: 0.34091, P: 0.00000, R: 0.00000, F1: 0.00000
+2025-12-28 18:07:18 - Epoch 2 - Train Summary | Speed: 3.92 it/s, Loss: 0.03933
+2025-12-28 18:07:19 - Epoch 2 | Val Acc: 0.75000, P: 1.00000, R: 0.62069, F1: 0.76596
+2025-12-28 18:07:20 -    -> New best model saved with F1: 0.76596
+2025-12-28 18:07:28 - Epoch 3 - Train Summary | Speed: 4.39 it/s, Loss: 0.04709
+2025-12-28 18:07:30 - Epoch 3 | Val Acc: 0.81818, P: 0.94366, R: 0.77011, F1: 0.84810
+2025-12-28 18:07:31 -    -> New best model saved with F1: 0.84810
+2025-12-28 18:07:38 - Epoch 4 - Train Summary | Speed: 4.31 it/s, Loss: 0.02102
+2025-12-28 18:07:40 - Epoch 4 | Val Acc: 0.84848, P: 1.00000, R: 0.77011, F1: 0.87013
+2025-12-28 18:07:40 -    -> New best model saved with F1: 0.87013
+2025-12-28 18:07:50 - Epoch 5 - Train Summary | Speed: 3.28 it/s, Loss: 0.03212
+2025-12-28 18:07:51 - Epoch 5 | Val Acc: 0.83333, P: 1.00000, R: 0.74713, F1: 0.85526
+2025-12-28 18:07:59 - Epoch 6 - Train Summary | Speed: 4.12 it/s, Loss: 0.04789
+2025-12-28 18:08:00 - Epoch 6 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 18:08:01 -    -> New best model saved with F1: 0.89873
+2025-12-28 18:08:08 - Epoch 7 - Train Summary | Speed: 4.57 it/s, Loss: 0.05375
+2025-12-28 18:08:11 - Epoch 7 | Val Acc: 0.82576, P: 1.00000, R: 0.73563, F1: 0.84768
+2025-12-28 18:08:19 - Epoch 8 - Train Summary | Speed: 4.29 it/s, Loss: 0.03199
+2025-12-28 18:08:20 - Epoch 8 | Val Acc: 0.84848, P: 1.00000, R: 0.77011, F1: 0.87013
+2025-12-28 18:08:29 - Epoch 9 - Train Summary | Speed: 3.85 it/s, Loss: 0.03156
+2025-12-28 18:08:30 - Epoch 9 | Val Acc: 0.84848, P: 1.00000, R: 0.77011, F1: 0.87013
+2025-12-28 18:08:39 - Epoch 10 - Train Summary | Speed: 3.61 it/s, Loss: 0.03148
+2025-12-28 18:08:40 - Epoch 10 | Val Acc: 0.84848, P: 1.00000, R: 0.77011, F1: 0.87013
+2025-12-28 18:08:47 - Epoch 11 - Train Summary | Speed: 4.86 it/s, Loss: 0.04744
+2025-12-28 18:08:49 - Epoch 11 | Val Acc: 0.87121, P: 0.97297, R: 0.82759, F1: 0.89441
+2025-12-28 18:08:57 - Epoch 12 - Train Summary | Speed: 4.40 it/s, Loss: 0.02630
+2025-12-28 18:08:59 - Epoch 12 | Val Acc: 0.81818, P: 1.00000, R: 0.72414, F1: 0.84000
+2025-12-28 18:09:08 - Epoch 13 - Train Summary | Speed: 3.58 it/s, Loss: 0.01624
+2025-12-28 18:09:09 - Epoch 13 | Val Acc: 0.85606, P: 1.00000, R: 0.78161, F1: 0.87742
+2025-12-28 18:09:17 - Epoch 14 - Train Summary | Speed: 4.23 it/s, Loss: 0.03389
+2025-12-28 18:09:19 - Epoch 14 | Val Acc: 0.86364, P: 1.00000, R: 0.79310, F1: 0.88462
+2025-12-28 18:09:27 - Epoch 15 - Train Summary | Speed: 4.84 it/s, Loss: 0.04455
+2025-12-28 18:09:28 - Epoch 15 | Val Acc: 0.84091, P: 1.00000, R: 0.75862, F1: 0.86275
+2025-12-28 18:09:37 - Epoch 16 - Train Summary | Speed: 4.19 it/s, Loss: 0.02224
+2025-12-28 18:09:39 - Epoch 16 | Val Acc: 0.88636, P: 1.00000, R: 0.82759, F1: 0.90566
+2025-12-28 18:09:39 -    -> New best model saved with F1: 0.90566
+2025-12-28 18:09:48 - Epoch 17 - Train Summary | Speed: 3.48 it/s, Loss: 0.01402
+2025-12-28 18:09:49 - Epoch 17 | Val Acc: 0.86364, P: 1.00000, R: 0.79310, F1: 0.88462
+2025-12-28 18:09:57 - Epoch 18 - Train Summary | Speed: 4.67 it/s, Loss: 0.02548
+2025-12-28 18:09:59 - Epoch 18 | Val Acc: 0.88636, P: 0.98649, R: 0.83908, F1: 0.90683
+2025-12-28 18:10:00 -    -> New best model saved with F1: 0.90683
+2025-12-28 18:10:08 - Epoch 19 - Train Summary | Speed: 4.32 it/s, Loss: 0.03730
+2025-12-28 18:10:09 - Epoch 19 | Val Acc: 0.87121, P: 0.98611, R: 0.81609, F1: 0.89308
+2025-12-28 18:10:17 - Epoch 20 - Train Summary | Speed: 4.62 it/s, Loss: 0.02111
+2025-12-28 18:10:18 - Epoch 20 | Val Acc: 0.87121, P: 1.00000, R: 0.80460, F1: 0.89172
+2025-12-28 18:10:26 - Epoch 21 - Train Summary | Speed: 4.01 it/s, Loss: 0.01415
+2025-12-28 18:10:28 - Epoch 21 | Val Acc: 0.82576, P: 1.00000, R: 0.73563, F1: 0.84768
+2025-12-28 18:10:36 - Epoch 22 - Train Summary | Speed: 4.76 it/s, Loss: 0.05540
+2025-12-28 18:10:37 - Epoch 22 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:10:38 -    -> New best model saved with F1: 0.91250
+2025-12-28 18:10:46 - Epoch 23 - Train Summary | Speed: 4.09 it/s, Loss: 0.01478
+2025-12-28 18:10:47 - Epoch 23 | Val Acc: 0.87121, P: 1.00000, R: 0.80460, F1: 0.89172
+2025-12-28 18:10:55 - Epoch 24 - Train Summary | Speed: 4.26 it/s, Loss: 0.03308
+2025-12-28 18:10:57 - Epoch 24 | Val Acc: 0.86364, P: 1.00000, R: 0.79310, F1: 0.88462
+2025-12-28 18:11:05 - Epoch 25 - Train Summary | Speed: 4.14 it/s, Loss: 0.02976
+2025-12-28 18:11:07 - Epoch 25 | Val Acc: 0.87121, P: 1.00000, R: 0.80460, F1: 0.89172
+2025-12-28 18:11:14 - Epoch 26 - Train Summary | Speed: 4.76 it/s, Loss: 0.05144
+2025-12-28 18:11:16 - Epoch 26 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 18:11:25 - Epoch 27 - Train Summary | Speed: 4.27 it/s, Loss: 0.08444
+2025-12-28 18:11:26 - Epoch 27 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 18:11:35 - Epoch 28 - Train Summary | Speed: 3.36 it/s, Loss: 0.02390
+2025-12-28 18:11:36 - Epoch 28 | Val Acc: 0.88636, P: 1.00000, R: 0.82759, F1: 0.90566
+2025-12-28 18:11:43 - Epoch 29 - Train Summary | Speed: 4.79 it/s, Loss: 0.01523
+2025-12-28 18:11:45 - Epoch 29 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:11:52 - Epoch 30 - Train Summary | Speed: 4.68 it/s, Loss: 0.02751
+2025-12-28 18:11:54 - Epoch 30 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:12:02 - Epoch 31 - Train Summary | Speed: 4.23 it/s, Loss: 0.02709
+2025-12-28 18:12:03 - Epoch 31 | Val Acc: 0.89394, P: 0.97403, R: 0.86207, F1: 0.91463
+2025-12-28 18:12:04 -    -> New best model saved with F1: 0.91463
+2025-12-28 18:12:11 - Epoch 32 - Train Summary | Speed: 4.41 it/s, Loss: 0.01727
+2025-12-28 18:12:13 - Epoch 32 | Val Acc: 0.87879, P: 0.98630, R: 0.82759, F1: 0.90000
+2025-12-28 18:12:22 - Epoch 33 - Train Summary | Speed: 4.75 it/s, Loss: 0.01719
+2025-12-28 18:12:23 - Epoch 33 | Val Acc: 0.91667, P: 0.97500, R: 0.89655, F1: 0.93413
+2025-12-28 18:12:23 -    -> New best model saved with F1: 0.93413
+2025-12-28 18:12:31 - Epoch 34 - Train Summary | Speed: 4.58 it/s, Loss: 0.00890
+2025-12-28 18:12:32 - Epoch 34 | Val Acc: 0.88636, P: 0.98649, R: 0.83908, F1: 0.90683
+2025-12-28 18:12:41 - Epoch 35 - Train Summary | Speed: 3.77 it/s, Loss: 0.03129
+2025-12-28 18:12:42 - Epoch 35 | Val Acc: 0.86364, P: 1.00000, R: 0.79310, F1: 0.88462
+2025-12-28 18:12:50 - Epoch 36 - Train Summary | Speed: 4.81 it/s, Loss: 0.01104
+2025-12-28 18:12:52 - Epoch 36 | Val Acc: 0.89394, P: 0.98667, R: 0.85057, F1: 0.91358
+2025-12-28 18:13:00 - Epoch 37 - Train Summary | Speed: 4.20 it/s, Loss: 0.01553
+2025-12-28 18:13:01 - Epoch 37 | Val Acc: 0.90909, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-12-28 18:13:09 - Epoch 38 - Train Summary | Speed: 4.28 it/s, Loss: 0.02976
+2025-12-28 18:13:11 - Epoch 38 | Val Acc: 0.91667, P: 0.97500, R: 0.89655, F1: 0.93413
+2025-12-28 18:13:19 - Epoch 39 - Train Summary | Speed: 3.74 it/s, Loss: 0.03490
+2025-12-28 18:13:21 - Epoch 39 | Val Acc: 0.90909, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-12-28 18:13:28 - Epoch 40 - Train Summary | Speed: 4.79 it/s, Loss: 0.02064
+2025-12-28 18:13:30 - Epoch 40 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:13:38 - Epoch 41 - Train Summary | Speed: 3.82 it/s, Loss: 0.07688
+2025-12-28 18:13:39 - Epoch 41 | Val Acc: 0.90152, P: 0.98684, R: 0.86207, F1: 0.92025
+2025-12-28 18:13:48 - Epoch 42 - Train Summary | Speed: 3.96 it/s, Loss: 0.01335
+2025-12-28 18:13:49 - Epoch 42 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:13:56 - Epoch 43 - Train Summary | Speed: 4.79 it/s, Loss: 0.01958
+2025-12-28 18:13:58 - Epoch 43 | Val Acc: 0.90909, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-12-28 18:14:06 - Epoch 44 - Train Summary | Speed: 4.20 it/s, Loss: 0.02617
+2025-12-28 18:14:08 - Epoch 44 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:14:16 - Epoch 45 - Train Summary | Speed: 4.00 it/s, Loss: 0.00972
+2025-12-28 18:14:17 - Epoch 45 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 18:14:26 - Epoch 46 - Train Summary | Speed: 4.34 it/s, Loss: 0.00943
+2025-12-28 18:14:27 - Epoch 46 | Val Acc: 0.93182, P: 0.98750, R: 0.90805, F1: 0.94611
+2025-12-28 18:14:28 -    -> New best model saved with F1: 0.94611
+2025-12-28 18:14:35 - Epoch 47 - Train Summary | Speed: 4.85 it/s, Loss: 0.02016
+2025-12-28 18:14:36 - Epoch 47 | Val Acc: 0.90152, P: 0.98684, R: 0.86207, F1: 0.92025
+2025-12-28 18:14:46 - Epoch 48 - Train Summary | Speed: 4.40 it/s, Loss: 0.02751
+2025-12-28 18:14:47 - Epoch 48 | Val Acc: 0.90909, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-12-28 18:14:55 - Epoch 49 - Train Summary | Speed: 3.87 it/s, Loss: 0.00479
+2025-12-28 18:14:56 - Epoch 49 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:14:57 -    -> New best model saved with F1: 0.95858
+2025-12-28 18:15:04 - Epoch 50 - Train Summary | Speed: 4.73 it/s, Loss: 0.01470
+2025-12-28 18:15:05 - Epoch 50 | Val Acc: 0.92424, P: 0.98734, R: 0.89655, F1: 0.93976
+2025-12-28 18:15:13 - Epoch 51 - Train Summary | Speed: 4.10 it/s, Loss: 0.01505
+2025-12-28 18:15:15 - Epoch 51 | Val Acc: 0.90909, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-12-28 18:15:23 - Epoch 52 - Train Summary | Speed: 4.09 it/s, Loss: 0.01006
+2025-12-28 18:15:24 - Epoch 52 | Val Acc: 0.92424, P: 0.95294, R: 0.93103, F1: 0.94186
+2025-12-28 18:15:32 - Epoch 53 - Train Summary | Speed: 4.67 it/s, Loss: 0.01775
+2025-12-28 18:15:33 - Epoch 53 | Val Acc: 0.86364, P: 1.00000, R: 0.79310, F1: 0.88462
+2025-12-28 18:15:41 - Epoch 54 - Train Summary | Speed: 4.61 it/s, Loss: 0.02713
+2025-12-28 18:15:42 - Epoch 54 | Val Acc: 0.87121, P: 1.00000, R: 0.80460, F1: 0.89172
+2025-12-28 18:15:50 - Epoch 55 - Train Summary | Speed: 4.21 it/s, Loss: 0.00945
+2025-12-28 18:15:51 - Epoch 55 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:15:59 - Epoch 56 - Train Summary | Speed: 4.63 it/s, Loss: 0.00612
+2025-12-28 18:16:00 - Epoch 56 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:16:08 - Epoch 57 - Train Summary | Speed: 4.78 it/s, Loss: 0.00618
+2025-12-28 18:16:09 - Epoch 57 | Val Acc: 0.93182, P: 0.98750, R: 0.90805, F1: 0.94611
+2025-12-28 18:16:17 - Epoch 58 - Train Summary | Speed: 4.23 it/s, Loss: 0.01491
+2025-12-28 18:16:19 - Epoch 58 | Val Acc: 0.93939, P: 1.00000, R: 0.90805, F1: 0.95181
+2025-12-28 18:16:27 - Epoch 59 - Train Summary | Speed: 4.12 it/s, Loss: 0.03414
+2025-12-28 18:16:28 - Epoch 59 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:16:35 - Epoch 60 - Train Summary | Speed: 4.75 it/s, Loss: 0.00625
+2025-12-28 18:16:37 - Epoch 60 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:16:45 - Epoch 61 - Train Summary | Speed: 4.69 it/s, Loss: 0.00948
+2025-12-28 18:16:47 - Epoch 61 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 18:16:55 - Epoch 62 - Train Summary | Speed: 3.84 it/s, Loss: 0.00445
+2025-12-28 18:16:56 - Epoch 62 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:17:04 - Epoch 63 - Train Summary | Speed: 4.27 it/s, Loss: 0.03113
+2025-12-28 18:17:05 - Epoch 63 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:17:13 - Epoch 64 - Train Summary | Speed: 4.56 it/s, Loss: 0.04391
+2025-12-28 18:17:14 - Epoch 64 | Val Acc: 0.92424, P: 0.95294, R: 0.93103, F1: 0.94186
+2025-12-28 18:17:23 - Epoch 65 - Train Summary | Speed: 4.09 it/s, Loss: 0.02307
+2025-12-28 18:17:24 - Epoch 65 | Val Acc: 0.93939, P: 0.96471, R: 0.94253, F1: 0.95349
+2025-12-28 18:17:32 - Epoch 66 - Train Summary | Speed: 4.55 it/s, Loss: 0.02220
+2025-12-28 18:17:33 - Epoch 66 | Val Acc: 0.92424, P: 0.98734, R: 0.89655, F1: 0.93976
+2025-12-28 18:17:41 - Epoch 67 - Train Summary | Speed: 4.73 it/s, Loss: 0.01026
+2025-12-28 18:17:42 - Epoch 67 | Val Acc: 0.92424, P: 0.96386, R: 0.91954, F1: 0.94118
+2025-12-28 18:17:50 - Epoch 68 - Train Summary | Speed: 4.29 it/s, Loss: 0.01481
+2025-12-28 18:17:51 - Epoch 68 | Val Acc: 0.93939, P: 0.97590, R: 0.93103, F1: 0.95294
+2025-12-28 18:18:00 - Epoch 69 - Train Summary | Speed: 3.81 it/s, Loss: 0.00322
+2025-12-28 18:18:02 - Epoch 69 | Val Acc: 0.92424, P: 1.00000, R: 0.88506, F1: 0.93902
+2025-12-28 18:18:02 -    -> Early stopping.
+2025-12-28 18:18:02 - --- Starting Fold 2/5 ---
+2025-12-28 18:18:09 - Epoch 1 - Train Summary | Speed: 4.77 it/s, Loss: 0.05489
+2025-12-28 18:18:10 - Epoch 1 | Val Acc: 0.47727, P: 0.84615, R: 0.25287, F1: 0.38938
+2025-12-28 18:18:10 -    -> New best model saved with F1: 0.38938
+2025-12-28 18:18:19 - Epoch 2 - Train Summary | Speed: 3.87 it/s, Loss: 0.04383
+2025-12-28 18:18:20 - Epoch 2 | Val Acc: 0.75758, P: 0.78351, R: 0.87356, F1: 0.82609
+2025-12-28 18:18:21 -    -> New best model saved with F1: 0.82609
+2025-12-28 18:18:29 - Epoch 3 - Train Summary | Speed: 4.01 it/s, Loss: 0.03363
+2025-12-28 18:18:30 - Epoch 3 | Val Acc: 0.74242, P: 0.94915, R: 0.64368, F1: 0.76712
+2025-12-28 18:18:37 - Epoch 4 - Train Summary | Speed: 4.80 it/s, Loss: 0.03740
+2025-12-28 18:18:38 - Epoch 4 | Val Acc: 0.84848, P: 1.00000, R: 0.77011, F1: 0.87013
+2025-12-28 18:18:39 -    -> New best model saved with F1: 0.87013
+2025-12-28 18:18:46 - Epoch 5 - Train Summary | Speed: 4.65 it/s, Loss: 0.02900
+2025-12-28 18:18:47 - Epoch 5 | Val Acc: 0.81818, P: 0.98462, R: 0.73563, F1: 0.84211
+2025-12-28 18:18:56 - Epoch 6 - Train Summary | Speed: 3.92 it/s, Loss: 0.08713
+2025-12-28 18:18:57 - Epoch 6 | Val Acc: 0.81061, P: 1.00000, R: 0.71264, F1: 0.83221
+2025-12-28 18:19:05 - Epoch 7 - Train Summary | Speed: 4.74 it/s, Loss: 0.02334
+2025-12-28 18:19:07 - Epoch 7 | Val Acc: 0.83333, P: 1.00000, R: 0.74713, F1: 0.85526
+2025-12-28 18:19:15 - Epoch 8 - Train Summary | Speed: 4.72 it/s, Loss: 0.03598
+2025-12-28 18:19:16 - Epoch 8 | Val Acc: 0.83333, P: 1.00000, R: 0.74713, F1: 0.85526
+2025-12-28 18:19:24 - Epoch 9 - Train Summary | Speed: 4.40 it/s, Loss: 0.03781
+2025-12-28 18:19:26 - Epoch 9 | Val Acc: 0.85606, P: 1.00000, R: 0.78161, F1: 0.87742
+2025-12-28 18:19:26 -    -> New best model saved with F1: 0.87742
+2025-12-28 18:19:35 - Epoch 10 - Train Summary | Speed: 3.40 it/s, Loss: 0.02719
+2025-12-28 18:19:36 - Epoch 10 | Val Acc: 0.85606, P: 1.00000, R: 0.78161, F1: 0.87742
+2025-12-28 18:19:44 - Epoch 11 - Train Summary | Speed: 4.09 it/s, Loss: 0.03412
+2025-12-28 18:19:46 - Epoch 11 | Val Acc: 0.78788, P: 1.00000, R: 0.67816, F1: 0.80822
+2025-12-28 18:19:54 - Epoch 12 - Train Summary | Speed: 4.18 it/s, Loss: 0.02765
+2025-12-28 18:19:55 - Epoch 12 | Val Acc: 0.82576, P: 0.98485, R: 0.74713, F1: 0.84967
+2025-12-28 18:20:03 - Epoch 13 - Train Summary | Speed: 4.20 it/s, Loss: 0.01899
+2025-12-28 18:20:05 - Epoch 13 | Val Acc: 0.90152, P: 0.98684, R: 0.86207, F1: 0.92025
+2025-12-28 18:20:05 -    -> New best model saved with F1: 0.92025
+2025-12-28 18:20:13 - Epoch 14 - Train Summary | Speed: 4.58 it/s, Loss: 0.06035
+2025-12-28 18:20:15 - Epoch 14 | Val Acc: 0.87879, P: 0.96104, R: 0.85057, F1: 0.90244
+2025-12-28 18:20:23 - Epoch 15 - Train Summary | Speed: 4.78 it/s, Loss: 0.01842
+2025-12-28 18:20:24 - Epoch 15 | Val Acc: 0.86364, P: 0.98592, R: 0.80460, F1: 0.88608
+2025-12-28 18:20:32 - Epoch 16 - Train Summary | Speed: 4.35 it/s, Loss: 0.03126
+2025-12-28 18:20:33 - Epoch 16 | Val Acc: 0.87121, P: 1.00000, R: 0.80460, F1: 0.89172
+2025-12-28 18:20:41 - Epoch 17 - Train Summary | Speed: 4.09 it/s, Loss: 0.02234
+2025-12-28 18:20:42 - Epoch 17 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:20:44 -    -> New best model saved with F1: 0.93252
+2025-12-28 18:20:51 - Epoch 18 - Train Summary | Speed: 4.82 it/s, Loss: 0.01881
+2025-12-28 18:20:52 - Epoch 18 | Val Acc: 0.86364, P: 1.00000, R: 0.79310, F1: 0.88462
+2025-12-28 18:21:00 - Epoch 19 - Train Summary | Speed: 4.65 it/s, Loss: 0.04852
+2025-12-28 18:21:02 - Epoch 19 | Val Acc: 0.88636, P: 1.00000, R: 0.82759, F1: 0.90566
+2025-12-28 18:21:10 - Epoch 20 - Train Summary | Speed: 4.07 it/s, Loss: 0.01953
+2025-12-28 18:21:11 - Epoch 20 | Val Acc: 0.88636, P: 1.00000, R: 0.82759, F1: 0.90566
+2025-12-28 18:21:19 - Epoch 21 - Train Summary | Speed: 4.44 it/s, Loss: 0.01193
+2025-12-28 18:21:21 - Epoch 21 | Val Acc: 0.86364, P: 0.98592, R: 0.80460, F1: 0.88608
+2025-12-28 18:21:28 - Epoch 22 - Train Summary | Speed: 4.80 it/s, Loss: 0.05339
+2025-12-28 18:21:29 - Epoch 22 | Val Acc: 0.85606, P: 0.86957, R: 0.91954, F1: 0.89385
+2025-12-28 18:21:38 - Epoch 23 - Train Summary | Speed: 4.26 it/s, Loss: 0.04134
+2025-12-28 18:21:39 - Epoch 23 | Val Acc: 0.80303, P: 1.00000, R: 0.70115, F1: 0.82432
+2025-12-28 18:21:46 - Epoch 24 - Train Summary | Speed: 4.51 it/s, Loss: 0.01775
+2025-12-28 18:21:48 - Epoch 24 | Val Acc: 0.91667, P: 0.94186, R: 0.93103, F1: 0.93642
+2025-12-28 18:21:49 -    -> New best model saved with F1: 0.93642
+2025-12-28 18:21:57 - Epoch 25 - Train Summary | Speed: 4.74 it/s, Loss: 0.02180
+2025-12-28 18:21:58 - Epoch 25 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:22:06 - Epoch 26 - Train Summary | Speed: 4.53 it/s, Loss: 0.03392
+2025-12-28 18:22:07 - Epoch 26 | Val Acc: 0.87121, P: 1.00000, R: 0.80460, F1: 0.89172
+2025-12-28 18:22:18 - Epoch 27 - Train Summary | Speed: 3.27 it/s, Loss: 0.03303
+2025-12-28 18:22:19 - Epoch 27 | Val Acc: 0.88636, P: 0.98649, R: 0.83908, F1: 0.90683
+2025-12-28 18:22:26 - Epoch 28 - Train Summary | Speed: 4.77 it/s, Loss: 0.02204
+2025-12-28 18:22:28 - Epoch 28 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 18:22:37 - Epoch 29 - Train Summary | Speed: 4.39 it/s, Loss: 0.00938
+2025-12-28 18:22:39 - Epoch 29 | Val Acc: 0.88636, P: 0.98649, R: 0.83908, F1: 0.90683
+2025-12-28 18:22:47 - Epoch 30 - Train Summary | Speed: 4.56 it/s, Loss: 0.02525
+2025-12-28 18:22:48 - Epoch 30 | Val Acc: 0.88636, P: 0.97368, R: 0.85057, F1: 0.90798
+2025-12-28 18:22:57 - Epoch 31 - Train Summary | Speed: 3.99 it/s, Loss: 0.05018
+2025-12-28 18:22:58 - Epoch 31 | Val Acc: 0.86364, P: 1.00000, R: 0.79310, F1: 0.88462
+2025-12-28 18:23:05 - Epoch 32 - Train Summary | Speed: 4.71 it/s, Loss: 0.02492
+2025-12-28 18:23:07 - Epoch 32 | Val Acc: 0.90152, P: 0.92045, R: 0.93103, F1: 0.92571
+2025-12-28 18:23:16 - Epoch 33 - Train Summary | Speed: 4.67 it/s, Loss: 0.00766
+2025-12-28 18:23:17 - Epoch 33 | Val Acc: 0.88636, P: 1.00000, R: 0.82759, F1: 0.90566
+2025-12-28 18:23:26 - Epoch 34 - Train Summary | Speed: 3.93 it/s, Loss: 0.01349
+2025-12-28 18:23:27 - Epoch 34 | Val Acc: 0.88636, P: 1.00000, R: 0.82759, F1: 0.90566
+2025-12-28 18:23:35 - Epoch 35 - Train Summary | Speed: 4.06 it/s, Loss: 0.02881
+2025-12-28 18:23:37 - Epoch 35 | Val Acc: 0.87121, P: 0.96053, R: 0.83908, F1: 0.89571
+2025-12-28 18:23:44 - Epoch 36 - Train Summary | Speed: 4.69 it/s, Loss: 0.06821
+2025-12-28 18:23:45 - Epoch 36 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 18:23:54 - Epoch 37 - Train Summary | Speed: 4.02 it/s, Loss: 0.01926
+2025-12-28 18:23:55 - Epoch 37 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:24:03 - Epoch 38 - Train Summary | Speed: 3.81 it/s, Loss: 0.01757
+2025-12-28 18:24:04 - Epoch 38 | Val Acc: 0.90152, P: 0.98684, R: 0.86207, F1: 0.92025
+2025-12-28 18:24:12 - Epoch 39 - Train Summary | Speed: 4.74 it/s, Loss: 0.03195
+2025-12-28 18:24:13 - Epoch 39 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:24:21 - Epoch 40 - Train Summary | Speed: 4.62 it/s, Loss: 0.02337
+2025-12-28 18:24:22 - Epoch 40 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:24:31 - Epoch 41 - Train Summary | Speed: 4.18 it/s, Loss: 0.04481
+2025-12-28 18:24:33 - Epoch 41 | Val Acc: 0.87879, P: 0.92771, R: 0.88506, F1: 0.90588
+2025-12-28 18:24:40 - Epoch 42 - Train Summary | Speed: 4.60 it/s, Loss: 0.02488
+2025-12-28 18:24:42 - Epoch 42 | Val Acc: 0.86364, P: 1.00000, R: 0.79310, F1: 0.88462
+2025-12-28 18:24:49 - Epoch 43 - Train Summary | Speed: 4.64 it/s, Loss: 0.08270
+2025-12-28 18:24:50 - Epoch 43 | Val Acc: 0.90152, P: 0.96250, R: 0.88506, F1: 0.92216
+2025-12-28 18:24:59 - Epoch 44 - Train Summary | Speed: 4.20 it/s, Loss: 0.01473
+2025-12-28 18:25:00 - Epoch 44 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:25:00 -    -> Early stopping.
+2025-12-28 17:57:46 - --- Starting Fold 3/5 ---
+2025-12-28 17:58:09 - Epoch 1 - Train Summary | Speed: 2.81 it/s, Loss: 0.02895
+2025-12-28 17:58:11 - Epoch 1 | Val Acc: 0.34091, P: 0.00000, R: 0.00000, F1: 0.00000
+2025-12-28 17:58:18 - Epoch 2 - Train Summary | Speed: 4.35 it/s, Loss: 0.06773
+2025-12-28 17:58:20 - Epoch 2 | Val Acc: 0.82576, P: 0.98485, R: 0.74713, F1: 0.84967
+2025-12-28 17:58:20 -    -> New best model saved with F1: 0.84967
+2025-12-28 17:58:28 - Epoch 3 - Train Summary | Speed: 4.46 it/s, Loss: 0.03866
+2025-12-28 17:58:29 - Epoch 3 | Val Acc: 0.87121, P: 0.98611, R: 0.81609, F1: 0.89308
+2025-12-28 17:58:29 -    -> New best model saved with F1: 0.89308
+2025-12-28 17:58:37 - Epoch 4 - Train Summary | Speed: 4.46 it/s, Loss: 0.03838
+2025-12-28 17:58:39 - Epoch 4 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 17:58:40 -    -> New best model saved with F1: 0.91250
+2025-12-28 17:58:49 - Epoch 5 - Train Summary | Speed: 3.58 it/s, Loss: 0.03440
+2025-12-28 17:58:51 - Epoch 5 | Val Acc: 0.85606, P: 1.00000, R: 0.78161, F1: 0.87742
+2025-12-28 17:58:59 - Epoch 6 - Train Summary | Speed: 4.15 it/s, Loss: 0.03282
+2025-12-28 17:59:00 - Epoch 6 | Val Acc: 0.90909, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-12-28 17:59:00 -    -> New best model saved with F1: 0.92683
+2025-12-28 17:59:08 - Epoch 7 - Train Summary | Speed: 4.69 it/s, Loss: 0.01567
+2025-12-28 17:59:09 - Epoch 7 | Val Acc: 0.89394, P: 0.97403, R: 0.86207, F1: 0.91463
+2025-12-28 17:59:18 - Epoch 8 - Train Summary | Speed: 4.10 it/s, Loss: 0.02156
+2025-12-28 17:59:20 - Epoch 8 | Val Acc: 0.90909, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-12-28 17:59:28 - Epoch 9 - Train Summary | Speed: 4.03 it/s, Loss: 0.02742
+2025-12-28 17:59:30 - Epoch 9 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 17:59:38 - Epoch 10 - Train Summary | Speed: 4.40 it/s, Loss: 0.01043
+2025-12-28 17:59:40 - Epoch 10 | Val Acc: 0.89394, P: 0.98667, R: 0.85057, F1: 0.91358
+2025-12-28 17:59:48 - Epoch 11 - Train Summary | Speed: 4.72 it/s, Loss: 0.04977
+2025-12-28 17:59:49 - Epoch 11 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 17:59:58 - Epoch 12 - Train Summary | Speed: 4.44 it/s, Loss: 0.04789
+2025-12-28 17:59:59 - Epoch 12 | Val Acc: 0.90909, P: 0.92135, R: 0.94253, F1: 0.93182
+2025-12-28 18:00:00 -    -> New best model saved with F1: 0.93182
+2025-12-28 18:00:09 - Epoch 13 - Train Summary | Speed: 3.57 it/s, Loss: 0.02823
+2025-12-28 18:00:10 - Epoch 13 | Val Acc: 0.88636, P: 1.00000, R: 0.82759, F1: 0.90566
+2025-12-28 18:00:18 - Epoch 14 - Train Summary | Speed: 4.36 it/s, Loss: 0.02881
+2025-12-28 18:00:20 - Epoch 14 | Val Acc: 0.89394, P: 0.96203, R: 0.87356, F1: 0.91566
+2025-12-28 18:00:27 - Epoch 15 - Train Summary | Speed: 4.73 it/s, Loss: 0.03522
+2025-12-28 18:00:28 - Epoch 15 | Val Acc: 0.84848, P: 1.00000, R: 0.77011, F1: 0.87013
+2025-12-28 18:00:37 - Epoch 16 - Train Summary | Speed: 4.45 it/s, Loss: 0.02413
+2025-12-28 18:00:39 - Epoch 16 | Val Acc: 0.88636, P: 1.00000, R: 0.82759, F1: 0.90566
+2025-12-28 18:00:48 - Epoch 17 - Train Summary | Speed: 3.39 it/s, Loss: 0.04116
+2025-12-28 18:00:50 - Epoch 17 | Val Acc: 0.87121, P: 1.00000, R: 0.80460, F1: 0.89172
+2025-12-28 18:00:57 - Epoch 18 - Train Summary | Speed: 4.69 it/s, Loss: 0.03406
+2025-12-28 18:00:59 - Epoch 18 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:01:08 - Epoch 19 - Train Summary | Speed: 4.72 it/s, Loss: 0.01759
+2025-12-28 18:01:09 - Epoch 19 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:01:17 - Epoch 20 - Train Summary | Speed: 4.42 it/s, Loss: 0.03356
+2025-12-28 18:01:19 - Epoch 20 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:01:27 - Epoch 21 - Train Summary | Speed: 3.90 it/s, Loss: 0.01102
+2025-12-28 18:01:28 - Epoch 21 | Val Acc: 0.89394, P: 0.98667, R: 0.85057, F1: 0.91358
+2025-12-28 18:01:36 - Epoch 22 - Train Summary | Speed: 4.64 it/s, Loss: 0.06103
+2025-12-28 18:01:37 - Epoch 22 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:01:45 - Epoch 23 - Train Summary | Speed: 4.55 it/s, Loss: 0.04501
+2025-12-28 18:01:46 - Epoch 23 | Val Acc: 0.90152, P: 0.96250, R: 0.88506, F1: 0.92216
+2025-12-28 18:01:54 - Epoch 24 - Train Summary | Speed: 3.86 it/s, Loss: 0.02692
+2025-12-28 18:01:56 - Epoch 24 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:02:03 - Epoch 25 - Train Summary | Speed: 4.52 it/s, Loss: 0.03177
+2025-12-28 18:02:05 - Epoch 25 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:02:12 - Epoch 26 - Train Summary | Speed: 4.61 it/s, Loss: 0.02228
+2025-12-28 18:02:14 - Epoch 26 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:02:23 - Epoch 27 - Train Summary | Speed: 4.29 it/s, Loss: 0.02110
+2025-12-28 18:02:24 - Epoch 27 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:02:32 - Epoch 28 - Train Summary | Speed: 4.12 it/s, Loss: 0.00617
+2025-12-28 18:02:33 - Epoch 28 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:02:41 - Epoch 29 - Train Summary | Speed: 4.71 it/s, Loss: 0.01388
+2025-12-28 18:02:42 - Epoch 29 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:02:42 -    -> New best model saved with F1: 0.93252
+2025-12-28 18:02:50 - Epoch 30 - Train Summary | Speed: 4.42 it/s, Loss: 0.02532
+2025-12-28 18:02:51 - Epoch 30 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:03:00 - Epoch 31 - Train Summary | Speed: 3.81 it/s, Loss: 0.01393
+2025-12-28 18:03:01 - Epoch 31 | Val Acc: 0.93182, P: 0.97561, R: 0.91954, F1: 0.94675
+2025-12-28 18:03:02 -    -> New best model saved with F1: 0.94675
+2025-12-28 18:03:09 - Epoch 32 - Train Summary | Speed: 4.74 it/s, Loss: 0.01998
+2025-12-28 18:03:10 - Epoch 32 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:03:18 - Epoch 33 - Train Summary | Speed: 4.59 it/s, Loss: 0.01799
+2025-12-28 18:03:19 - Epoch 33 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:03:27 - Epoch 34 - Train Summary | Speed: 4.01 it/s, Loss: 0.01692
+2025-12-28 18:03:29 - Epoch 34 | Val Acc: 0.92424, P: 0.98734, R: 0.89655, F1: 0.93976
+2025-12-28 18:03:37 - Epoch 35 - Train Summary | Speed: 4.63 it/s, Loss: 0.01014
+2025-12-28 18:03:38 - Epoch 35 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:03:46 - Epoch 36 - Train Summary | Speed: 4.68 it/s, Loss: 0.00566
+2025-12-28 18:03:47 - Epoch 36 | Val Acc: 0.93182, P: 0.98750, R: 0.90805, F1: 0.94611
+2025-12-28 18:03:55 - Epoch 37 - Train Summary | Speed: 4.18 it/s, Loss: 0.00795
+2025-12-28 18:03:56 - Epoch 37 | Val Acc: 0.91667, P: 0.97500, R: 0.89655, F1: 0.93413
+2025-12-28 18:04:05 - Epoch 38 - Train Summary | Speed: 4.08 it/s, Loss: 0.02607
+2025-12-28 18:04:06 - Epoch 38 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:04:14 - Epoch 39 - Train Summary | Speed: 4.61 it/s, Loss: 0.00427
+2025-12-28 18:04:15 - Epoch 39 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:04:23 - Epoch 40 - Train Summary | Speed: 4.45 it/s, Loss: 0.01692
+2025-12-28 18:04:24 - Epoch 40 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:04:32 - Epoch 41 - Train Summary | Speed: 3.93 it/s, Loss: 0.07241
+2025-12-28 18:04:34 - Epoch 41 | Val Acc: 0.87121, P: 0.88889, R: 0.91954, F1: 0.90395
+2025-12-28 18:04:41 - Epoch 42 - Train Summary | Speed: 4.72 it/s, Loss: 0.03589
+2025-12-28 18:04:42 - Epoch 42 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:04:50 - Epoch 43 - Train Summary | Speed: 4.48 it/s, Loss: 0.01542
+2025-12-28 18:04:51 - Epoch 43 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:05:00 - Epoch 44 - Train Summary | Speed: 3.87 it/s, Loss: 0.01544
+2025-12-28 18:05:01 - Epoch 44 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:05:08 - Epoch 45 - Train Summary | Speed: 4.78 it/s, Loss: 0.00750
+2025-12-28 18:05:09 - Epoch 45 | Val Acc: 0.93182, P: 1.00000, R: 0.89655, F1: 0.94545
+2025-12-28 18:05:17 - Epoch 46 - Train Summary | Speed: 4.57 it/s, Loss: 0.01108
+2025-12-28 18:05:19 - Epoch 46 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:05:19 -    -> New best model saved with F1: 0.95858
+2025-12-28 18:05:27 - Epoch 47 - Train Summary | Speed: 4.03 it/s, Loss: 0.01237
+2025-12-28 18:05:29 - Epoch 47 | Val Acc: 0.92424, P: 1.00000, R: 0.88506, F1: 0.93902
+2025-12-28 18:05:37 - Epoch 48 - Train Summary | Speed: 4.26 it/s, Loss: 0.02543
+2025-12-28 18:05:39 - Epoch 48 | Val Acc: 0.93939, P: 1.00000, R: 0.90805, F1: 0.95181
+2025-12-28 18:05:46 - Epoch 49 - Train Summary | Speed: 4.74 it/s, Loss: 0.00415
+2025-12-28 18:05:47 - Epoch 49 | Val Acc: 0.92424, P: 1.00000, R: 0.88506, F1: 0.93902
+2025-12-28 18:05:55 - Epoch 50 - Train Summary | Speed: 4.26 it/s, Loss: 0.00491
+2025-12-28 18:05:57 - Epoch 50 | Val Acc: 0.93939, P: 1.00000, R: 0.90805, F1: 0.95181
+2025-12-28 18:06:06 - Epoch 51 - Train Summary | Speed: 3.02 it/s, Loss: 0.01365
+2025-12-28 18:06:07 - Epoch 51 | Val Acc: 0.91667, P: 0.97500, R: 0.89655, F1: 0.93413
+2025-12-28 18:06:15 - Epoch 52 - Train Summary | Speed: 4.70 it/s, Loss: 0.01745
+2025-12-28 18:06:16 - Epoch 52 | Val Acc: 0.87879, P: 1.00000, R: 0.81609, F1: 0.89873
+2025-12-28 18:06:24 - Epoch 53 - Train Summary | Speed: 4.51 it/s, Loss: 0.00872
+2025-12-28 18:06:25 - Epoch 53 | Val Acc: 0.93182, P: 0.97561, R: 0.91954, F1: 0.94675
+2025-12-28 18:06:34 - Epoch 54 - Train Summary | Speed: 3.66 it/s, Loss: 0.02494
+2025-12-28 18:06:35 - Epoch 54 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:06:43 - Epoch 55 - Train Summary | Speed: 4.70 it/s, Loss: 0.01241
+2025-12-28 18:06:44 - Epoch 55 | Val Acc: 0.92424, P: 1.00000, R: 0.88506, F1: 0.93902
+2025-12-28 18:06:52 - Epoch 56 - Train Summary | Speed: 4.60 it/s, Loss: 0.02292
+2025-12-28 18:06:53 - Epoch 56 | Val Acc: 0.96212, P: 1.00000, R: 0.94253, F1: 0.97041
+2025-12-28 18:06:55 -    -> New best model saved with F1: 0.97041
+2025-12-28 18:07:03 - Epoch 57 - Train Summary | Speed: 4.24 it/s, Loss: 0.00996
+2025-12-28 18:07:04 - Epoch 57 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:07:12 - Epoch 58 - Train Summary | Speed: 4.00 it/s, Loss: 0.05872
+2025-12-28 18:07:13 - Epoch 58 | Val Acc: 0.93182, P: 1.00000, R: 0.89655, F1: 0.94545
+2025-12-28 18:07:22 - Epoch 59 - Train Summary | Speed: 4.72 it/s, Loss: 0.00762
+2025-12-28 18:07:23 - Epoch 59 | Val Acc: 0.93182, P: 0.98750, R: 0.90805, F1: 0.94611
+2025-12-28 18:07:33 - Epoch 60 - Train Summary | Speed: 4.62 it/s, Loss: 0.01486
+2025-12-28 18:07:34 - Epoch 60 | Val Acc: 0.93182, P: 0.98750, R: 0.90805, F1: 0.94611
+2025-12-28 18:07:43 - Epoch 61 - Train Summary | Speed: 4.13 it/s, Loss: 0.03032
+2025-12-28 18:07:45 - Epoch 61 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:07:53 - Epoch 62 - Train Summary | Speed: 3.82 it/s, Loss: 0.05944
+2025-12-28 18:07:54 - Epoch 62 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:08:02 - Epoch 63 - Train Summary | Speed: 4.66 it/s, Loss: 0.02564
+2025-12-28 18:08:04 - Epoch 63 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:08:12 - Epoch 64 - Train Summary | Speed: 4.60 it/s, Loss: 0.01744
+2025-12-28 18:08:13 - Epoch 64 | Val Acc: 0.96970, P: 0.98824, R: 0.96552, F1: 0.97674
+2025-12-28 18:08:13 -    -> New best model saved with F1: 0.97674
+2025-12-28 18:08:21 - Epoch 65 - Train Summary | Speed: 4.16 it/s, Loss: 0.00492
+2025-12-28 18:08:23 - Epoch 65 | Val Acc: 0.96212, P: 0.98810, R: 0.95402, F1: 0.97076
+2025-12-28 18:08:30 - Epoch 66 - Train Summary | Speed: 4.39 it/s, Loss: 0.00853
+2025-12-28 18:08:32 - Epoch 66 | Val Acc: 0.96212, P: 0.97674, R: 0.96552, F1: 0.97110
+2025-12-28 18:08:39 - Epoch 67 - Train Summary | Speed: 4.67 it/s, Loss: 0.00716
+2025-12-28 18:08:41 - Epoch 67 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:08:49 - Epoch 68 - Train Summary | Speed: 3.90 it/s, Loss: 0.05278
+2025-12-28 18:08:51 - Epoch 68 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:08:59 - Epoch 69 - Train Summary | Speed: 3.81 it/s, Loss: 0.00668
+2025-12-28 18:09:00 - Epoch 69 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:09:08 - Epoch 70 - Train Summary | Speed: 4.59 it/s, Loss: 0.00897
+2025-12-28 18:09:10 - Epoch 70 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:09:18 - Epoch 71 - Train Summary | Speed: 4.54 it/s, Loss: 0.02322
+2025-12-28 18:09:19 - Epoch 71 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:09:27 - Epoch 72 - Train Summary | Speed: 4.04 it/s, Loss: 0.01671
+2025-12-28 18:09:29 - Epoch 72 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:09:38 - Epoch 73 - Train Summary | Speed: 4.07 it/s, Loss: 0.01484
+2025-12-28 18:09:39 - Epoch 73 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:09:47 - Epoch 74 - Train Summary | Speed: 4.60 it/s, Loss: 0.00577
+2025-12-28 18:09:48 - Epoch 74 | Val Acc: 0.96212, P: 0.98810, R: 0.95402, F1: 0.97076
+2025-12-28 18:09:57 - Epoch 75 - Train Summary | Speed: 4.49 it/s, Loss: 0.00287
+2025-12-28 18:09:59 - Epoch 75 | Val Acc: 0.94697, P: 1.00000, R: 0.91954, F1: 0.95808
+2025-12-28 18:10:07 - Epoch 76 - Train Summary | Speed: 3.84 it/s, Loss: 0.00246
+2025-12-28 18:10:09 - Epoch 76 | Val Acc: 0.93939, P: 0.98765, R: 0.91954, F1: 0.95238
+2025-12-28 18:10:17 - Epoch 77 - Train Summary | Speed: 4.25 it/s, Loss: 0.00554
+2025-12-28 18:10:19 - Epoch 77 | Val Acc: 0.95455, P: 0.98795, R: 0.94253, F1: 0.96471
+2025-12-28 18:10:26 - Epoch 78 - Train Summary | Speed: 4.64 it/s, Loss: 0.00904
+2025-12-28 18:10:27 - Epoch 78 | Val Acc: 0.95455, P: 0.98795, R: 0.94253, F1: 0.96471
+2025-12-28 18:10:36 - Epoch 79 - Train Summary | Speed: 4.22 it/s, Loss: 0.02447
+2025-12-28 18:10:37 - Epoch 79 | Val Acc: 0.95455, P: 0.98795, R: 0.94253, F1: 0.96471
+2025-12-28 18:10:45 - Epoch 80 - Train Summary | Speed: 3.87 it/s, Loss: 0.01048
+2025-12-28 18:10:47 - Epoch 80 | Val Acc: 0.95455, P: 0.98795, R: 0.94253, F1: 0.96471
+2025-12-28 18:10:54 - Epoch 81 - Train Summary | Speed: 4.59 it/s, Loss: 0.01977
+2025-12-28 18:10:55 - Epoch 81 | Val Acc: 0.91667, P: 0.88776, R: 1.00000, F1: 0.94054
+2025-12-28 18:11:04 - Epoch 82 - Train Summary | Speed: 4.15 it/s, Loss: 0.00580
+2025-12-28 18:11:05 - Epoch 82 | Val Acc: 0.93182, P: 0.98750, R: 0.90805, F1: 0.94611
+2025-12-28 18:11:14 - Epoch 83 - Train Summary | Speed: 3.97 it/s, Loss: 0.00731
+2025-12-28 18:11:15 - Epoch 83 | Val Acc: 0.93182, P: 0.98750, R: 0.90805, F1: 0.94611
+2025-12-28 18:11:23 - Epoch 84 - Train Summary | Speed: 4.65 it/s, Loss: 0.02278
+2025-12-28 18:11:24 - Epoch 84 | Val Acc: 0.93939, P: 0.97590, R: 0.93103, F1: 0.95294
+2025-12-28 18:11:25 -    -> Early stopping.
+2025-12-28 18:11:25 - --- Starting Fold 4/5 ---
+2025-12-28 18:11:32 - Epoch 1 - Train Summary | Speed: 4.65 it/s, Loss: 0.05091
+2025-12-28 18:11:33 - Epoch 1 | Val Acc: 0.34091, P: 0.00000, R: 0.00000, F1: 0.00000
+2025-12-28 18:11:42 - Epoch 2 - Train Summary | Speed: 4.29 it/s, Loss: 0.05369
+2025-12-28 18:11:43 - Epoch 2 | Val Acc: 0.84848, P: 0.95890, R: 0.80460, F1: 0.87500
+2025-12-28 18:11:43 -    -> New best model saved with F1: 0.87500
+2025-12-28 18:11:52 - Epoch 3 - Train Summary | Speed: 3.88 it/s, Loss: 0.02838
+2025-12-28 18:11:53 - Epoch 3 | Val Acc: 0.80303, P: 0.91781, R: 0.77011, F1: 0.83750
+2025-12-28 18:12:03 - Epoch 4 - Train Summary | Speed: 4.02 it/s, Loss: 0.05390
+2025-12-28 18:12:06 - Epoch 4 | Val Acc: 0.80303, P: 0.94203, R: 0.74713, F1: 0.83333
+2025-12-28 18:12:14 - Epoch 5 - Train Summary | Speed: 4.38 it/s, Loss: 0.02658
+2025-12-28 18:12:15 - Epoch 5 | Val Acc: 0.87121, P: 0.97297, R: 0.82759, F1: 0.89441
+2025-12-28 18:12:16 -    -> New best model saved with F1: 0.89441
+2025-12-28 18:12:24 - Epoch 6 - Train Summary | Speed: 3.84 it/s, Loss: 0.06165
+2025-12-28 18:12:26 - Epoch 6 | Val Acc: 0.87879, P: 0.97333, R: 0.83908, F1: 0.90123
+2025-12-28 18:12:26 -    -> New best model saved with F1: 0.90123
+2025-12-28 18:12:34 - Epoch 7 - Train Summary | Speed: 4.04 it/s, Loss: 0.05933
+2025-12-28 18:12:36 - Epoch 7 | Val Acc: 0.84091, P: 1.00000, R: 0.75862, F1: 0.86275
+2025-12-28 18:12:43 - Epoch 8 - Train Summary | Speed: 4.56 it/s, Loss: 0.02753
+2025-12-28 18:12:45 - Epoch 8 | Val Acc: 0.89394, P: 0.97403, R: 0.86207, F1: 0.91463
+2025-12-28 18:12:45 -    -> New best model saved with F1: 0.91463
+2025-12-28 18:12:53 - Epoch 9 - Train Summary | Speed: 4.67 it/s, Loss: 0.02640
+2025-12-28 18:12:54 - Epoch 9 | Val Acc: 0.91667, P: 0.97500, R: 0.89655, F1: 0.93413
+2025-12-28 18:12:55 -    -> New best model saved with F1: 0.93413
+2025-12-28 18:13:03 - Epoch 10 - Train Summary | Speed: 4.39 it/s, Loss: 0.03386
+2025-12-28 18:13:04 - Epoch 10 | Val Acc: 0.88636, P: 0.98649, R: 0.83908, F1: 0.90683
+2025-12-28 18:13:13 - Epoch 11 - Train Summary | Speed: 3.79 it/s, Loss: 0.06575
+2025-12-28 18:13:14 - Epoch 11 | Val Acc: 0.84848, P: 0.86813, R: 0.90805, F1: 0.88764
+2025-12-28 18:13:21 - Epoch 12 - Train Summary | Speed: 4.61 it/s, Loss: 0.04970
+2025-12-28 18:13:23 - Epoch 12 | Val Acc: 0.91667, P: 0.96341, R: 0.90805, F1: 0.93491
+2025-12-28 18:13:26 -    -> New best model saved with F1: 0.93491
+2025-12-28 18:13:33 - Epoch 13 - Train Summary | Speed: 4.62 it/s, Loss: 0.04214
+2025-12-28 18:13:34 - Epoch 13 | Val Acc: 0.90909, P: 0.98701, R: 0.87356, F1: 0.92683
+2025-12-28 18:13:42 - Epoch 14 - Train Summary | Speed: 4.28 it/s, Loss: 0.02437
+2025-12-28 18:13:44 - Epoch 14 | Val Acc: 0.93182, P: 0.97561, R: 0.91954, F1: 0.94675
+2025-12-28 18:13:44 -    -> New best model saved with F1: 0.94675
+2025-12-28 18:13:52 - Epoch 15 - Train Summary | Speed: 3.88 it/s, Loss: 0.01920
+2025-12-28 18:13:53 - Epoch 15 | Val Acc: 0.94697, P: 0.93478, R: 0.98851, F1: 0.96089
+2025-12-28 18:13:54 -    -> New best model saved with F1: 0.96089
+2025-12-28 18:14:01 - Epoch 16 - Train Summary | Speed: 4.64 it/s, Loss: 0.02567
+2025-12-28 18:14:02 - Epoch 16 | Val Acc: 0.89394, P: 1.00000, R: 0.83908, F1: 0.91250
+2025-12-28 18:14:11 - Epoch 17 - Train Summary | Speed: 4.50 it/s, Loss: 0.02249
+2025-12-28 18:14:12 - Epoch 17 | Val Acc: 0.93182, P: 1.00000, R: 0.89655, F1: 0.94545
+2025-12-28 18:14:20 - Epoch 18 - Train Summary | Speed: 3.95 it/s, Loss: 0.02792
+2025-12-28 18:14:21 - Epoch 18 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:14:29 - Epoch 19 - Train Summary | Speed: 4.57 it/s, Loss: 0.03254
+2025-12-28 18:14:31 - Epoch 19 | Val Acc: 0.93939, P: 1.00000, R: 0.90805, F1: 0.95181
+2025-12-28 18:14:38 - Epoch 20 - Train Summary | Speed: 4.60 it/s, Loss: 0.02055
+2025-12-28 18:14:39 - Epoch 20 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:14:48 - Epoch 21 - Train Summary | Speed: 4.03 it/s, Loss: 0.02505
+2025-12-28 18:14:49 - Epoch 21 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:14:58 - Epoch 22 - Train Summary | Speed: 4.00 it/s, Loss: 0.01845
+2025-12-28 18:14:59 - Epoch 22 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:15:06 - Epoch 23 - Train Summary | Speed: 4.64 it/s, Loss: 0.03729
+2025-12-28 18:15:08 - Epoch 23 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:15:16 - Epoch 24 - Train Summary | Speed: 4.40 it/s, Loss: 0.01516
+2025-12-28 18:15:17 - Epoch 24 | Val Acc: 0.90152, P: 0.98684, R: 0.86207, F1: 0.92025
+2025-12-28 18:15:25 - Epoch 25 - Train Summary | Speed: 3.81 it/s, Loss: 0.01777
+2025-12-28 18:15:27 - Epoch 25 | Val Acc: 0.93182, P: 0.97561, R: 0.91954, F1: 0.94675
+2025-12-28 18:15:34 - Epoch 26 - Train Summary | Speed: 4.62 it/s, Loss: 0.02109
+2025-12-28 18:15:35 - Epoch 26 | Val Acc: 0.96212, P: 0.98810, R: 0.95402, F1: 0.97076
+2025-12-28 18:15:36 -    -> New best model saved with F1: 0.97076
+2025-12-28 18:15:44 - Epoch 27 - Train Summary | Speed: 3.93 it/s, Loss: 0.04403
+2025-12-28 18:15:46 - Epoch 27 | Val Acc: 0.95455, P: 1.00000, R: 0.93103, F1: 0.96429
+2025-12-28 18:15:54 - Epoch 28 - Train Summary | Speed: 4.17 it/s, Loss: 0.01200
+2025-12-28 18:15:55 - Epoch 28 | Val Acc: 0.95455, P: 0.98795, R: 0.94253, F1: 0.96471
+2025-12-28 18:16:03 - Epoch 29 - Train Summary | Speed: 4.19 it/s, Loss: 0.02688
+2025-12-28 18:16:05 - Epoch 29 | Val Acc: 0.94697, P: 1.00000, R: 0.91954, F1: 0.95808
+2025-12-28 18:16:12 - Epoch 30 - Train Summary | Speed: 4.59 it/s, Loss: 0.02298
+2025-12-28 18:16:14 - Epoch 30 | Val Acc: 0.94697, P: 1.00000, R: 0.91954, F1: 0.95808
+2025-12-28 18:16:22 - Epoch 31 - Train Summary | Speed: 4.44 it/s, Loss: 0.01655
+2025-12-28 18:16:24 - Epoch 31 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:16:33 - Epoch 32 - Train Summary | Speed: 4.06 it/s, Loss: 0.02597
+2025-12-28 18:16:35 - Epoch 32 | Val Acc: 0.90152, P: 1.00000, R: 0.85057, F1: 0.91925
+2025-12-28 18:16:42 - Epoch 33 - Train Summary | Speed: 4.37 it/s, Loss: 0.02114
+2025-12-28 18:16:45 - Epoch 33 | Val Acc: 0.97727, P: 1.00000, R: 0.96552, F1: 0.98246
+2025-12-28 18:16:46 -    -> New best model saved with F1: 0.98246
+2025-12-28 18:16:53 - Epoch 34 - Train Summary | Speed: 4.66 it/s, Loss: 0.02406
+2025-12-28 18:16:54 - Epoch 34 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:17:02 - Epoch 35 - Train Summary | Speed: 4.48 it/s, Loss: 0.02049
+2025-12-28 18:17:04 - Epoch 35 | Val Acc: 0.98485, P: 1.00000, R: 0.97701, F1: 0.98837
+2025-12-28 18:17:04 -    -> New best model saved with F1: 0.98837
+2025-12-28 18:17:12 - Epoch 36 - Train Summary | Speed: 3.83 it/s, Loss: 0.02321
+2025-12-28 18:17:14 - Epoch 36 | Val Acc: 0.90909, P: 1.00000, R: 0.86207, F1: 0.92593
+2025-12-28 18:17:22 - Epoch 37 - Train Summary | Speed: 4.43 it/s, Loss: 0.02930
+2025-12-28 18:17:24 - Epoch 37 | Val Acc: 0.98485, P: 0.98851, R: 0.98851, F1: 0.98851
+2025-12-28 18:17:24 -    -> New best model saved with F1: 0.98851
+2025-12-28 18:17:32 - Epoch 38 - Train Summary | Speed: 4.64 it/s, Loss: 0.05558
+2025-12-28 18:17:33 - Epoch 38 | Val Acc: 0.98485, P: 0.97753, R: 1.00000, F1: 0.98864
+2025-12-28 18:17:33 -    -> New best model saved with F1: 0.98864
+2025-12-28 18:17:41 - Epoch 39 - Train Summary | Speed: 4.31 it/s, Loss: 0.01091
+2025-12-28 18:17:42 - Epoch 39 | Val Acc: 0.96970, P: 1.00000, R: 0.95402, F1: 0.97647
+2025-12-28 18:17:51 - Epoch 40 - Train Summary | Speed: 3.91 it/s, Loss: 0.02184
+2025-12-28 18:17:52 - Epoch 40 | Val Acc: 0.96970, P: 1.00000, R: 0.95402, F1: 0.97647
+2025-12-28 18:17:59 - Epoch 41 - Train Summary | Speed: 4.58 it/s, Loss: 0.05610
+2025-12-28 18:18:01 - Epoch 41 | Val Acc: 0.95455, P: 0.97647, R: 0.95402, F1: 0.96512
+2025-12-28 18:18:09 - Epoch 42 - Train Summary | Speed: 4.31 it/s, Loss: 0.05592
+2025-12-28 18:18:10 - Epoch 42 | Val Acc: 0.96970, P: 0.98824, R: 0.96552, F1: 0.97674
+2025-12-28 18:18:19 - Epoch 43 - Train Summary | Speed: 3.96 it/s, Loss: 0.03184
+2025-12-28 18:18:20 - Epoch 43 | Val Acc: 0.87121, P: 1.00000, R: 0.80460, F1: 0.89172
+2025-12-28 18:18:27 - Epoch 44 - Train Summary | Speed: 4.68 it/s, Loss: 0.04538
+2025-12-28 18:18:29 - Epoch 44 | Val Acc: 0.94697, P: 0.96512, R: 0.95402, F1: 0.95954
+2025-12-28 18:18:38 - Epoch 45 - Train Summary | Speed: 4.66 it/s, Loss: 0.01685
+2025-12-28 18:18:39 - Epoch 45 | Val Acc: 0.94697, P: 1.00000, R: 0.91954, F1: 0.95808
+2025-12-28 18:18:47 - Epoch 46 - Train Summary | Speed: 4.37 it/s, Loss: 0.01117
+2025-12-28 18:18:49 - Epoch 46 | Val Acc: 0.95455, P: 0.98795, R: 0.94253, F1: 0.96471
+2025-12-28 18:18:58 - Epoch 47 - Train Summary | Speed: 3.79 it/s, Loss: 0.03239
+2025-12-28 18:18:59 - Epoch 47 | Val Acc: 0.93939, P: 1.00000, R: 0.90805, F1: 0.95181
+2025-12-28 18:19:06 - Epoch 48 - Train Summary | Speed: 4.68 it/s, Loss: 0.02394
+2025-12-28 18:19:07 - Epoch 48 | Val Acc: 0.94697, P: 0.98780, R: 0.93103, F1: 0.95858
+2025-12-28 18:19:17 - Epoch 49 - Train Summary | Speed: 4.58 it/s, Loss: 0.01177
+2025-12-28 18:19:18 - Epoch 49 | Val Acc: 0.96970, P: 0.98824, R: 0.96552, F1: 0.97674
+2025-12-28 18:19:27 - Epoch 50 - Train Summary | Speed: 4.17 it/s, Loss: 0.02529
+2025-12-28 18:19:28 - Epoch 50 | Val Acc: 0.97727, P: 0.98837, R: 0.97701, F1: 0.98266
+2025-12-28 18:19:37 - Epoch 51 - Train Summary | Speed: 3.81 it/s, Loss: 0.01138
+2025-12-28 18:19:38 - Epoch 51 | Val Acc: 0.96970, P: 1.00000, R: 0.95402, F1: 0.97647
+2025-12-28 18:19:46 - Epoch 52 - Train Summary | Speed: 4.65 it/s, Loss: 0.00762
+2025-12-28 18:19:47 - Epoch 52 | Val Acc: 0.95455, P: 0.96552, R: 0.96552, F1: 0.96552
+2025-12-28 18:19:55 - Epoch 53 - Train Summary | Speed: 4.49 it/s, Loss: 0.02494
+2025-12-28 18:19:56 - Epoch 53 | Val Acc: 0.95455, P: 0.96552, R: 0.96552, F1: 0.96552
+2025-12-28 18:20:05 - Epoch 54 - Train Summary | Speed: 3.93 it/s, Loss: 0.02595
+2025-12-28 18:20:06 - Epoch 54 | Val Acc: 0.94697, P: 0.97619, R: 0.94253, F1: 0.95906
+2025-12-28 18:20:14 - Epoch 55 - Train Summary | Speed: 4.51 it/s, Loss: 0.00560
+2025-12-28 18:20:16 - Epoch 55 | Val Acc: 0.91667, P: 1.00000, R: 0.87356, F1: 0.93252
+2025-12-28 18:20:24 - Epoch 56 - Train Summary | Speed: 4.56 it/s, Loss: 0.03554
+2025-12-28 18:20:25 - Epoch 56 | Val Acc: 0.97727, P: 1.00000, R: 0.96552, F1: 0.98246
+2025-12-28 18:20:34 - Epoch 57 - Train Summary | Speed: 4.14 it/s, Loss: 0.00779
+2025-12-28 18:20:35 - Epoch 57 | Val Acc: 0.98485, P: 1.00000, R: 0.97701, F1: 0.98837
+2025-12-28 18:20:43 - Epoch 58 - Train Summary | Speed: 4.01 it/s, Loss: 0.02044
+2025-12-28 18:20:45 - Epoch 58 | Val Acc: 0.97727, P: 1.00000, R: 0.96552, F1: 0.98246
+2025-12-28 18:20:45 -    -> Early stopping.
+2025-12-28 17:56:52 - --- Starting Fold 5/5 ---
+2025-12-28 17:57:16 - Epoch 1 - Train Summary | Speed: 2.94 it/s, Loss: 0.05373
+2025-12-28 17:57:17 - Epoch 1 | Val Acc: 0.34848, P: 0.00000, R: 0.00000, F1: 0.00000
+2025-12-28 17:57:25 - Epoch 2 - Train Summary | Speed: 4.42 it/s, Loss: 0.03416
+2025-12-28 17:57:27 - Epoch 2 | Val Acc: 0.83333, P: 0.98485, R: 0.75581, F1: 0.85526
+2025-12-28 17:57:27 -    -> New best model saved with F1: 0.85526
+2025-12-28 17:57:35 - Epoch 3 - Train Summary | Speed: 3.92 it/s, Loss: 0.10858
+2025-12-28 17:57:36 - Epoch 3 | Val Acc: 0.89394, P: 0.98649, R: 0.84884, F1: 0.91250
+2025-12-28 17:57:37 -    -> New best model saved with F1: 0.91250
+2025-12-28 17:57:44 - Epoch 4 - Train Summary | Speed: 4.80 it/s, Loss: 0.04113
+2025-12-28 17:57:45 - Epoch 4 | Val Acc: 0.86364, P: 1.00000, R: 0.79070, F1: 0.88312
+2025-12-28 17:57:54 - Epoch 5 - Train Summary | Speed: 3.64 it/s, Loss: 0.08451
+2025-12-28 17:57:56 - Epoch 5 | Val Acc: 0.90152, P: 0.93976, R: 0.90698, F1: 0.92308
+2025-12-28 17:57:56 -    -> New best model saved with F1: 0.92308
+2025-12-28 17:58:05 - Epoch 6 - Train Summary | Speed: 3.79 it/s, Loss: 0.02501
+2025-12-28 17:58:06 - Epoch 6 | Val Acc: 0.86364, P: 0.98571, R: 0.80233, F1: 0.88462
+2025-12-28 17:58:14 - Epoch 7 - Train Summary | Speed: 4.57 it/s, Loss: 0.02675
+2025-12-28 17:58:15 - Epoch 7 | Val Acc: 0.89394, P: 0.96154, R: 0.87209, F1: 0.91463
+2025-12-28 17:58:23 - Epoch 8 - Train Summary | Speed: 4.83 it/s, Loss: 0.02336
+2025-12-28 17:58:24 - Epoch 8 | Val Acc: 0.90152, P: 0.96203, R: 0.88372, F1: 0.92121
+2025-12-28 17:58:33 - Epoch 9 - Train Summary | Speed: 4.37 it/s, Loss: 0.03531
+2025-12-28 17:58:34 - Epoch 9 | Val Acc: 0.90909, P: 0.97436, R: 0.88372, F1: 0.92683
+2025-12-28 17:58:35 -    -> New best model saved with F1: 0.92683
+2025-12-28 17:58:43 - Epoch 10 - Train Summary | Speed: 3.90 it/s, Loss: 0.02923
+2025-12-28 17:58:45 - Epoch 10 | Val Acc: 0.89394, P: 0.97368, R: 0.86047, F1: 0.91358
+2025-12-28 17:58:52 - Epoch 11 - Train Summary | Speed: 4.84 it/s, Loss: 0.04108
+2025-12-28 17:58:54 - Epoch 11 | Val Acc: 0.78030, P: 0.75676, R: 0.97674, F1: 0.85279
+2025-12-28 17:59:03 - Epoch 12 - Train Summary | Speed: 4.78 it/s, Loss: 0.03987
+2025-12-28 17:59:04 - Epoch 12 | Val Acc: 0.86364, P: 1.00000, R: 0.79070, F1: 0.88312
+2025-12-28 17:59:13 - Epoch 13 - Train Summary | Speed: 4.52 it/s, Loss: 0.03144
+2025-12-28 17:59:14 - Epoch 13 | Val Acc: 0.86364, P: 1.00000, R: 0.79070, F1: 0.88312
+2025-12-28 17:59:23 - Epoch 14 - Train Summary | Speed: 3.79 it/s, Loss: 0.01822
+2025-12-28 17:59:24 - Epoch 14 | Val Acc: 0.86364, P: 1.00000, R: 0.79070, F1: 0.88312
+2025-12-28 17:59:32 - Epoch 15 - Train Summary | Speed: 4.76 it/s, Loss: 0.04663
+2025-12-28 17:59:34 - Epoch 15 | Val Acc: 0.88636, P: 0.98630, R: 0.83721, F1: 0.90566
+2025-12-28 17:59:43 - Epoch 16 - Train Summary | Speed: 4.74 it/s, Loss: 0.01773
+2025-12-28 17:59:44 - Epoch 16 | Val Acc: 0.87879, P: 0.98611, R: 0.82558, F1: 0.89873
+2025-12-28 17:59:53 - Epoch 17 - Train Summary | Speed: 4.43 it/s, Loss: 0.03650
+2025-12-28 17:59:54 - Epoch 17 | Val Acc: 0.89394, P: 0.98649, R: 0.84884, F1: 0.91250
+2025-12-28 18:00:02 - Epoch 18 - Train Summary | Speed: 4.05 it/s, Loss: 0.03746
+2025-12-28 18:00:03 - Epoch 18 | Val Acc: 0.89394, P: 0.98649, R: 0.84884, F1: 0.91250
+2025-12-28 18:00:11 - Epoch 19 - Train Summary | Speed: 4.77 it/s, Loss: 0.00899
+2025-12-28 18:00:13 - Epoch 19 | Val Acc: 0.92424, P: 0.98718, R: 0.89535, F1: 0.93902
+2025-12-28 18:00:13 -    -> New best model saved with F1: 0.93902
+2025-12-28 18:00:21 - Epoch 20 - Train Summary | Speed: 4.68 it/s, Loss: 0.01701
+2025-12-28 18:00:22 - Epoch 20 | Val Acc: 0.93182, P: 0.98734, R: 0.90698, F1: 0.94545
+2025-12-28 18:00:22 -    -> New best model saved with F1: 0.94545
+2025-12-28 18:00:30 - Epoch 21 - Train Summary | Speed: 4.08 it/s, Loss: 0.03439
+2025-12-28 18:00:31 - Epoch 21 | Val Acc: 0.87879, P: 1.00000, R: 0.81395, F1: 0.89744
+2025-12-28 18:00:39 - Epoch 22 - Train Summary | Speed: 4.75 it/s, Loss: 0.04223
+2025-12-28 18:00:41 - Epoch 22 | Val Acc: 0.88636, P: 1.00000, R: 0.82558, F1: 0.90446
+2025-12-28 18:00:49 - Epoch 23 - Train Summary | Speed: 4.76 it/s, Loss: 0.02707
+2025-12-28 18:00:50 - Epoch 23 | Val Acc: 0.87121, P: 1.00000, R: 0.80233, F1: 0.89032
+2025-12-28 18:00:58 - Epoch 24 - Train Summary | Speed: 4.35 it/s, Loss: 0.03081
+2025-12-28 18:00:59 - Epoch 24 | Val Acc: 0.90152, P: 1.00000, R: 0.84884, F1: 0.91824
+2025-12-28 18:01:07 - Epoch 25 - Train Summary | Speed: 4.11 it/s, Loss: 0.02929
+2025-12-28 18:01:09 - Epoch 25 | Val Acc: 0.92424, P: 0.98718, R: 0.89535, F1: 0.93902
+2025-12-28 18:01:16 - Epoch 26 - Train Summary | Speed: 4.76 it/s, Loss: 0.01455
+2025-12-28 18:01:17 - Epoch 26 | Val Acc: 0.90909, P: 1.00000, R: 0.86047, F1: 0.92500
+2025-12-28 18:01:25 - Epoch 27 - Train Summary | Speed: 4.31 it/s, Loss: 0.03627
+2025-12-28 18:01:27 - Epoch 27 | Val Acc: 0.93939, P: 0.98750, R: 0.91860, F1: 0.95181
+2025-12-28 18:01:27 -    -> New best model saved with F1: 0.95181
+2025-12-28 18:01:35 - Epoch 28 - Train Summary | Speed: 3.91 it/s, Loss: 0.02038
+2025-12-28 18:01:36 - Epoch 28 | Val Acc: 0.93182, P: 0.98734, R: 0.90698, F1: 0.94545
+2025-12-28 18:01:44 - Epoch 29 - Train Summary | Speed: 4.65 it/s, Loss: 0.01323
+2025-12-28 18:01:45 - Epoch 29 | Val Acc: 0.92424, P: 1.00000, R: 0.88372, F1: 0.93827
+2025-12-28 18:01:54 - Epoch 30 - Train Summary | Speed: 3.91 it/s, Loss: 0.02749
+2025-12-28 18:01:55 - Epoch 30 | Val Acc: 0.93182, P: 0.98734, R: 0.90698, F1: 0.94545
+2025-12-28 18:02:03 - Epoch 31 - Train Summary | Speed: 4.06 it/s, Loss: 0.04479
+2025-12-28 18:02:04 - Epoch 31 | Val Acc: 0.90909, P: 0.98684, R: 0.87209, F1: 0.92593
+2025-12-28 18:02:11 - Epoch 32 - Train Summary | Speed: 4.79 it/s, Loss: 0.06712
+2025-12-28 18:02:13 - Epoch 32 | Val Acc: 0.90152, P: 0.98667, R: 0.86047, F1: 0.91925
+2025-12-28 18:02:21 - Epoch 33 - Train Summary | Speed: 4.75 it/s, Loss: 0.03044
+2025-12-28 18:02:22 - Epoch 33 | Val Acc: 0.88636, P: 1.00000, R: 0.82558, F1: 0.90446
+2025-12-28 18:02:30 - Epoch 34 - Train Summary | Speed: 4.09 it/s, Loss: 0.02849
+2025-12-28 18:02:31 - Epoch 34 | Val Acc: 0.95455, P: 0.97619, R: 0.95349, F1: 0.96471
+2025-12-28 18:02:31 -    -> New best model saved with F1: 0.96471
+2025-12-28 18:02:39 - Epoch 35 - Train Summary | Speed: 4.53 it/s, Loss: 0.02413
+2025-12-28 18:02:41 - Epoch 35 | Val Acc: 0.96970, P: 0.96591, R: 0.98837, F1: 0.97701
+2025-12-28 18:02:41 -    -> New best model saved with F1: 0.97701
+2025-12-28 18:02:48 - Epoch 36 - Train Summary | Speed: 4.84 it/s, Loss: 0.01606
+2025-12-28 18:02:49 - Epoch 36 | Val Acc: 0.90909, P: 0.98684, R: 0.87209, F1: 0.92593
+2025-12-28 18:02:57 - Epoch 37 - Train Summary | Speed: 4.35 it/s, Loss: 0.02584
+2025-12-28 18:02:59 - Epoch 37 | Val Acc: 0.94697, P: 0.98765, R: 0.93023, F1: 0.95808
+2025-12-28 18:03:07 - Epoch 38 - Train Summary | Speed: 4.10 it/s, Loss: 0.02843
+2025-12-28 18:03:08 - Epoch 38 | Val Acc: 0.91667, P: 0.98701, R: 0.88372, F1: 0.93252
+2025-12-28 18:03:15 - Epoch 39 - Train Summary | Speed: 4.79 it/s, Loss: 0.02314
+2025-12-28 18:03:17 - Epoch 39 | Val Acc: 0.94697, P: 0.98765, R: 0.93023, F1: 0.95808
+2025-12-28 18:03:25 - Epoch 40 - Train Summary | Speed: 4.28 it/s, Loss: 0.01550
+2025-12-28 18:03:26 - Epoch 40 | Val Acc: 0.93939, P: 0.98750, R: 0.91860, F1: 0.95181
+2025-12-28 18:03:34 - Epoch 41 - Train Summary | Speed: 3.90 it/s, Loss: 0.02034
+2025-12-28 18:03:35 - Epoch 41 | Val Acc: 0.90909, P: 1.00000, R: 0.86047, F1: 0.92500
+2025-12-28 18:03:43 - Epoch 42 - Train Summary | Speed: 4.77 it/s, Loss: 0.01096
+2025-12-28 18:03:44 - Epoch 42 | Val Acc: 0.94697, P: 0.98765, R: 0.93023, F1: 0.95808
+2025-12-28 18:03:53 - Epoch 43 - Train Summary | Speed: 4.69 it/s, Loss: 0.02606
+2025-12-28 18:03:54 - Epoch 43 | Val Acc: 0.87879, P: 0.97297, R: 0.83721, F1: 0.90000
+2025-12-28 18:04:04 - Epoch 44 - Train Summary | Speed: 3.95 it/s, Loss: 0.05684
+2025-12-28 18:04:05 - Epoch 44 | Val Acc: 0.93939, P: 0.98750, R: 0.91860, F1: 0.95181
+2025-12-28 18:04:13 - Epoch 45 - Train Summary | Speed: 4.42 it/s, Loss: 0.00613
+2025-12-28 18:04:15 - Epoch 45 | Val Acc: 0.93939, P: 0.93333, R: 0.97674, F1: 0.95455
+2025-12-28 18:04:23 - Epoch 46 - Train Summary | Speed: 4.75 it/s, Loss: 0.01776
+2025-12-28 18:04:24 - Epoch 46 | Val Acc: 0.94697, P: 0.96471, R: 0.95349, F1: 0.95906
+2025-12-28 18:04:33 - Epoch 47 - Train Summary | Speed: 4.04 it/s, Loss: 0.00611
+2025-12-28 18:04:34 - Epoch 47 | Val Acc: 0.94697, P: 0.96471, R: 0.95349, F1: 0.95906
+2025-12-28 18:04:42 - Epoch 48 - Train Summary | Speed: 3.90 it/s, Loss: 0.01338
+2025-12-28 18:04:43 - Epoch 48 | Val Acc: 0.95455, P: 0.97619, R: 0.95349, F1: 0.96471
+2025-12-28 18:04:50 - Epoch 49 - Train Summary | Speed: 4.77 it/s, Loss: 0.01849
+2025-12-28 18:04:52 - Epoch 49 | Val Acc: 0.96212, P: 0.98795, R: 0.95349, F1: 0.97041
+2025-12-28 18:05:00 - Epoch 50 - Train Summary | Speed: 4.23 it/s, Loss: 0.03082
+2025-12-28 18:05:01 - Epoch 50 | Val Acc: 0.96212, P: 0.98795, R: 0.95349, F1: 0.97041
+2025-12-28 18:05:09 - Epoch 51 - Train Summary | Speed: 4.05 it/s, Loss: 0.00660
+2025-12-28 18:05:10 - Epoch 51 | Val Acc: 0.94697, P: 0.94382, R: 0.97674, F1: 0.96000
+2025-12-28 18:05:18 - Epoch 52 - Train Summary | Speed: 4.79 it/s, Loss: 0.06663
+2025-12-28 18:05:19 - Epoch 52 | Val Acc: 0.94697, P: 0.94382, R: 0.97674, F1: 0.96000
+2025-12-28 18:05:28 - Epoch 53 - Train Summary | Speed: 4.75 it/s, Loss: 0.02860
+2025-12-28 18:05:30 - Epoch 53 | Val Acc: 0.93182, P: 1.00000, R: 0.89535, F1: 0.94479
+2025-12-28 18:05:38 - Epoch 54 - Train Summary | Speed: 4.45 it/s, Loss: 0.01334
+2025-12-28 18:05:39 - Epoch 54 | Val Acc: 0.96212, P: 0.98795, R: 0.95349, F1: 0.97041
+2025-12-28 18:05:47 - Epoch 55 - Train Summary | Speed: 4.21 it/s, Loss: 0.01118
+2025-12-28 18:05:48 - Epoch 55 | Val Acc: 0.94697, P: 1.00000, R: 0.91860, F1: 0.95758
+2025-12-28 18:05:48 -    -> Early stopping.
+
+2025-12-28 18:05:48 -
+2025-12-28 18:05:48 - --- K-Fold Training Finished ---
+2025-12-28 18:05:48 - Fold F1 Scores: [0.95858, 0.93642, 0.97674, 0.98864, 0.97701]
+2025-12-28 18:05:48 - Average F1-Score: 0.96748 ± 0.01827
+2025-12-28 18:05:48 - --- Finished Training: BASELINE ---
