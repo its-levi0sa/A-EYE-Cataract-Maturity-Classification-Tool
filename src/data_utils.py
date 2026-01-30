@@ -1,3 +1,42 @@
+"""
+Program Title: data_utils.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  Found in `src/`. This is a helper file that `train.py` and `evaluate.py`
+  both use. It handles loading the images and making sure they are processed
+  correctly.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To implement BSRDA augmentation pipeline. It defines how the images are load
+  and what specific augmentations (like distortions or CLAHE) get applied.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    A.Compose: A list of augmentations from the Albumentations library.
+    AlbumentationsDataset: Class that connects the raw image files to PyTorch.
+
+  Algorithms:
+    CLAHE: Use this to fix lighting issues in the images (Contrast Limited
+      Adaptive Histogram Equalization).
+    Semantic Augmentation: The specific mix of distortions and cutouts
+      to simulate cataract irregularities.
+
+  Control:
+    Mode Switching: The code checks if `is_train` is True or False. If True,
+      it applies the heavy augmentations. If False, it just resizes and
+      normalizes the image.
+"""
+
 import cv2
 import torch
 import numpy as np

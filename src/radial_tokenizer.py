@@ -1,3 +1,47 @@
+"""
+Program Title: radial_tokenizer.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  Found in the `src/` folder. This is the first thing that happens to the image
+  inside the model. It takes the raw image and converts it into "tokens" based
+  on the concentric rings defined.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To split the pupil image into concentric rings (4, 8, or 16) and calculate
+  stats for each ring. This is the code that actually implements the
+  "Radial-Aware" part of the study.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    ring_masks (Tensor): Save the mask shapes here so there is no need
+      re-calculate the circles for every single image.
+    tokens (Tensor): The final output that holds the stats (mean, std, median)
+      for each ring.
+
+  Algorithms:
+    Distance Grid: Use grid calculation to figure out how far every pixel
+      is from the center, which tells which ring it belongs to.
+    Statistical Pooling: Calculate the Mean, Standard Deviation, and Median
+      for the pixels inside each ring.
+    Deterministic Median: Calculate the median on the CPU because the GPU
+      version can be a bit random, so as to achieve reproducible results.
+
+  Control:
+    Input Validation: It stops the program if try to use an invalid number of
+      rings (only 4, 8, or 16 allowed).
+    Device Handling: Moves data between GPU and CPU automatically when needed.
+"""
+
 import torch
 import torch.nn as nn
 

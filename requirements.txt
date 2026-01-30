@@ -1,3 +1,41 @@
+# Program Title: requirements.txt
+#
+# Programmers:
+#   Albonia, Jade Lorenz M.
+#   Caspe, Mark Vincent G.
+#   Rivera, Rei Djemf M.
+#   Velante, Kamilah Kaye M.
+#   Villegas, Jedidiah S.
+#
+# Where the program fits in the general system design:
+#   Located in the root directory. This is the setup file. Anyone who wants to
+#   run the code (on Colab or their local machine) needs to run this first
+#   to get the correct libraries.
+#
+# Date Written: July 2025
+# Date Revised: December 2025
+#
+# Purpose:
+#   To ensure reproducibility. It lists every external library the system relies
+#   on so that the model produces the exact same results on any machine.
+#
+# Data Structures, Algorithms, and Control:
+#   Core Dependencies:
+#     torch & torchvision: The backbone for all the Deep Learning models.
+#
+#   Data Processing:
+#     albumentations==1.1.0: Pinned this specific version because the
+#       BSRDA pipeline relies on syntax that changed in newer versions.
+#     opencv-python-headless: Chose the headless version because as this is
+#       run on Google Colab/Cloud servers where there is no screen/GUI.
+#       Standard opencv often crashes in those environments.
+#
+#   Analysis Tools:
+#     thop: The library used to calculate the GFLOPs and prove the A-EYE
+#       efficiency in the thesis.
+#     scikit-learn: Used for the K-Fold split and calculating Precision/Recall.
+#     seaborn: Used specifically to draw the Confusion Matrix heatmaps.
+
 torch
 torchvision
 scikit-learn

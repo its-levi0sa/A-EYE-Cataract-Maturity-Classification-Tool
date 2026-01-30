@@ -1,3 +1,47 @@
+"""
+Program Title: utils.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  This file is the toolbox of the project, located in `src/`. It holds all the
+  helper functions and standard building blocks that get reused across different
+  parts of the model (like `aeye_model.py`) and training scripts.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To keep the main code clean by offloading common tasks here. It defines the
+  standard MobileNet blocks used for the CNN parts, custom Loss function,
+  and tools for reproducibility (seeding).
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    nn.Sequential: Use this a lot here to bundle layers (like Conv+BN+ReLU)
+      into single reusable blocks.
+
+  Algorithms:
+    Focal Loss: Custom loss calculation. It uses a mathematical formula to
+      down-weight easy examples so the model focuses on the hard ones.
+    Inverted Residuals (MV2Block): The standard MobileNetV2 algorithm where the
+      channels are expanded, do a depthwise convolution, and then project back down.
+    Token Folding: A simple logic to turn the 1D transformer tokens back into
+      a 2D feature map by taking the average and expanding it across the grid.
+
+  Control:
+    Residual Connections: Inside `MV2Block`, logic that checks if the
+      input and output shapes match. If they do, input is added back to the
+      output (skip connection); otherwise, omitted.
+    Reduction Logic: In `FocalLoss`, it checks the mean, sum,
+      or raw loss and return the correct format.
+"""
+
 import os
 import random
 import torch

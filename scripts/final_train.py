@@ -1,3 +1,45 @@
+"""
+Program Title: final_train.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  Located in `scripts/`. This is the main script to train the final model (Phase 2). 
+  It loads all the data and runs the training loop.
+
+Date Written: August 2025
+Date Revised: December 2025
+
+Purpose:
+  To train the production-ready A-EYE model using the best settings found.
+  It handles saving the model checkpoints and logging the progress.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    AlbumentationsDataset: Custom wrapper that handles loading images and
+      applying augmentations.
+    DataLoader: Pytorch utility that batches images together.
+
+  Algorithms:
+    Optimization: Use AdamW as it handles weight decay better.
+    Scheduling: Cosine Annealing to adjust the learning rate during training.
+    Mixed Precision: Use GradScaler to make training faster and use less
+      memory on the GPU.
+    Focal Loss: The loss function used to help with class imbalance.
+
+  Control:
+    Reproducibility: Set a fixed seed at the start to get the same
+      results every time.
+    Argparse: Allow change settings (like epochs or batch size) from the
+      command line without changing the code.
+    Training Loop: The main `for` loop that iterates through the data.
+"""
+
 import argparse
 import logging
 import os

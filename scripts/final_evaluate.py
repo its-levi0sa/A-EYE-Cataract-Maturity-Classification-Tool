@@ -1,3 +1,43 @@
+"""
+Program Title: final_evaluate.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  Located in `scripts/`. This script runs the evaluation for Phase 2 (Final System
+  Evaluation). It loads the single final model trained on the entire
+  dataset (from `final_train.py`) and tests it to see how well it performs
+  before deployment.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To get the final performance numbers for the production model. Unlike
+  `evaluate.py` which averages 5 models (ensemble), this script tests just one
+  model file to simulate exactly how the mobile app will perform in the real
+  world.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    Single Model Loader: Loads just one `.pth` file instead of a list.
+
+  Algorithms:
+    Standard Inference: Runs the test images through the model and thresholds
+      the output probability at 0.5 (Sigmoid > 0.5 = Mature).
+    Confusion Matrix: Generates the final heatmap to show any remaining errors.
+
+  Control:
+    Input Validation: Checks if the provided path to the model file is correct.
+    Model instantiation: Dynamically builds either the A-EYE or Baseline
+      architecture based on the arguments to load the weights correctly.
+"""
+
 import argparse
 import logging
 import os

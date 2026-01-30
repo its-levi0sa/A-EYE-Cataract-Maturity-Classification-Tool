@@ -1,3 +1,49 @@
+"""
+Program Title: train.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  Located in `scripts/`. This is the primary training script used for Phase 1 of
+  the experiments (the Ablation Study and Baseline Comparison). Unlike
+  `final_train.py` which trains on everything, this script runs 5-Fold Cross-Validation
+  to generate the statistical performance metrics used in the study.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To rigorously evaluate the models using Stratified K-Fold Cross-Validation.
+  It trains 5 separate versions of the model (one for each fold) and calculates
+  average metrics (Accuracy, Precision, Recall, F1) to prove that the results
+  are stable and not just luck.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    StratifiedKFold: A Scikit-Learn tool that splits the data into 5 chunks,
+      making sure each chunk has the same percentage of Mature and Immature images.
+    DataLoader: PyTorch data manager that handles batching.
+
+  Algorithms:
+    K-Fold Cross-Validation: The main loop that trains the model 5 times on different
+      data splits.
+    Mixed Precision Training: Uses `GradScaler` to speed up training by using
+      16-bit math where possible without losing accuracy.
+    Early Stopping: Watches the Validation F1-Score; if it stops improving for
+      20 epochs, it stops training to prevent overfitting.
+
+  Control:
+    Determinism: Strict seeds were set for Python, Numpy, and PyTorch (and even
+      the DataLoader workers) to ensure that results are reproducible.
+    Model Switching: The script checks `args.model_type` to decide whether to
+      build the `AEyeModel` or the `baseline` MobileViT.
+"""
+
 import os
 import argparse
 import logging

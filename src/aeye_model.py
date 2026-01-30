@@ -1,3 +1,46 @@
+"""
+Program Title: aeye_model.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  This file is inside the `src/` folder and acts as the main blueprint of the
+  A-EYE system. It connects the `RadialTokenizer` (which processes the rings)
+  and the `ModifiedMobileViT` (the backbone). This is the class that gets
+  called whenever training or testing is running.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To build the actual structure of the A-EYE model. It defines how the image
+  flows through the layers—starting from the initial convolutions, passing
+  through custom transformer blocks, and finally going to the classification
+  head to get the result.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    config (dict): Just a dictionary where settings like model depth,
+      dimensions, and how many rings are kept.
+    nn.ModuleList: This is to stack the model stages in order.
+
+  Algorithms:
+    Hybrid Feature Extraction: Combine standard CNN blocks (MV2Block) with the
+      custom radial-aware blocks.
+    Adaptive Pooling: Shrinks the final features down and feed them
+      into the final linear layer for classification.
+
+  Control:
+    Forward Pass: The `forward` function controls the data flow. It sends the
+      image to the tokenizer first to get the ring data, then passes that
+      ring data into specific stages of the network (Stages 3, 5, and 7).
+"""
+
 import torch.nn as nn
 from .utils import conv_3x3_bn, MV2Block
 from .modified_mobilevit import ModifiedMobileViT

@@ -1,3 +1,46 @@
+"""
+Program Title: baseline_model.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  This file is located in `src/`. It implements the standard MobileViT
+  architecture. This is the "Baseline" model used to compare against the
+  custom A-EYE model. It provides the "control" results for the study's
+  experiments.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To define the original MobileViT network structure without any of the radial
+  modifications. This allows to run fair side-by-side comparisons (SOP 2)
+  to prove that changes (A-EYE) actually improved performance.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    nn.ModuleList: Stores the sequence of MobileNetV2 (MV2) blocks and
+      MobileViT (transformer) blocks.
+
+  Algorithms:
+    Inverted Residuals: The standard efficient CNN block used in MobileNet.
+    MobileViT Block: The core hybrid block that unfolds the image into
+      patches, runs a Transformer on them to learn global features, and then
+      folds them back to a feature map.
+    Global Pooling: Standard averaging of the final feature map before
+      classification.
+
+  Control:
+    Layer Sequencing: The `forward` function manually steps through specific
+      layers (mv2[0], mv2[1], mvit[0], etc.) to match the specific downsampling
+      structure of the original MobileViT paper.
+"""
+
 import torch
 import torch.nn as nn
 from einops import rearrange

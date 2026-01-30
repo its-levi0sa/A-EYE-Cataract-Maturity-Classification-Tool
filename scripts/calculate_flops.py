@@ -1,3 +1,44 @@
+"""
+Program Title: calculate_flops.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  Located in `scripts/`. This utility script is used to generate the
+  Computational Efficiency data found in the study's manuscript. It measures how 
+  heavy the model is in terms of mathematical operations and memory.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To scientifically quantify the speed and size of the models. It calculates
+  two key metrics: GFLOPs (how many billion math operations per inference) and
+  Parameters (how many weights the model has).
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    dummy_input (Tensor): A fake image tensor of shape (1, 3, 256, 256) used
+      to trace the model's execution path.
+
+  Algorithms:
+    THOP Profiling: Use the `thop` library (PyTorch OpCounter) to hook into
+      every layer of the model and count the exact number of Multiply-Accumulate
+      (MAC) operations.
+    GFLOPs Conversion: Convert MACs to GFLOPs using the standard formula
+      (MACs * 2) / 1e9, since one MAC counts as two floating point operations
+      (one multiply + one add).
+
+  Control:
+    Model Selection: Accepts command-line arguments to build the exact model
+      variant (Baseline vs 4/8/16-ring A-EYE) to measure.
+"""
+
 import argparse
 import torch
 import torch.nn as nn

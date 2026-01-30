@@ -1,3 +1,47 @@
+"""
+Program Title: evaluate.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  Located in `scripts/`. This script runs the formal testing phase. It loads
+  the 5 models trained during Cross-Validation (from `train.py`) and tests
+  them as an ensemble on the unseen Test Set. This generates the final numbers
+  and Confusion Matrices for the study.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To provide a fair evaluation of the models. It ensures that the
+  metrics report are based on data the model has never seen before. It also
+  generates the confusion matrix plots for error analysis.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    Ensemble Logic: Load 5 different .pth files (one for each fold).
+    Numpy Arrays: Store predictions in arrays to easily calculate averages.
+
+  Algorithms:
+    Ensemble Averaging: For every test image, acquired 5 different probability
+      scores (one from each fold model) and average them together. If the
+      average > 0.5, it is classified as Mature. This reduces the risk of one
+      bad model ruining the results.
+    Confusion Matrix Generation: Uses Seaborn to draw the heatmap that shows
+      True Positives vs. False Negatives.
+
+  Control:
+    Pre-flight Checks: The script verifies that the model folder and data folder
+      actually contain files before crashing halfway through.
+    Argparse Logic: Forces to specify which model to test (Baseline
+      vs. A-EYE) and where the files are.
+"""
+
 import os
 import argparse
 import logging

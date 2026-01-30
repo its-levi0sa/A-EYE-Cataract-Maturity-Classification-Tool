@@ -1,3 +1,49 @@
+"""
+Program Title: predict.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  Located in `scripts/`. This is the user-facing script for testing the model
+  on a single image. It simulates how the final mobile app would behave: taking
+  an image as input and outputting a diagnosis ("Mature" or "Immature") along
+  with an explainability report.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To demonstrate the A-EYE model's inference capabilities. It loads a trained
+  model (or an ensemble of models), processes a new image, and provides both a
+  classification result and a human-readable explanation based on the radial
+  token statistics.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    Ensemble List: A list of loaded PyTorch models. Predictions were averaged
+      to get a more robust final result.
+    Token Tensor: The internal radial features extracted from the model, which
+      were analyze to generate the explanation.
+
+  Algorithms:
+    Model Ensembling: Instead of relying on just one training run, available checkpoints are loaded 
+      in the folder and average their probabilities.
+    Heuristic Explainability: The raw token values (which represent brightness and texture 
+    in each ring) were taken and convert them into user-friendly
+      percentages like "Opacity Extent" and "Density."
+
+  Control:
+    Argument Logic: Checks if the user wants to test the 'aeye' model or the
+      'baseline'. If 'aeye', it enforces that the `num_rings` argument is provided.
+    Feedback Loop: Prints a formatted report to the console so the user can
+      see exactly why the model made its decision.
+"""
+
 import os
 import argparse
 import glob

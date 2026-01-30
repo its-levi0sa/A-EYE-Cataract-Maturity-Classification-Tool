@@ -1,3 +1,41 @@
+"""
+Program Title: modified_mobilevit.py
+
+Programmers:
+  Albonia, Jade Lorenz M.
+  Caspe, Mark Vincent G.
+  Rivera, Rei Djemf M.
+  Velante, Kamilah Kaye M.
+  Villegas, Jedidiah S.
+
+Where the program fits in the general system design:
+  This is in `src/`. It is a modified version of the standard MobileViT block.
+  It was changed to accept the ring tokens coming from the tokenizer.
+
+Date Written: July 2025
+Date Revised: December 2025
+
+Purpose:
+  To combine the local features (what the CNN sees) with the global radial
+  features (the rings). It runs the attention mechanism on the rings and then
+  mixes that info back into the main image features.
+
+Data Structures, Algorithms, and Control:
+  Data Structures:
+    tokens (Tensor): The data representing the rings.
+    x (Tensor): The standard feature map from the convolutional layers.
+
+  Algorithms:
+    Radial Positional Encoding: Adds info to the tokens so the model knows
+      which ring is the center and which is the outer edge.
+    Feature Fusion: Basically stick the global ring info onto the local
+      image info (concatenation) and then smooth it out with a convolution.
+
+  Control:
+    Pipeline: Project Tokens -> Add Position Info -> Transformer Attention ->
+      Reshape back to Grid -> Fuse with Image.
+"""
+
 import torch
 import torch.nn as nn
 from .transformer_block import TransformerBlock
