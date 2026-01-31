@@ -9,37 +9,40 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  Located in `scripts/`. This script runs the formal testing phase. It loads
-  the 5 models trained during Cross-Validation (from `train.py`) and tests
-  them as an ensemble on the unseen Test Set. This generates the final numbers
-  and Confusion Matrices for the study.
+  This script is located in the `scripts/` directory and executes the formal
+  evaluation phase (Phase 2). It aggregates the 5 independent model checkpoints
+  generated during K-Fold Cross-Validation (from `train.py`) and evaluates them
+  as a "Soft Voting" Ensemble on the unseen Test Set.
 
 Date Written: July 2025
 Date Revised: December 2025
 
 Purpose:
-  To provide a fair evaluation of the models. It ensures that the
-  metrics report are based on data the model has never seen before. It also
-  generates the confusion matrix plots for error analysis.
+  To measure the model's generalization capability on strictly unseen data.
+  By averaging the predictions of 5 models trained on different data subsets,
+  this script produces the definitive performance metrics (Accuracy, F1-Score)
+  and Confusion Matrices used in the Results and Discussion chapter.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    Ensemble Logic: Load 5 different .pth files (one for each fold).
-    Numpy Arrays: Store predictions in arrays to easily calculate averages.
+    Ensemble List (List[nn.Module]): A collection of 5 distinct model instances,
+      each loaded with weights from a specific training fold.
+    Prediction Matrix (Numpy Array): Stores the probability outputs from all
+      models to facilitate vectorized averaging.
 
   Algorithms:
-    Ensemble Averaging: For every test image, acquired 5 different probability
-      scores (one from each fold model) and average them together. If the
-      average > 0.5, it is classified as Mature. This reduces the risk of one
-      bad model ruining the results.
-    Confusion Matrix Generation: Uses Seaborn to draw the heatmap that shows
-      True Positives vs. False Negatives.
+    Soft Voting Ensemble: Instead of voting on the final class labels (Hard Voting),
+      this algorithm averages the continuous probability scores from all 5 models.
+      This technique is statistically robust against outliers and reduces variance.
+    Confusion Matrix Generation: Visualizes the True Positive vs. False Negative
+      rates using a Seaborn heatmap.
 
   Control:
-    Pre-flight Checks: The script verifies that the model folder and data folder
-      actually contain files before crashing halfway through.
-    Argparse Logic: Forces to specify which model to test (Baseline
-      vs. A-EYE) and where the files are.
+    Pre-flight Integrity Checks: Validates the existence of model checkpoints
+      and test data before initializing the GPU, preventing runtime failures.
+    Deterministic Loading: Forces file paths to be sorted alphabetically to
+      ensure that "Fold 1" is always loaded into index 0, guaranteeing
+      reproducible debugging.
 """
 
 import os
@@ -56,7 +59,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import sys
 
-# --- Import models and utils from 'src' folder ---
 from src.aeye_model import AEyeModel
 from src.baseline_model import mobilevit_s
 from src.data_utils import AlbumentationsDataset, get_transforms
@@ -66,8 +68,16 @@ from src.utils import seed_everything
 os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
 
 def main(args):
-    """Main function to set up and run the evaluation process."""
+    """
+    Main execution function for the Ensemble Evaluation.
     
+    Workflow:
+      1. Setup logging and device (GPU/CPU).
+      2. Identify and load the 5 model checkpoints (folds).
+      3. Run inference with EACH model on the Test Set.
+      4. Average the predictions (Ensembling).
+      5. Calculate metrics and save the Confusion Matrix.
+    """
     seed_everything(42)
     torch.use_deterministic_algorithms(True)
 
@@ -105,24 +115,28 @@ def main(args):
     logging.info(f"Using device: {device}")
     logging.info(f"Found {len(model_paths)} models for ensembling.")
 
-    # Load models
+    # --- Load Ensemble Models ---
     models = []
     for path in model_paths:
         if args.model_type == 'aeye':
+            # Instantiate A-EYE with fixed architecture
             model = AEyeModel({'dims': [32, 64, 128, 160], 'embed_dim': 256, 'num_rings': args.num_rings})
-        else: # baseline
+        else:
+            # Instantiate Baseline
             model = mobilevit_s()
             model.fc = nn.Linear(model.fc.in_features, 1)
+        
+        # Load weights
         model.load_state_dict(torch.load(path, map_location=device))
         models.append(model.to(device).eval())
 
-    # Load test data
+    # --- Load Test Data ---
     test_labels = [0 if 'immature' in path else 1 for path in test_image_paths]
     test_ds = AlbumentationsDataset(test_image_paths, test_labels, transform=get_transforms(is_train=False))
     test_loader = DataLoader(test_ds, batch_size=args.batch_size, shuffle=False, num_workers=0)
     logging.info(f"Loaded {len(test_ds)} images from the test set.")
 
-    # --- Run evaluation ---
+    # --- Run Inference (Per Model) ---
     all_fold_preds = []
     
     with torch.no_grad():
@@ -134,9 +148,14 @@ def main(args):
                 fold_preds.extend(preds.cpu().numpy().flatten())
             all_fold_preds.append(fold_preds)
 
-    # --- Ensemble predictions and calculate metrics ---
+    # --- Ensemble Averaging (Soft Voting) ---
+    # Calculate the mean probability across the 5 models
     avg_preds = np.mean(all_fold_preds, axis=0)
+
+    # Apply Thresholding (0.5)
     final_preds = (avg_preds >= 0.5).astype(int)
+
+    # --- Calculate Metrics ---
     accuracy = accuracy_score(test_labels, final_preds)
     precision = precision_score(test_labels, final_preds, zero_division=0)
     recall = recall_score(test_labels, final_preds, zero_division=0)
@@ -150,11 +169,13 @@ def main(args):
 
     # --- Generate and save confusion matrix ---
     cm = confusion_matrix(test_labels, final_preds)
+
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Immature', 'Mature'], yticklabels=['Immature', 'Mature'])
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
     plt.title(f'Confusion Matrix for {log_name.replace("_", " ").title()}')
+    
     cm_path = os.path.join("results", f"confusion_matrix_{log_name}.png")
     plt.savefig(cm_path)
     plt.close()

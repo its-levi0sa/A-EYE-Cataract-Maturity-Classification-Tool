@@ -9,33 +9,38 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  Located in `scripts/`. This script runs the evaluation for Phase 2 (Final System
-  Evaluation). It loads the single final model trained on the entire
-  dataset (from `final_train.py`) and tests it to see how well it performs
-  before deployment.
+  This script is located in the `scripts/` directory. It executes the Phase 2
+  (Final System Evaluation) protocols. Unlike the cross-validation script
+  (`evaluate.py`) which aggregates an ensemble, this script evaluates the
+  performance of the single, production-ready `.pth` artifact that will be
+  deployed to the mobile application.
 
 Date Written: July 2025
 Date Revised: December 2025
 
 Purpose:
-  To get the final performance numbers for the production model. Unlike
-  `evaluate.py` which averages 5 models (ensemble), this script tests just one
-  model file to simulate exactly how the mobile app will perform in the real
-  world.
+  To validate the performance of the finalized model on the Test Set before
+  deployment. It simulates the exact inference pipeline of the mobile app
+  (Single Model Inference) to generate the definitive Accuracy, Precision,
+  Recall, and F1-Score metrics reported in the Conclusion.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    Single Model Loader: Loads just one `.pth` file instead of a list.
+    Single Model Instance: Loads a specific checkpoint file defined by the
+      `--model_path` argument, rather than iterating through a list of folds.
 
   Algorithms:
-    Standard Inference: Runs the test images through the model and thresholds
-      the output probability at 0.5 (Sigmoid > 0.5 = Mature).
-    Confusion Matrix: Generates the final heatmap to show any remaining errors.
+    Standard Inference: Performs a forward pass on test images and applies a
+      Sigmoid threshold (θ = 0.5) to generate binary classifications
+      (0 = Immature, 1 = Mature).
+    Confusion Matrix Visualization: Generates a heatmap to visualize the
+      distribution of True Positives, False Positives, True Negatives, and
+      False Negatives.
 
   Control:
-    Input Validation: Checks if the provided path to the model file is correct.
-    Model instantiation: Dynamically builds either the A-EYE or Baseline
-      architecture based on the arguments to load the weights correctly.
+    Architecture Switching: Dynamically instantiates the correct model class
+      (`AEyeModel` or `MobileViT`) based on command-line arguments to ensure
+      the state dictionary loads without key mismatch errors.
 """
 
 import argparse
@@ -59,7 +64,17 @@ from src.baseline_model import MobileViT as BaselineModel
 from src.data_utils import get_transforms, AlbumentationsDataset as CataractDataset
 
 def evaluate_single_model(model, dataloader, device):
-    """Evaluates a single model on the provided dataloader."""
+    """
+    Performs inference using a single model instance.
+
+    Args:
+        model (nn.Module): The loaded PyTorch model.
+        dataloader (DataLoader): The test data iterator.
+        device (torch.device): CPU or CUDA.
+
+    Returns:
+        tuple: (Predicted Labels, True Labels)
+    """
     model.eval()
     all_preds = []
     all_labels = []
@@ -77,7 +92,9 @@ def evaluate_single_model(model, dataloader, device):
     return all_preds, all_labels
 
 def main(args):
-    """Main function to run the final model evaluation."""
+    """
+    Main execution function for Final Model Evaluation.
+    """
     log_name = f"final_evaluation_results_{os.path.basename(args.model_path).replace('.pth', '')}"
     log_file = f"results/{log_name}.txt"
     os.makedirs('results', exist_ok=True)
@@ -149,10 +166,8 @@ if __name__ == '__main__':
     parser.add_argument('--num_rings', type=int, choices=[4, 8, 16], help='Number of rings if model_type is aeye.')
     parser.add_argument('--data_dir', type=str, default='data/test', help='Directory containing the test data.')
 
-    # --- Hyperparameters ---
     parser.add_argument('--batch_size', type=int, default=16, help='Batch size for evaluation.')
 
-    # --- Model Architecture Arguments ---
     parser.add_argument('--dims', type=int, nargs='+', default=[32, 64, 128, 160])
     parser.add_argument('--embed_dim', type=int, default=256)
 

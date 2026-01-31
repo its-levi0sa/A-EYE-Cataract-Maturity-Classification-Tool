@@ -9,34 +9,36 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  Located in `scripts/`. This utility script is used to generate the
-  Computational Efficiency data found in the study's manuscript. It measures how 
-  heavy the model is in terms of mathematical operations and memory.
+  This utility script is located in the `scripts/` directory. It is executed
+  independently of the training loop to generate the "Computational Efficiency"
+  metrics reported in the thesis results.
 
 Date Written: July 2025
 Date Revised: December 2025
 
 Purpose:
-  To scientifically quantify the speed and size of the models. It calculates
-  two key metrics: GFLOPs (how many billion math operations per inference) and
-  Parameters (how many weights the model has).
+  To quantify the computational complexity of the A-EYE architecture variants
+  versus the Baseline. It calculates two critical resource metrics:
+  1. Parameters (M): Proxy for memory footprint and storage size.
+  2. GFLOPs (Giga Floating Point Operations): Proxy for inference latency and
+     power consumption on mobile devices.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    dummy_input (Tensor): A fake image tensor of shape (1, 3, 256, 256) used
-      to trace the model's execution path.
+    dummy_input (Tensor): A synthetic tensor of shape (1, 3, 256, 256) used
+      to trigger a forward pass for tracing.
 
   Algorithms:
-    THOP Profiling: Use the `thop` library (PyTorch OpCounter) to hook into
-      every layer of the model and count the exact number of Multiply-Accumulate
+    THOP Profiling: Utilizes the `thop` (PyTorch OpCounter) library to hook
+      into the model's computational graph and count exact Multiply-Accumulate
       (MAC) operations.
-    GFLOPs Conversion: Convert MACs to GFLOPs using the standard formula
-      (MACs * 2) / 1e9, since one MAC counts as two floating point operations
-      (one multiply + one add).
+    FLOPs Conversion: Converts MACs to GFLOPs using the standard hardware
+      formula.
 
   Control:
-    Model Selection: Accepts command-line arguments to build the exact model
-      variant (Baseline vs 4/8/16-ring A-EYE) to measure.
+    Model Instantiation: dynamically initializes the specific model architecture
+      (Baseline or A-EYE 4/8/16-Ring) based on command-line arguments to ensure
+      accurate benchmarking.
 """
 
 import argparse
@@ -48,17 +50,22 @@ from src.aeye_model import AEyeModel
 from src.baseline_model import mobilevit_s
 
 def main(args):
-    """Main function to instantiate the model and calculate its complexity."""
-    # --- Model Selection ---
+    """
+    Main execution function to measure and report model complexity.
+    """
+    # --- Model Selection & Instantiation ---
     if args.model_type == 'aeye':
+        # Hardcoded dims/embed_dim match the fixed architecture used in the study
         model = AEyeModel({'dims': [32, 64, 128, 160], 'embed_dim': 256, 'num_rings': args.num_rings})
         model_name = f"A-EYE ({args.num_rings} rings)"
-    else: # baseline
+    else:
+        # Baseline MobileViT-S
         model = mobilevit_s()
         model.fc = nn.Linear(model.fc.in_features, 1)
         model_name = "Baseline MobileViT-S"
 
-    # Create a dummy input tensor with the standard size used for training
+    # --- Computational Profiling ---
+    # Create a dummy input tensor matching the standard training resolution (256x256)
     input_size = (1, 3, 256, 256)
     dummy_input = torch.randn(*input_size)
 
@@ -69,7 +76,7 @@ def main(args):
     gflops = (macs * 2) / 1e9
     params_m = params / 1e6
 
-    # --- Print Results ---
+    # --- Report Generation ---
     print("\n" + "="*40)
     print(f"Model Efficiency Report")
     print("="*40)

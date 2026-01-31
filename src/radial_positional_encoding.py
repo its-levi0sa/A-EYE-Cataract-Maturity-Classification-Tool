@@ -9,45 +9,64 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  This file is in `src/`. This is a critical component used by the
-  `ModifiedMobileViT` backbone. It sits right before the Transformer block to
-  give the rings a sense of order.
+  This file is located in the `src/` directory. It is a critical sub-component
+  of the `ModifiedMobileViT` backbone. It is invoked immediately before the
+  Transformer attention mechanism to inject spatial awareness into the sequence.
 
 Date Written: July 2025
 Date Revised: December 2025
 
 Purpose:
-  To inject "positional" information into the ring tokens. Since Transformers
-  treat all tokens as equal/unordered by default, this module adds a learnable
-  vector to each token so the model knows which ring is the center (Ring 0)
-  and which is the edge (Ring N).
+  To address the permutation-invariance of standard Transformers. Since the
+  self-attention mechanism treats all tokens as an unordered set, this module
+  injects a learnable "Radial Bias." This ensures the model distinguishes
+  between the center (Ring 0) and the periphery (Ring N), preserving the
+  anatomical hierarchy of the lens.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    nn.Embedding: A lookup table that stores a unique vector for each ring index.
+    nn.Embedding: A lookup table that stores a unique, learnable vector for
+      each ring index.
 
   Algorithms:
-    Learnable Additive Embedding: Instead of using fixed sine/cosine waves, the
-      model is able learn the best position vectors during training. This simply
-      generate indices [0, 1, ... N] and add the corresponding embedding vector
-      to the input data.
+    Learnable Additive Embedding: Unlike fixed sinusoidal encodings (used in
+      NLP), this implementation allows the model to learn the optimal
+      positional representations via backpropagation during training.
+    Vector Addition: The position vector is added element-wise to the feature
+      token, mathematically embedding location data into the feature space.
 
   Control:
-    Validation: Assertions are added to make sure the number of tokens coming in
-      actually matches the number of rings defined in the config.
+    Dimensionality Verification: Includes assertions to enforce that the
+      input tensor dimensions strictly match the configuration defined in
+      `train.py`.
 """
 
 import torch
 import torch.nn as nn
 
 class RadialPositionEmbedding(nn.Module):
+    """
+    Learnable Positional Encoding for Radial Tokens.
+    """
     def __init__(self, num_rings, embed_dim):
+        """
+        Args:
+            num_rings (int): The total number of concentric rings (sequence length).
+            embed_dim (int): The dimension of the feature vector for each ring.
+        """
         super().__init__()
         self.num_rings = num_rings
         self.embed_dim = embed_dim
         self.embedding = nn.Embedding(num_embeddings=self.num_rings, embedding_dim=self.embed_dim)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            x (Tensor): Input tokens of shape [Batch, Num_Rings, Embed_Dim]
+            
+        Returns:
+            Tensor: Output tokens with positional info added [Batch, Num_Rings, Embed_Dim]
+        """
         B, num_tokens, dim = x.shape
         assert num_tokens == self.num_rings, f"Input tensor has {num_tokens} tokens, but model expects {self.num_rings}."
         assert dim == self.embed_dim, f"Input tensor has embedding dim {dim}, but model expects {self.embed_dim}."

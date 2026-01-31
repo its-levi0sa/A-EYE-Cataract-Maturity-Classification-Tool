@@ -9,44 +9,56 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  Found in the `src/` folder. This is the first thing that happens to the image
-  inside the model. It takes the raw image and converts it into "tokens" based
-  on the concentric rings defined.
+  This file is located in the `src/` directory. It serves as the initial
+  preprocessing module of the A-EYE architecture. It transforms raw pixel data
+  into a sequence of radially-aggregated feature vectors, which are subsequently
+  ingested by the `ModifiedMobileViT` backbone.
 
 Date Written: July 2025
 Date Revised: December 2025
 
 Purpose:
-  To split the pupil image into concentric rings (4, 8, or 16) and calculate
-  stats for each ring. This is the code that actually implements the
-  "Radial-Aware" part of the study.
+  To implement the "Radial-Aware" tokenization strategy. This module mathematically
+  partitions the pupil image into concentric zones (4, 8, or 16 rings) and
+  extracts statistical descriptors (Mean, Standard Deviation, Median) for each
+  zone. This converts a 2D spatial image into a 1D sequence of anatomical features.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    ring_masks (Tensor): Save the mask shapes here so there is no need
-      re-calculate the circles for every single image.
-    tokens (Tensor): The final output that holds the stats (mean, std, median)
-      for each ring.
+    ring_masks (Tensor): Pre-computed boolean masks stored as a persistent
+      buffer. This prevents redundant Euclidean distance calculations during
+      every forward pass.
+    tokens (Tensor): The output tensor containing statistical features.
+      Shape: [Batch, Num_Rings, 9]. (The 9 features are Mean/Std/Median for R, G, B).
 
   Algorithms:
-    Distance Grid: Use grid calculation to figure out how far every pixel
-      is from the center, which tells which ring it belongs to.
-    Statistical Pooling: Calculate the Mean, Standard Deviation, and Median
-      for the pixels inside each ring.
-    Deterministic Median: Calculate the median on the CPU because the GPU
-      version can be a bit random, so as to achieve reproducible results.
+    Euclidean Distance Transformation: Computes a pixel-wise distance grid from
+      the image center to determine ring membership.
+    Vectorized Statistical Pooling: Aggregates pixel values within each mask
+      to compute Mean and Standard Deviation entirely on the GPU.
+    CPU-Offloaded Deterministic Median: Computes the median on the CPU to
+      bypass non-deterministic behavior in CUDA's sorting algorithms.
 
   Control:
-    Input Validation: It stops the program if try to use an invalid number of
-      rings (only 4, 8, or 16 allowed).
-    Device Handling: Moves data between GPU and CPU automatically when needed.
+    Input Validation: Enforces strict constraints on the `num_rings` argument
+      (valid sets: 4, 8, 16) to align with the ablation study configurations.
+    Device Management: Manages the transfer of tensors between GPU and CPU
+      specifically for the median calculation step to balance speed and determinism.
 """
 
 import torch
 import torch.nn as nn
 
 class RadialTokenizer(nn.Module):
+    """
+    Transforms an input image into a sequence of Radial Tokens.
+    """
     def __init__(self, image_size=256, num_rings=16):
+        """
+        Args:
+            image_size (int): Height/Width of the input image.
+            num_rings (int): Number of concentric rings to divide the image into.
+        """
         super().__init__()
         self.image_size = image_size
         self.center = (image_size // 2, image_size // 2)
@@ -59,7 +71,6 @@ class RadialTokenizer(nn.Module):
             
         self.rings = [(i * ring_width, (i + 1) * ring_width) for i in range(self.num_rings)]
 
-        # Pre-compute ring masks for GPU efficiency
         y, x = torch.meshgrid(torch.arange(0, image_size), torch.arange(0, image_size), indexing='ij')
         distance_grid = torch.sqrt((x - self.center[0])**2 + (y - self.center[1])**2)
         
@@ -67,6 +78,14 @@ class RadialTokenizer(nn.Module):
         self.register_buffer('ring_masks', torch.stack(ring_masks, dim=0).float())
 
     def forward(self, image_tensor: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            image_tensor (Tensor): Input images [Batch, 3, 256, 256]
+            
+        Returns:
+            Tensor: Radial tokens [Batch, Num_Rings, 9]
+                    (9 features = MeanRGB + StdRGB + MedianRGB)
+        """
         B, C, H, W = image_tensor.shape
         original_device = image_tensor.device
         
@@ -75,21 +94,23 @@ class RadialTokenizer(nn.Module):
         num_pixels_per_ring = masks.sum(dim=[1, 2]) + 1e-6
 
         # Calculate statistics
+        # --- 1. Mean Calculation (GPU) ---
         mean_vals = masked_pixels.sum(dim=[3, 4]) / num_pixels_per_ring.view(1, self.num_rings, 1)
+
+        # --- 2. Standard Deviation Calculation (GPU) ---
         mean_sq_vals = (masked_pixels**2).sum(dim=[3, 4]) / num_pixels_per_ring.view(1, self.num_rings, 1)
         std_vals = torch.sqrt(torch.clamp(mean_sq_vals - mean_vals**2, min=0))
         
-        # --- DETERMINISM ---
+        # --- 3. Median Calculation (CPU - Deterministic) ---
         flat_pixels = masked_pixels.view(B, self.num_rings, C, -1)
         flat_pixels_cpu = flat_pixels.cpu()
         flat_pixels_cpu[flat_pixels_cpu == 0] = float('nan')
         
-        # Calculate median on the CPU
         median_vals_cpu = torch.nanmedian(flat_pixels_cpu, dim=3).values
         
-        # Move the result back to the original device
+        # Move results back to GPU
         median_vals = median_vals_cpu.to(original_device)
 
-        # Concatenate features: (mean, std, median) for each channel
+        # --- 4. Concatenate Features ---
         tokens = torch.cat([mean_vals, std_vals, median_vals], dim=2)
         return tokens.to(device=original_device, dtype=torch.float32)

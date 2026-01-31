@@ -9,35 +9,40 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  Located in `scripts/`. This is the main script to train the final model (Phase 2). 
-  It loads all the data and runs the training loop.
+  This script is located in the `scripts/` directory. It executes Phase 3
+  (Production Training) of the methodology. It utilizes the golden hyperparameters
+  derived from Cross-Validation to train the final deployment model on the
+  complete dataset (Training + Validation combined).
 
 Date Written: August 2025
 Date Revised: December 2025
 
 Purpose:
-  To train the production-ready A-EYE model using the best settings found.
-  It handles saving the model checkpoints and logging the progress.
+  To generate the definitive `.pth` model artifact for the mobile application.
+  It implements a full-scale training loop with fixed seeds, ensuring that the
+  final model weights are optimized using the maximum available data variance
+  before deployment.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    AlbumentationsDataset: Custom wrapper that handles loading images and
-      applying augmentations.
-    DataLoader: Pytorch utility that batches images together.
+    AlbumentationsDataset: A custom Dataset wrapper that applies the online
+      augmentation pipeline to input images.
+    GradScaler: Manages FP16 (Half-Precision) gradients to reduce VRAM usage
+      and accelerate training on NVIDIA T4 GPUs.
 
   Algorithms:
-    Optimization: Use AdamW as it handles weight decay better.
-    Scheduling: Cosine Annealing to adjust the learning rate during training.
-    Mixed Precision: Use GradScaler to make training faster and use less
-      memory on the GPU.
-    Focal Loss: The loss function used to help with class imbalance.
+    AdamW Optimization: An extension of Adam that decouples weight decay from
+      the gradient update, providing better generalization for Transformers.
+    Cosine Annealing with Warm Restarts: A learning rate scheduler that
+      periodically resets the learning rate to escape local minima (`T_0`, `T_mult`).
+    Focal Loss: Addresses the medical data imbalance by down-weighting easy
+      negatives and focusing learning on hard-to-classify cataract cases.
 
   Control:
-    Reproducibility: Set a fixed seed at the start to get the same
-      results every time.
-    Argparse: Allow change settings (like epochs or batch size) from the
-      command line without changing the code.
-    Training Loop: The main `for` loop that iterates through the data.
+    Deterministic Initialization: Sets seeds for Python, NumPy, and PyTorch
+      backends to ensure that the "Production Model" can be retrained identically.
+    Architecture Switching: Dynamically instantiates the correct model class
+      (AEyeModel vs. MobileViT) based on the provided command-line arguments.
 """
 
 import argparse
@@ -62,7 +67,10 @@ from src.utils import FocalLoss
 
 # --- Training reproducibility function ---
 def set_seed(seed=42):
-    """Sets the seed for reproducibility across all libraries."""
+    """
+    Sets the random seed across all libraries (Python, NumPy, PyTorch, CUDA)
+    to ensure the training process is strictly reproducible.
+    """
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
@@ -74,14 +82,17 @@ def set_seed(seed=42):
     torch.backends.cudnn.benchmark = False
 
 def main(args):
-    """Main function to run the final model training on all data."""
+    """
+    Main execution function for Final Model Training.
+    """
+    # --- 1. Setup Environment ---
     set_seed(args.seed)
     torch.use_deterministic_algorithms(True)
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logging.info(f"Using device: {device}")
 
-    # --- 1. Load the FULL Dataset for Training ---
+    # --- 2. Load the FULL Dataset ---
     image_paths = glob.glob(os.path.join(args.data_dir, '*/*.[jp][pn]g'))
     labels = [0 if 'immature' in path else 1 for path in image_paths]
 
@@ -89,12 +100,12 @@ def main(args):
     train_loader = DataLoader(full_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True)
     logging.info(f"Loaded {len(full_dataset)} images for final training.")
 
-    # --- 2. Initialize the Model ---
+    # --- 3. Initialize the Model ---
     config = vars(args)
     model = AEyeModel(config)
     model.to(device)
 
-    # --- 3. Setup Optimizer, Loss, and Scheduler ---
+    # --- 4. Setup Optimizer, Loss, and Scheduler ---
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
     criterion = FocalLoss(alpha=0.25, gamma=2.5)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
@@ -102,7 +113,7 @@ def main(args):
     )
     scaler = torch.cuda.amp.GradScaler()
 
-    # --- 4. Final Training Loop ---
+    # --- 5. Final Training Loop ---
     logging.info(f"Starting final training for {args.epochs} epochs...")
     for epoch in range(args.epochs):
         model.train()
@@ -134,9 +145,7 @@ def main(args):
             f"Epoch {epoch+1} Train Summary |     Speed: {avg_it_speed:.2f} it/s     Loss: {avg_loss:.5f}"
         )
 
-
-
-    # --- 5. Save the Final Trained Model ---
+    # --- 6. Save the Final Trained Model ---
     os.makedirs(args.save_dir, exist_ok=True)
     model_name = f"{args.model_type}_{args.num_rings}_rings_final_model.pth"
     save_path = os.path.join(args.save_dir, model_name)

@@ -9,32 +9,39 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  Found in `src/`. This is a helper file that `train.py` and `evaluate.py`
-  both use. It handles loading the images and making sure they are processed
-  correctly.
+  This file is located in the `src/` directory and serves as the data processing
+  engine for the A-EYE system. It is imported by `train.py`, `evaluate.py`, and
+  `predict.py` to standardize how images are loaded, enhanced, and converted
+  into tensors before entering the neural network.
 
 Date Written: July 2025
 Date Revised: December 2025
 
 Purpose:
-  To implement BSRDA augmentation pipeline. It defines how the images are load
-  and what specific augmentations (like distortions or CLAHE) get applied.
+  To standardize the preprocessing logic, ensuring that all input images undergo
+  Contrast Limited Adaptive Histogram Equalization (CLAHE) to enhance cataract
+  features.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    A.Compose: A list of augmentations from the Albumentations library.
-    AlbumentationsDataset: Class that connects the raw image files to PyTorch.
+    A.Compose: An Albumentations pipeline wrapper that sequences multiple
+      image transformation operations.
+    AlbumentationsDataset: A custom PyTorch Dataset class that bridges raw
+      image files on disk with the augmentation pipeline.
 
   Algorithms:
-    CLAHE: Use this to fix lighting issues in the images (Contrast Limited
-      Adaptive Histogram Equalization).
-    Semantic Augmentation: The specific mix of distortions and cutouts
-      to simulate cataract irregularities.
+    CLAHE (Contrast Limited Adaptive Histogram Equalization): An algorithm
+      applied in the LAB color space to locally enhance contrast, making
+      opacity patterns in the lens more visible.
+    Online Augmentation: A specific combination of geometric distortions (Grid,
+      Optical) and regularization techniques (Cutout, Blur) designed to
+      simulate diverse cataract presentations and prevent overfitting.
 
   Control:
-    Mode Switching: The code checks if `is_train` is True or False. If True,
-      it applies the heavy augmentations. If False, it just resizes and
-      normalizes the image.
+    Pipeline Branching: The `get_transforms` function acts as a switch. If
+      `is_train=True`, it activates the full stochastic augmentation suite.
+      If `is_train=False`, it activates a deterministic evaluation pipeline
+      that only applies resizing and CLAHE.
 """
 
 import cv2
@@ -46,6 +53,22 @@ from albumentations.pytorch import ToTensorV2
 
 # --- Deterministic CLAHE function ---
 def clahe_deterministic(image, clip_limit=2.0, tile_grid_size=(8, 8), **kwargs):
+    """
+    Applies Contrast Limited Adaptive Histogram Equalization (CLAHE) to an image.
+    
+    Algorithm:
+      1. Convert RGB image to LAB color space.
+      2. Apply CLAHE only to the L-channel (Lightness) to preserve color info.
+      3. Merge channels and convert back to RGB.
+    
+    Args:
+        image (np.array): Input image in RGB format.
+        clip_limit (float): Threshold for contrast limiting.
+        tile_grid_size (tuple): Size of grid for histogram equalization.
+        
+    Returns:
+        np.array: Contrast-enhanced image in RGB format.
+    """
     # Convert to LAB color space
     lab_img = cv2.cvtColor(image, cv2.COLOR_RGB2LAB)
     l, a, b = cv2.split(lab_img)
@@ -62,9 +85,19 @@ def clahe_deterministic(image, clip_limit=2.0, tile_grid_size=(8, 8), **kwargs):
 
 
 def get_transforms(is_train=True):
+    """
+    Constructs the data augmentation pipeline.
+    
+    Args:
+        is_train (bool): If True, returns the full training pipeline (BSRDA).
+                         If False, returns the validation/test pipeline.
+    
+    Returns:
+        A.Compose: The composed albumentations transformation pipeline.
+    """
     if is_train:
         """
-        Augmentation pipeline for training.
+        # Augmentation pipeline for training.
         """
         return A.Compose([
             A.Resize(256, 256),
@@ -96,6 +129,12 @@ class AlbumentationsDataset(Dataset):
     Custom PyTorch Dataset for Albumentations.
     """
     def __init__(self, image_paths, labels, transform=None):
+        """
+        Args:
+            image_paths (list): List of file paths to images.
+            labels (list): List of corresponding labels (0 or 1).
+            transform (A.Compose): Albumentations transformation pipeline.
+        """
         self.image_paths = image_paths
         self.labels = labels
         self.transform = transform

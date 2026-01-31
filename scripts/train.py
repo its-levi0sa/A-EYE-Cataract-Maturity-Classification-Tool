@@ -9,39 +9,43 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  Located in `scripts/`. This is the primary training script used for Phase 1 of
-  the experiments (the Ablation Study and Baseline Comparison). Unlike
-  `final_train.py` which trains on everything, this script runs 5-Fold Cross-Validation
-  to generate the statistical performance metrics used in the study.
+  This script is located in the `scripts/` directory. It functions as the
+  primary experimental harness for Phase 1 (Ablation Study & Baseline Comparison).
+  Unlike `final_train.py` (which trains on the full dataset), this script
+  executes Stratified K-Fold Cross-Validation to generate statistically
+  robust performance metrics (Mean ± Std Dev) for the thesis.
 
 Date Written: July 2025
 Date Revised: December 2025
 
 Purpose:
-  To rigorously evaluate the models using Stratified K-Fold Cross-Validation.
-  It trains 5 separate versions of the model (one for each fold) and calculates
-  average metrics (Accuracy, Precision, Recall, F1) to prove that the results
-  are stable and not just luck.
+  To rigorously evaluate model stability and generalization. It implements a
+  5-Fold Cross-Validation loop that trains five independent instances of the
+  model on stratified data splits, ensuring that performance gains are consistent
+  and not artifacts of a specific random seed.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    StratifiedKFold: A Scikit-Learn tool that splits the data into 5 chunks,
-      making sure each chunk has the same percentage of Mature and Immature images.
-    DataLoader: PyTorch data manager that handles batching.
+    StratifiedKFold: A Scikit-Learn cross-validator that splits the dataset
+      into k=5 disjoint folds while preserving the percentage of samples for
+      each class (Mature vs. Immature).
 
   Algorithms:
-    K-Fold Cross-Validation: The main loop that trains the model 5 times on different
-      data splits.
-    Mixed Precision Training: Uses `GradScaler` to speed up training by using
-      16-bit math where possible without losing accuracy.
-    Early Stopping: Watches the Validation F1-Score; if it stops improving for
-      20 epochs, it stops training to prevent overfitting.
+    Mixed Precision Training (AMP): Utilizes `torch.cuda.amp` to perform
+      forward/backward passes in FP16 (Half-Precision), reducing memory
+      footprint and accelerating training on Tensor Core GPUs.
+    Cosine Annealing with Warm Restarts: A learning rate scheduler that
+      periodically resets the learning rate to prevent the optimizer from
+      getting stuck in local minima.
+    Early Stopping: Monitors the Validation F1-Score and terminates training
+      if performance plateaus for `patience=20` epochs to prevent overfitting.
 
   Control:
-    Determinism: Strict seeds were set for Python, Numpy, and PyTorch (and even
-      the DataLoader workers) to ensure that results are reproducible.
-    Model Switching: The script checks `args.model_type` to decide whether to
-      build the `AEyeModel` or the `baseline` MobileViT.
+    Strict Determinism: Sets seeds for Python, NumPy, PyTorch, and CUDA
+      backends to ensure that the K-Fold splits and weight initializations
+      are identical across runs.
+    Dynamic Model Instantiation: Switches between `AEyeModel` and `MobileViT`
+      architectures based on the `--model_type` flag.
 """
 
 import os
@@ -69,7 +73,10 @@ from src.utils import FocalLoss
 
 # --- Training reproducibility function ---
 def seed_everything(seed=42):
-    """Seeds all relevant random number generators for reproducibility."""
+    """
+    Seeds all relevant random number generators (Python, NumPy, PyTorch, CUDA)
+    to ensure bit-exact reproducibility of results.
+    """
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
@@ -80,21 +87,39 @@ def seed_everything(seed=42):
     torch.backends.cudnn.benchmark = False
 
 def seed_worker(worker_id):
-    """Seeds the dataloader workers for reproducibility."""
+    """
+    Seeds the DataLoader workers to ensure data augmentation is deterministic.
+    """
     worker_seed = torch.initial_seed() % 2**32
     np.random.seed(worker_seed)
     random.seed(worker_seed)
 
 # --- Training and Validation logic ---
-
 def train_one_fold(fold, model, train_loader, val_loader, config):
-    """Trains and validates the model for a single K-Fold split."""
+    """
+    Executes the training and validation loop for a single K-Fold split.
+    
+    Args:
+        fold (int): The current fold index (0-4).
+        model (nn.Module): The model instance to train.
+        train_loader (DataLoader): Iterator for training data.
+        val_loader (DataLoader): Iterator for validation data.
+        config (dict): Configuration dictionary containing hyperparameters.
+        
+    Returns:
+        float: The best Validation F1-Score achieved in this fold.
+    """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
+    # Optimizer & Scheduler
     optimizer = optim.AdamW(model.parameters(), lr=config['learning_rate'], weight_decay=config['weight_decay'])
     criterion = FocalLoss(alpha=0.25, gamma=2.5)
+    
+    # Cosine Annealing Scheduler
     scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=len(train_loader) * 10, T_mult=1, eta_min=1e-6)
+    
+    # Mixed Precision Scaler
     scaler = torch.cuda.amp.GradScaler()
 
     best_val_f1 = 0.0
@@ -102,29 +127,36 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
     logging.info(f"--- Starting Fold {fold+1}/{config['n_splits']} ---")
 
     for epoch in range(config['epochs']):
+        # --- Training Phase ---
         model.train()
         train_loop = tqdm(train_loader, desc=f"Fold {fold+1} Epoch {epoch+1}", leave=False, file=sys.stdout)
         for inputs, labels in train_loop:
             inputs, labels = inputs.to(device), labels.to(device).unsqueeze(1)
+
+            # Forward Pass with Mixed Precision
             with torch.cuda.amp.autocast():
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
             
+            # Backward Pass
             optimizer.zero_grad()
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
+
+            # Step Scheduler per batch
             scheduler.step()
+
             train_loop.set_postfix(loss=loss.item())
         
-        # Log training summary after loop ends
+        # Log training summary
         final_loss = loss.item()
         avg_speed = train_loop.format_dict.get("rate", 0)
         logging.info(
             f"Epoch {epoch+1} - Train Summary | Speed: {avg_speed:.2f} it/s, Loss: {final_loss:.5f}"
         )
 
-        # Validation
+        # --- Validation Phase ---
         model.eval()
         val_preds, val_labels = [], []
         with torch.no_grad():
@@ -134,7 +166,7 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
                 val_preds.extend(preds.cpu().numpy().flatten())
                 val_labels.extend(labels.cpu().numpy().flatten())
         
-        # Calculate and log all validation metrics
+        # Calculate Validation Metrics
         val_accuracy = accuracy_score(val_labels, val_preds)
         val_precision = precision_score(val_labels, val_preds, zero_division=0)
         val_recall = recall_score(val_labels, val_preds, zero_division=0)
@@ -144,7 +176,7 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
             f"Epoch {epoch+1} | Val Acc: {val_accuracy:.5f}, P: {val_precision:.5f}, R: {val_recall:.5f}, F1: {val_f1:.5f}"
         )
 
-        # Checkpointing and Early Stopping (driven by F1-score)
+        # --- Checkpointing & Early Stopping ---
         if val_f1 > best_val_f1:
             best_val_f1 = val_f1
             patience_counter = 0
@@ -160,11 +192,11 @@ def train_one_fold(fold, model, train_loader, val_loader, config):
     return best_val_f1
 
 # --- MAIN EXECUTION SCRIPT ---
-
 def main(args):
-    """Main function to set up and run the training process."""
-    
-    # Global determinism flags
+    """
+    Main function to orchestrate the K-Fold Cross-Validation process.
+    """
+    # Enforce Determinism globally
     torch.use_deterministic_algorithms(True)
     
     config = vars(args)
@@ -179,10 +211,11 @@ def main(args):
     labels = np.array([0 if 'immature' in path else 1 for path in image_paths])
     logging.info(f"Found {len(image_paths)} images for training.")
 
-    # K-Fold Cross-Validation
+    # Initialize Stratified K-Fold
     skf = StratifiedKFold(n_splits=config['n_splits'], shuffle=True, random_state=42)
     fold_scores = []
     
+    # --- K-Fold Loop ---
     for fold, (train_idx, val_idx) in enumerate(skf.split(image_paths, labels)):
         seed_everything(seed=42 + fold)
         g = torch.Generator()
@@ -195,7 +228,9 @@ def main(args):
             model = mobilevit_s()
             model.fc = nn.Linear(model.fc.in_features, 1)
 
-        # --- Dataset and DataLoader Initialization ---
+        # --- Dataset Initialization ---
+        # is_train=True for Training (Apply Augmentation)
+        # is_train=False for Validation (No Augmentation)
         train_ds = AlbumentationsDataset(image_paths[train_idx], labels[train_idx], transform=get_transforms(is_train=True))
         val_ds = AlbumentationsDataset(image_paths[val_idx], labels[val_idx], transform=get_transforms(is_train=False))
         
@@ -218,10 +253,11 @@ def main(args):
             generator=g
         )
         
-        # --- Run Training for the Fold ---
+        # --- Run Training for Current Fold ---
         fold_f1 = train_one_fold(fold, model, train_loader, val_loader, config)
         fold_scores.append(fold_f1)
     
+    # --- Final Report ---
     logging.info("\n--- K-Fold Training Finished ---")
     logging.info(f"Fold F1 Scores: {[f'{s:.5f}' for s in fold_scores]}")
     logging.info(f"Average F1-Score: {np.mean(fold_scores):.5f} ± {np.std(fold_scores):.5f}")
@@ -239,7 +275,6 @@ if __name__ == '__main__':
     parser.add_argument('--patience', type=int, default=20, help="Epochs for early stopping.")
     parser.add_argument('--n_splits', type=int, default=5, help="Number of K-Fold splits.")
     
-    # A-EYE specific arguments
     parser.add_argument('--dims', type=int, nargs='+', default=[32, 64, 128, 160])
     parser.add_argument('--embed_dim', type=int, default=256)
 

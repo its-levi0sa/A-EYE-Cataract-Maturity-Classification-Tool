@@ -9,39 +9,40 @@ Programmers:
   Villegas, Jedidiah S.
 
 Where the program fits in the general system design:
-  Located in `scripts/`. This is the user-facing script for testing the model
-  on a single image. It simulates how the final mobile app would behave: taking
-  an image as input and outputting a diagnosis ("Mature" or "Immature") along
-  with an explainability report.
+  This script is located in the `scripts/` directory. It serves as the
+  inference engine for the A-EYE system, simulating the behavior of the final
+  mobile application. It processes a single input image and generates a
+  dual-output: a binary classification ("Mature" vs. "Immature") and a granular
+  explainability report derived from radial token statistics.
 
 Date Written: July 2025
 Date Revised: December 2025
 
 Purpose:
-  To demonstrate the A-EYE model's inference capabilities. It loads a trained
-  model (or an ensemble of models), processes a new image, and provides both a
-  classification result and a human-readable explanation based on the radial
-  token statistics.
+  To demonstrate the white-box capabilities of the A-EYE architecture.
+  Unlike standard CNNs which output a black-box probability, this script
+  extracts the intermediate radial tokens to provide human-readable justification
+  for the model's decision, bridging the gap between AI and clinical interpretability.
 
 Data Structures, Algorithms, and Control:
   Data Structures:
-    Ensemble List: A list of loaded PyTorch models. Predictions were averaged
-      to get a more robust final result.
-    Token Tensor: The internal radial features extracted from the model, which
-      were analyze to generate the explanation.
+    Ensemble List: A collection of loaded PyTorch models used to reduce variance
+      and provide a robust prediction via averaging.
+    Token Tensor: A multi-dimensional array representing the extracted features
+      (Mean, Std, Median) for each anatomical ring.
 
   Algorithms:
-    Model Ensembling: Instead of relying on just one training run, available checkpoints are loaded 
-      in the folder and average their probabilities.
-    Heuristic Explainability: The raw token values (which represent brightness and texture 
-    in each ring) were taken and convert them into user-friendly
-      percentages like "Opacity Extent" and "Density."
+    Soft Voting Ensemble: Aggregates probability scores from all loaded model
+      checkpoints to formulate the final diagnosis.
+    Heuristic Explainability: A translation layer that converts raw, normalized
+      tensor values (Model Space) into intuitive percentage metrics like
+      "Opacity Extent" and "Density" (User Space).
 
   Control:
-    Argument Logic: Checks if the user wants to test the 'aeye' model or the
-      'baseline'. If 'aeye', it enforces that the `num_rings` argument is provided.
-    Feedback Loop: Prints a formatted report to the console so the user can
-      see exactly why the model made its decision.
+    Input Validation: Verifies image integrity and model configuration before inference.
+    Conditional Execution: Dynamically adjusts the inference pipeline; if the
+      model is 'A-EYE', it triggers the token extraction and report generation
+      branch. If 'Baseline', it runs standard classification only.
 """
 
 import os
@@ -60,6 +61,13 @@ def generate_aeye_explanation(tokens_tensor, num_rings):
     """
     Generates a user-friendly summary and a detailed statistical report from
     the A-EYE model's internal radial tokens.
+
+    Args:
+        tokens_tensor (Tensor): [Num_Models, Num_Rings, 9]
+        num_rings (int): Number of rings.
+
+    Returns:
+        str: Formatted text report.
     """
     # Average the tokens from the model ensemble
     avg_tokens = tokens_tensor.mean(dim=0).squeeze(0).cpu().numpy()
@@ -74,6 +82,7 @@ def generate_aeye_explanation(tokens_tensor, num_rings):
     core_ring_count = max(1, num_rings // 4)
     core_brightness = np.mean(mean_rgb[0:core_ring_count])
 
+    # Proxies for clinical features (calibrated via heuristics)
     brightness_proxy = min(100.0, max(0.0, (overall_mean_brightness - 100) / 80 * 100))
     opacity_proxy = min(100.0, (overall_mean_texture / 45.0) * 100)
     
@@ -97,9 +106,12 @@ def generate_aeye_explanation(tokens_tensor, num_rings):
     return report
 
 def predict(args):
-    """Main function to load models and run prediction."""
+    """
+    Main function to load models and run inference on a single image.
+    """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    # Load Model Checkpoints
     model_paths = glob.glob(os.path.join(args.model_dir, '*.pth'))
     if not model_paths:
         print(f"Error: No model files (.pth) found in '{args.model_dir}'.")
@@ -117,10 +129,12 @@ def predict(args):
         models.append(model.to(device).eval())
     print(f"Loaded {len(models)} models from '{args.model_dir}' for ensembling.")
 
+    # Load and Preprocess Image
     image = cv2.imread(args.image_path)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     input_tensor = get_transforms(is_train=False)(image=image)['image'].unsqueeze(0).to(device)
 
+    # Run Inference
     all_probs, all_tokens = [], []
     with torch.no_grad():
         for model in models:
@@ -131,6 +145,7 @@ def predict(args):
                 output = model(input_tensor)
             all_probs.append(torch.sigmoid(output).item())
 
+    # Aggregate Results
     final_prob = np.mean(all_probs)
     prediction = "Mature" if final_prob >= 0.5 else "Immature"
     
@@ -139,17 +154,18 @@ def predict(args):
     print(f"Predicted Class:   {prediction}")
     print(f"Confidence Score:  {final_prob:.2%}")
     
+    # Generate Explanation (A-EYE Only)
     if args.model_type == 'aeye' and all_tokens:
         print(generate_aeye_explanation(torch.stack(all_tokens, dim=0), args.num_rings))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Single Image Prediction & Explainability Script")
+    
     parser.add_argument('--model_type', required=True, choices=['aeye', 'baseline'])
     parser.add_argument('--num_rings', type=int, choices=[4, 8, 16], help="Required for 'aeye' model.")
     parser.add_argument('--model_dir', required=True, help='Directory containing trained .pth files.')
     parser.add_argument('--image_path', required=True, help='Path to the input image.')
 
-    # --- Arguments for model configuration ---
     parser.add_argument('--dims', type=int, nargs='+', default=[32, 64, 128, 160])
     parser.add_argument('--embed_dim', type=int, default=256)
 
