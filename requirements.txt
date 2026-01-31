@@ -8,33 +8,37 @@
 #   Villegas, Jedidiah S.
 #
 # Where the program fits in the general system design:
-#   Located in the root directory. This is the setup file. Anyone who wants to
-#   run the code (on Colab or their local machine) needs to run this first
-#   to get the correct libraries.
+#   Located in the root directory. This configuration file defines the
+#   Python runtime environment required to execute the A-EYE system. It is
+#   invoked by the installation commands in the Google Colab notebooks
 #
 # Date Written: July 2025
 # Date Revised: December 2025
 #
 # Purpose:
-#   To ensure reproducibility. It lists every external library the system relies
-#   on so that the model produces the exact same results on any machine.
+#   To enforce software reproducibility. By explicitly listing
+#   external dependencies and pinning critical versions, this file ensures
+#   that the experimental results are consistent across different computational
+#   environments.
 #
 # Data Structures, Algorithms, and Control:
-#   Core Dependencies:
-#     torch & torchvision: The backbone for all the Deep Learning models.
+#   Core Framework:
+#     torch & torchvision: The primary Deep Learning framework used for tensor
+#       computation and model architecture definition.
 #
 #   Data Processing:
-#     albumentations==1.1.0: Pinned this specific version because the
-#       BSRDA pipeline relies on syntax that changed in newer versions.
-#     opencv-python-headless: Chose the headless version because as this is
-#       run on Google Colab/Cloud servers where there is no screen/GUI.
-#       Standard opencv often crashes in those environments.
+#     albumentations==1.1.0: Version-locked to 1.1.0 to preserve the specific
+#       syntax of the `Cutout` augmentation, which was deprecated in later releases.
+#     opencv-python-headless: Selected over the standard `opencv-python` to
+#       optimize performance in server-side environments (Google Colab/Linux VM)
+#       by removing unnecessary GUI dependencies.
 #
-#   Analysis Tools:
-#     thop: The library used to calculate the GFLOPs and prove the A-EYE
-#       efficiency in the thesis.
-#     scikit-learn: Used for the K-Fold split and calculating Precision/Recall.
-#     seaborn: Used specifically to draw the Confusion Matrix heatmaps.
+#   Analysis & Metrics:
+#     thop: (PyTorch OpCounter) Utilized in `calculate_flops.py` to quantify
+#       computational complexity (MACs/GFLOPs).
+#     scikit-learn: Provides the Stratified K-Fold splitter and metric
+#       functions (F1-Score, Precision, Recall).
+#     seaborn: Used in `evaluate.py` to render the Confusion Matrix visualizations.
 
 torch
 torchvision
